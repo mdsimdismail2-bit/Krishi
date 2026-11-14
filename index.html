@@ -61,19 +61,30 @@ label{display:block;font-weight:600;font-size:14px;margin-top:14px}
 .wx .adv{background:rgba(255,255,255,.2);border-left-color:#ffd54f;color:#fff}
 .wx .upd{font-size:12px;opacity:.8;margin-top:8px}
 .fcd{display:grid;grid-template-columns:1fr auto auto auto;gap:10px;padding:8px 0;border-bottom:1px dashed var(--bd);align-items:center}.fcd:last-child{border:0}
+
+.hb{display:flex;align-items:center;gap:10px}#bell{position:relative;width:42px;height:42px;border-radius:50%;background:var(--soft);border:1px solid var(--bd);padding:0;font-size:19px;color:inherit;cursor:pointer}
+#bdg{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;border-radius:10px;background:#e53935;color:#fff;font:700 11px/20px 'Hind Siliguri',sans-serif;font-style:normal;padding:0 5px}#bdg[hidden]{display:none}
+#pf{overflow:hidden}
+#pop{position:fixed;left:12px;right:12px;top:calc(12px + env(safe-area-inset-top,0px));max-width:520px;margin:0 auto;z-index:40;background:linear-gradient(135deg,#0f4c2a,#1f7a45);color:#fff;border-radius:20px;padding:14px 18px;box-shadow:0 14px 40px rgba(0,0,0,.35);transform:translateY(-140%);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);cursor:pointer;border-left:6px solid #ffd54f}#pop.on{transform:none}
+.av{width:38px;height:38px;border-radius:50%;object-fit:cover;background:var(--soft);display:inline-flex;align-items:center;justify-content:center;flex:none}
+.sl{display:flex;gap:10px;align-items:center;margin-top:8px}.sl span{line-height:1.35;font-size:14px}
+.pav{position:relative;display:block;width:98px;height:98px;margin:6px auto 0;border-radius:50%;background:var(--soft);border:3px solid var(--acc);cursor:pointer}.pav img{width:100%;height:100%;border-radius:50%;object-fit:cover}.pav>span{font-size:46px;line-height:92px;display:block}.pav i{position:absolute;right:-2px;bottom:0;width:32px;height:32px;border-radius:50%;background:var(--pri);color:var(--prit);font-style:normal;line-height:32px;font-size:16px}
+.gh{background:linear-gradient(135deg,#14532d,#2f9158);color:#fff;border-radius:26px;padding:20px;margin-bottom:12px;box-shadow:var(--sh);position:relative;overflow:hidden}.gh::after{content:'🌿';position:absolute;right:-6px;bottom:-24px;font-size:110px;opacity:.18}.gh h1{margin:2px 0 6px;font-size:27px}.gh p{margin:0;opacity:.95}.gh .m{font-size:13px;opacity:.85}
+details.rc{background:var(--card);border:1px solid var(--bd);border-radius:20px;margin-bottom:12px;box-shadow:var(--sh);overflow:hidden}details.rc summary{display:flex;gap:12px;align-items:center;padding:14px 16px;cursor:pointer;list-style:none}details.rc summary::-webkit-details-marker{display:none}
+.ri{width:48px;height:48px;border-radius:16px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:26px;flex:none}.rb{padding:0 18px 16px}.rb h4{margin:14px 0 4px;color:var(--pri)}.rb p{margin:0}.rb ol{margin:0;padding-left:20px}.rb li{margin-bottom:4px}
+a.btn{display:block;text-align:center;text-decoration:none;font-weight:600;padding:11px 18px;border-radius:14px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--prit)}a.btn.alt{background:transparent;color:var(--pri);border:1.5px solid var(--pri)}
 </style>
 </head>
 <body>
 <header><div class="brand"><span class="logo">🌾</span>মাঠের হাট</div>
-<a id="pf" href="#me" aria-label="প্রোফাইল"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a></header>
+<div class="hb"><button id="bell" data-a="bell" aria-label="নোটিফিকেশন">🔔<i id="bdg" hidden></i></button><a id="pf" href="#me" aria-label="প্রোফাইল"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a></div></header>
 <main id="app"></main>
-<nav id="nav"><a href="#home"><span>🏠</span>হোম</a><a href="#market"><span>🛒</span>বাজার</a><a href="#post" class="fab" aria-label="পণ্য পোস্ট করুন"><i>＋</i></a><a href="#chat"><span>💬</span>বার্তা</a><a href="#help"><span>🌱</span>সহায়তা</a></nav>
-<div class="md" id="md"></div><div id="toast"></div>
+<nav id="nav"><a href="#home"><span>🏠</span>হোম</a><a href="#market"><span>🛒</span>বাজার</a><a href="#post" class="fab" aria-label="পণ্য পোস্ট করুন"><i>＋</i></a><a href="#chat"><span>💬</span>বার্তা</a><a href="#guide"><span>🌿</span>গাইড</a></nav>
+<div id="pop" role="alert"></div><div class="md" id="md"></div><div id="toast"></div>
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
 import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, collection, query, where, getDocs, onSnapshot, orderBy, limit, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js';
 
 // Firebase প্রজেক্ট: krishi-4b93c
 const firebaseConfig = {
@@ -113,13 +124,14 @@ const CROPS = {
 'সরিষা':[[22,'বাকি ইউরিয়া ও ১ম সেচ'],[52,'২য় সেচ দিন'],[92,'সরিষা কাটুন']]};
 
 
-const fb = initializeApp(firebaseConfig), auth = getAuth(fb), db = getFirestore(fb), st = getStorage(fb);
+const fb = initializeApp(firebaseConfig), auth = getAuth(fb), db = getFirestore(fb);
 const $ = i => document.getElementById(i), BN = '০১২৩৪৫৬৭৮৯', bn = n => String(n).replace(/\d/g, d => BN[d]);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const opts = a => (a || []).map(x => `<option>${esc(x)}</option>`).join('');
 const ST = { requested: 'অনুরোধ', confirmed: 'নিশ্চিত', shipped: 'পাঠানো হয়েছে', delivered: 'পৌঁছেছে', cancelled: 'বাতিল' };
 const NEAR = { 4: '📍 আপনার উপজেলা', 3: 'আপনার জেলা', 2: 'আপনার বিভাগ', 1: 'অন্য এলাকা' };
 let ME = null, UID = null, CUR = null, REG = false, ALL = [], off = [], P = {}, A = {}, FAV = new Set();
+const LOGO = '<div style="width:100%;aspect-ratio:1;border-radius:26px;background:linear-gradient(135deg,#0f4c2a,#1f7a45);display:flex;align-items:center;justify-content:center;font-size:52px">🌾</div>';
 const today = () => new Date().toISOString().slice(0, 10);
 // ১৮+ বা অশ্লীল শব্দ (Firestore rules-এও একই তালিকা আছে; এখানে বাড়াতে চাইলে দুই জায়গায় বদলান)
 const BAD = /(sex|porn|xxx|nude|naked|escort|erotic|18\s*\+|সেক্স|পর্ন|ন্যুড|নগ্ন|যৌন)/i;
@@ -145,6 +157,7 @@ let keep = false;
 window.addEventListener('hashchange', () => { if (keep) keep = false; else CUR = null; route(); });
 onAuthStateChanged(auth, async u => {
   UID = u ? u.uid : null; ME = null;
+  if (!u) { nu.forEach(x => x()); nu = []; NS = false; }
   if (u) {
     const s = await getDoc(doc(db, 'users', u.uid));
     if (s.exists()) ME = { id: u.uid, ...s.data() };
@@ -156,21 +169,24 @@ onAuthStateChanged(auth, async u => {
 /* ---------- রাউটার ---------- */
 function route() {
   off.forEach(x => x()); off = [];
+  setAv();
   const r = (location.hash || '#home').slice(1);
   document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + r));
   if (r === 'setup') return setup();
   if (!UID || !ME) return authView();
-  ({ home, market, post, chat, help, me, favs, book }[r] || home)();
+  startNotif();
+  ({ home, market, post, chat, help, me, favs, book, guide }[r] || home)();
 }
 
 /* ---------- লগইন / নিবন্ধন ---------- */
 function authView() {
   $('app').innerHTML = REG
-    ? `<div class="card"><h3>নতুন অ্যাকাউন্ট</h3><label>পুরো নাম</label><input id="rn"><label>মোবাইল নম্বর</label><input id="rp" inputmode="numeric" placeholder="01XXXXXXXXX"><label>পাসওয়ার্ড (৬+ অক্ষর)</label><input id="rw" type="password">
+    ? `<div class="card"><h3>নতুন অ্যাকাউন্ট</h3><label>পুরো নাম</label><input id="rn"><label>মোবাইল নম্বর</label><input id="rp" inputmode="numeric" placeholder="01XXXXXXXXX"><label>পাসওয়ার্ড (৬+ অক্ষর)</label><input id="rw" type="password"><label>গ্রামের নাম</label><input id="rv" placeholder="যেমন: কালিয়াগঞ্জ">
 <label>বিভাগ</label><select id="lv">${opts(Object.keys(G))}</select><label>জেলা</label><select id="ld"></select><label>উপজেলা</label><select id="lu"></select>
 <label>আপনি কী করবেন?</label><select id="rt"><option value="both">খুচরা ও পাইকারি দুটোই</option><option value="retail">শুধু খুচরা</option><option value="wholesale">শুধু পাইকারি</option></select>
 <div class="row"><button data-a="reg">অ্যাকাউন্ট খুলুন</button><button class="alt" data-a="tog">লগইন</button></div></div>`
     : `<div class="card"><h3>লগইন</h3><label>মোবাইল নম্বর</label><input id="lp" inputmode="numeric"><label>পাসওয়ার্ড</label><input id="lw" type="password"><div class="row"><button data-a="login">লগইন</button><button class="alt" data-a="tog">নতুন অ্যাকাউন্ট</button></div></div>`;
+  $('app').insertAdjacentHTML('afterbegin', `<div style="text-align:center;margin:8px 0 14px"><div style="width:92px;margin:auto">${LOGO}</div><h2 style="margin:8px 0 0">মাঠের হাট</h2><div class="mut">কৃষকের নিজের বাজার</div></div>`);
   if (REG) { $('lv').onchange = () => { $('ld').innerHTML = opts(G[$('lv').value]); $('ld').onchange(); }; $('ld').onchange = () => $('lu').innerHTML = opts(upz($('ld').value)); $('lv').onchange(); }
 }
 A.tog = () => { REG = !REG; authView(); };
@@ -180,7 +196,7 @@ A.reg = async () => {
   if (!n || !/^01[3-9]\d{8}$/.test(p) || w.length < 6) return toast('সঠিক নাম, মোবাইল নম্বর ও ৬+ অক্ষরের পাসওয়ার্ড দিন');
   try {
     const c = await createUserWithEmailAndPassword(auth, p + '@mathar.app', w);
-    const d = { name: n, phone: p, division: $('lv').value, district: $('ld').value, upazila: $('lu').value, type: $('rt').value, banned: false, createdAt: serverTimestamp() };
+    const d = { name: n, phone: p, village: $('rv').value.trim().slice(0, 60), division: $('lv').value, district: $('ld').value, upazila: $('lu').value, type: $('rt').value, banned: false, createdAt: serverTimestamp() };
     await setDoc(doc(db, 'users', c.user.uid), d); UID = c.user.uid; ME = { id: UID, ...d }; route();
   } catch (e) { toast(e.code === 'auth/email-already-in-use' ? 'এই নম্বরে অ্যাকাউন্ট আছে' : 'নিবন্ধন ব্যর্থ হয়েছে'); }
 };
@@ -207,7 +223,7 @@ let WX = null, WPOS = null;
 const tm = (t, o) => new Date(t).toLocaleTimeString('bn-BD', o);
 function tick() {
   const d = new Date(), c = $('wclk'), e = $('wdt');
-  if (c) c.textContent = d.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  if (c) { const h = d.getHours(), pd = h < 5 ? 'রাত' : h < 12 ? 'সকাল' : h < 15 ? 'দুপুর' : h < 18 ? 'বিকেল' : h < 20 ? 'সন্ধ্যা' : 'রাত', z = n => String(n).padStart(2, '0'); c.textContent = pd + ' ' + bn(z(h % 12 || 12) + ':' + z(d.getMinutes()) + ':' + z(d.getSeconds())); }
   if (e) e.textContent = d.toLocaleDateString('bn-BD', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 }
 async function wxLoad(pos) {
@@ -255,13 +271,13 @@ async function feed() {
   const A_ = f('status', 'active'), c = f('scope', 'country'), v = f('division', ME.division), d = f('district', ME.district), u = f('upazila', ME.upazila);
   const Q = [[A_, c, v, d, u], [A_, c, v, d], [A_, c, v], [A_, c], [A_, f('scope', 'upazila'), v, d, u], [A_, f('scope', 'district'), v, d], [A_, f('scope', 'division'), v]];
   const m = new Map();
-  (await Promise.all(Q.map(q => getDocs(query(col('products'), ...q, limit(40)))))).forEach(s => s.docs.forEach(x => m.set(x.id, { id: x.id, ...x.data() })));
+  (await Promise.all(Q.map(q => getDocs(query(col('products'), ...q, limit(25)))))).forEach(s => s.docs.forEach(x => m.set(x.id, { id: x.id, ...x.data() })));
   return [...m.values()].map(p => ({ ...p, r: nearOf(p) })).sort((a, b) => b.r - a.r || (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
 }
-const card = p => `<article class="pcard">${p.urls?.[0] ? `<div class="ph"><img src="${esc(p.urls[0])}" alt="${esc(p.title)}" loading="lazy"><button class="heart" data-a="fav" data-v="${p.id}" aria-label="পছন্দ">${FAV.has(p.id) ? '❤️' : '🤍'}</button></div>` : ''}<div class="pb">
+const card = p => `<article class="pcard">${p.images?.[0] ? `<div class="ph"><img src="${esc(p.images[0])}" alt="${esc(p.title)}" loading="lazy"><button class="heart" data-a="fav" data-v="${p.id}" aria-label="পছন্দ">${FAV.has(p.id) ? '❤️' : '🤍'}</button></div>` : ''}<div class="pb">
 <span class="tag ${p.r > 2 ? 'n' : ''}">${NEAR[p.r]}</span> ${p.saleType !== 'retail' ? '<span class="tag w">পাইকারি</span>' : ''}<h3>${esc(p.title)}</h3>
 <div class="price">৳${bn(p.price)}<small>/${esc(p.unit)}</small></div>${p.saleType !== 'retail' ? `<div class="mut">পাইকারি ৳${bn(p.wholesalePrice)}/${esc(p.unit)} (ন্যূনতম ${bn(p.minWholesaleQty)})</div>` : ''}
-<div class="mut">${esc(p.category)} • মজুত ${bn(p.qty)} ${esc(p.unit)}<br>📍 ${esc(p.upazila)}, ${esc(p.district)} • ${esc(p.sellerName)}</div>
+<div class="mut">${esc(p.category)} • মজুত ${bn(p.qty)} ${esc(p.unit)}</div><div class="sl">${p.sellerPhoto ? `<img class="av" src="${esc(p.sellerPhoto)}" alt="" loading="lazy">` : '<span class="av">👤</span>'}<span><b>${esc(p.sellerName)}</b><br>📍 ${p.sellerVillage ? esc(p.sellerVillage) + ', ' : ''}${esc(p.upazila)}, ${esc(p.district)}</span></div>
 ${p.sellerId !== UID ? `<div class="row"><button data-a="order" data-v="${p.id}">অর্ডার করুন</button><button class="alt" data-a="msg" data-v="${p.id}">💬</button><button class="alt" data-a="share" data-v="${p.id}">↗</button><button class="alt" data-a="rep" data-v="${p.id}" title="রিপোর্ট">🚩</button></div>` : '<div class="mut">এটি আপনার পোস্ট</div>'}</div></article>`;
 let FLT = 'all';
 async function loadFav() { try { FAV = new Set((await getDocs(col('users', UID, 'favs'))).docs.map(d => d.id)); } catch { } }
@@ -323,7 +339,7 @@ async function openChat(p, first) {
   if (first) await sendMsg(cid, first);
   CUR = cid; if (location.hash === '#chat') route(); else { keep = true; location.hash = '#chat'; }
 }
-const sendMsg = async (cid, text) => { await addDoc(col('chats', cid, 'messages'), { from: UID, text, createdAt: serverTimestamp() }); await updateDoc(doc(db, 'chats', cid), { last: text, updatedAt: serverTimestamp() }); };
+const sendMsg = async (cid, text) => { await addDoc(col('chats', cid, 'messages'), { from: UID, text, createdAt: serverTimestamp() }); await updateDoc(doc(db, 'chats', cid), { last: text, lastFrom: UID, updatedAt: serverTimestamp() }); };
 function chat() {
   if (CUR) {
     $('app').innerHTML = `<button class="alt sm" data-a="back">← সব বার্তা</button><div id="th" style="min-height:50vh;margin:10px 0"></div><div class="row"><input id="mi" placeholder="মেসেজ লিখুন…" style="flex:3"><button data-a="send" style="flex:1">পাঠান</button></div>`;
@@ -343,7 +359,7 @@ A.send = async () => { const t = $('mi').value.trim(); if (!t) return; $('mi').v
 /* ---------- পণ্য পোস্ট (ছবিসহ) ---------- */
 function post() {
   const t = ME.type;
-  $('app').innerHTML = `<div class="card"><h3>নতুন পণ্য পোস্ট</h3><label>ছবি (১ থেকে ৫টি) *</label><input id="pi" type="file" accept="image/*" multiple>
+  $('app').innerHTML = `<div class="card"><h3>নতুন পণ্য পোস্ট</h3><label>ছবি (১ থেকে ৩টি) *</label><input id="pi" type="file" accept="image/*" multiple>
 <label>পণ্যের নাম</label><input id="pt"><label>ধরন</label><select id="pc">${opts(CATS)}</select>
 <div class="row"><div><label>মজুত পরিমাণ</label><input id="pq" type="number" min="1"></div><div><label>একক</label><select id="pu">${opts(['মণ', 'কেজি', 'পিস', 'লিটার', 'টন', 'টি'])}</select></div></div>
 <label>বিক্রির ধরন</label><select id="ps">${t !== 'wholesale' ? '<option value="retail">খুচরা</option>' : ''}${t !== 'retail' ? '<option value="wholesale">পাইকারি</option>' : ''}${t === 'both' ? '<option value="both">খুচরা ও পাইকারি</option>' : ''}</select>
@@ -354,9 +370,18 @@ function post() {
 <button id="pb" data-a="doPost" style="width:100%">পোস্ট করুন</button></div>`;
   const sc = () => { const v = $('ps').value; $('wsf').hidden = v === 'retail'; $('rtf').hidden = v === 'wholesale'; }; $('ps').onchange = sc; sc();
 }
-const shrink = file => new Promise(r => { const i = new Image(); i.onload = () => { const k = Math.min(1, 1200 / Math.max(i.width, i.height)), c = document.createElement('canvas'); c.width = i.width * k; c.height = i.height * k; c.getContext('2d').drawImage(i, 0, 0, c.width, c.height); c.toBlob(r, 'image/jpeg', .8); }; i.src = URL.createObjectURL(file); });
+const shrink = (file, mx = 560, q = 0.55, cap = 80000) => new Promise((res, rej) => {
+  const i = new Image();
+  i.onload = () => {
+    const k = Math.min(1, mx / Math.max(i.width, i.height)), c = document.createElement('canvas'); c.width = Math.round(i.width * k); c.height = Math.round(i.height * k);
+    c.getContext('2d').drawImage(i, 0, 0, c.width, c.height);
+    let d = c.toDataURL('image/jpeg', q); while (d.length > cap && q > 0.3) { q -= 0.1; d = c.toDataURL('image/jpeg', q); }
+    URL.revokeObjectURL(i.src); d.length > cap * 1.8 ? rej(new Error('big')) : res(d);
+  };
+  i.onerror = rej; i.src = URL.createObjectURL(file);
+});
 A.doPost = async () => {
-  const fl = [...$('pi').files].slice(0, 5), title = $('pt').value.trim(), qty = +$('pq').value, price = +$('pp').value, sale = $('ps').value;
+  const fl = [...$('pi').files].slice(0, 3), title = $('pt').value.trim(), qty = +$('pq').value, price = +$('pp').value, sale = $('ps').value;
   const ws = +$('pw').value || 0, mn = +$('pm').value || 0;
   if (!fl.length || !title || !qty || (sale !== 'wholesale' && !price)) return toast('ছবি, নাম, পরিমাণ ও দাম দিন');
   if (sale !== 'retail' && (!ws || !mn)) return toast('পাইকারি দাম ও ন্যূনতম পরিমাণ দিন');
@@ -364,13 +389,14 @@ A.doPost = async () => {
   let why = BAD.test(title + ' ' + $('pd').value) ? 'নিষিদ্ধ শব্দ' : '';
   if (!why) for (const x of fl) if (await adultImage(x)) { why = '১৮+ ছবি'; break; }
   if (why) { await addDoc(col('violations'), { uid: UID, name: ME.name, title, reason: why, at: serverTimestamp() }).catch(() => {}); b.disabled = false; b.textContent = 'পোস্ট করুন'; return toast('এই পোস্ট নীতিমালা-বিরোধী (' + why + ')। বাতিল করা হয়েছে।'); }
-  b.textContent = 'ছবি আপলোড হচ্ছে…';
+  b.textContent = 'পোস্ট হচ্ছে…';
   try {
-    const images = [], urls = [];
-    for (let i = 0; i < fl.length; i++) { const path = `products/${UID}/${Date.now()}_${i}.jpg`, r = ref(st, path); await uploadBytes(r, await shrink(fl[i]), { contentType: 'image/jpeg' }); images.push(path); urls.push(await getDownloadURL(r)); }
-    await addDoc(col('products'), { sellerId: UID, sellerName: ME.name, title, description: $('pd').value.trim(), category: $('pc').value, price: price || ws, unit: $('pu').value, qty, saleType: sale, wholesalePrice: ws, minWholesaleQty: mn, scope: $('pr').value, division: ME.division, district: ME.district, upazila: ME.upazila, images, urls, status: 'active', createdAt: serverTimestamp() });
+    const images = [];
+    for (const x of fl) images.push(await shrink(x));
+    if (images.join('').length > 600000) throw new Error('big');
+    await addDoc(col('products'), { sellerId: UID, sellerName: ME.name, sellerVillage: ME.village || '', sellerPhoto: ME.photo || '', title, description: $('pd').value.trim(), category: $('pc').value, price: price || ws, unit: $('pu').value, qty, saleType: sale, wholesalePrice: ws, minWholesaleQty: mn, scope: $('pr').value, division: ME.division, district: ME.district, upazila: ME.upazila, images, status: 'active', createdAt: serverTimestamp() });
     toast('পোস্ট প্রকাশিত হয়েছে ✅'); location.hash = '#market';
-  } catch (e) { console.error(e); toast('পোস্ট ব্যর্থ হয়েছে'); b.disabled = false; b.textContent = 'পোস্ট করুন'; }
+  } catch (e) { console.error(e); toast(e.message === 'big' ? 'ছবিগুলো বেশি বড়, কম ছবি দিন' : 'পোস্ট ব্যর্থ হয়েছে'); b.disabled = false; b.textContent = 'পোস্ট করুন'; }
 };
 
 /* ---------- কৃষি সহায়তা: AI প্রশ্ন + হিসাব ---------- */
@@ -387,11 +413,10 @@ A.calc = () => { const v = i => +$(i).value || 0, cost = v('c1') + v('c2') + v('
 
 /* ---------- প্রোফাইল (উপরে ডানে আইকন) ---------- */
 async function me() {
-  $('app').innerHTML = `<div class="card"><h3>👤 ${esc(ME.name)}</h3><div class="mut">${esc(ME.phone)} • ${esc(ME.upazila)}, ${esc(ME.district)}, ${esc(ME.division)}</div>
-<label>আমি করতে চাই</label><select id="ut"><option value="both">খুচরা ও পাইকারি</option><option value="retail">শুধু খুচরা</option><option value="wholesale">শুধু পাইকারি</option></select>
-<div class="row"><button data-a="ut">সংরক্ষণ</button><button class="alt" data-a="out">লগ আউট</button></div></div>
+  $('app').innerHTML = `<div class="card" style="text-align:center"><label class="pav" for="pph">${ME.photo ? `<img src="${esc(ME.photo)}" alt="">` : '<span>👤</span>'}<i>📷</i></label><input id="pph" type="file" accept="image/*" hidden><h3 style="margin-top:10px">${esc(ME.name)}</h3><div class="mut">${ME.village ? '🏡 ' + esc(ME.village) + ' • ' : ''}${esc(ME.upazila)}, ${esc(ME.district)}, ${esc(ME.division)}</div><div class="mut">${esc(ME.phone)}</div></div>
+<div class="card"><label>আমার গ্রামের নাম</label><input id="pv" value="${esc(ME.village || '')}" placeholder="যেমন: কালিয়াগঞ্জ"><label>আমি করতে চাই</label><select id="ut"><option value="both">খুচরা ও পাইকারি</option><option value="retail">শুধু খুচরা</option><option value="wholesale">শুধু পাইকারি</option></select><div class="row"><button data-a="ut">সংরক্ষণ</button><button class="alt" data-a="perm">🔔 ফোন নোটিফিকেশন চালু</button></div><div class="row"><button class="alt" data-a="out">লগ আউট</button></div></div>
 <div class="card"><h3>আমার পোস্ট</h3><div id="mp"></div></div><div class="card"><h3>আমার ক্রয় (অর্ডার)</h3><div id="ob"></div></div><div class="card"><h3>আমার কাছে আসা অর্ডার</h3><div id="os"></div></div>`;
-  $('ut').value = ME.type;
+  $('ut').value = ME.type; $('pph').onchange = e => avatar(e.target.files[0]);
   const ord = (id, q, seller) => off.push(onSnapshot(q, s => {
     const L = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
     $(id).innerHTML = L.length ? L.map(o => `<div class="it"><b>${esc(o.title)}</b> <span class="tag">${ST[o.status]}</span><div class="mut">${seller ? 'ক্রেতা: ' + esc(o.buyerName) : 'বিক্রেতা: ' + esc(o.sellerName)} • ${bn(o.qty)} • ${o.mode === 'wholesale' ? 'পাইকারি' : 'খুচরা'} • মোট ৳${bn(o.total)}</div>
@@ -403,12 +428,74 @@ ${seller && o.status === 'requested' ? `<button class="sm" data-a="os" data-v="$
     $('mp').innerHTML = s.docs.length ? s.docs.map(d => { const p = d.data(); return `<div class="it"><b>${esc(p.title)}</b> <span class="tag">${PS[p.status] || p.status}</span> <button class="sm del" data-a="dp" data-v="${d.id}">মুছুন</button></div>`; }).join('') : '<p class="mut">কোনো পোস্ট নেই</p>';
   }));
 }
-A.ut = async (v, b) => { if (b.tagName === 'BUTTON' && !v) { await updateDoc(doc(db, 'users', UID), { type: $('ut').value }); ME.type = $('ut').value; toast('সংরক্ষিত'); } };
+A.ut = async (v, b) => { if (b.tagName === 'BUTTON' && !v) { const vl = $('pv').value.trim().slice(0, 60); await updateDoc(doc(db, 'users', UID), { type: $('ut').value, village: vl }); ME.type = $('ut').value; ME.village = vl; toast('সংরক্ষিত ✅'); me(); } };
 A.out = () => signOut(auth);
 A.os = async v => { const [id, s] = v.split('|'); await updateDoc(doc(db, 'orders', id), { status: s, updatedAt: serverTimestamp() }); };
 A.dp = async id => { if (confirm('পোস্টটি মুছবেন?')) await deleteDoc(doc(db, 'products', id)); };
 
 
+
+
+/* ---------- কৃষি গাইড: জৈব সার, জৈব বালাইনাশক, মৌসুমি পরামর্শ ---------- */
+const MONTHS = [['জানুয়ারি', 'বোরো চারা রোপণ শেষ করুন। ঠান্ডায় বীজতলা পলিথিনে ঢাকুন। আলুতে কুয়াশা-মেঘলায় নাবী ধসা রোগ নজরে রাখুন।'], ['ফেব্রুয়ারি', 'গমে শেষ সেচ দিন, সরিষা পাকলে কাটুন। আমের মুকুলে ছত্রাকের দিকে নজর রাখুন।'], ['মার্চ', 'বোরো ধানে থোড় অবস্থায় জমিতে পানি রাখুন। গ্রীষ্মকালীন সবজি (ঢেঁড়স, করলা, লাউ) বীজ বপন করুন।'], ['এপ্রিল', 'বোরো কাটার প্রস্তুতি নিন। ঝড়-বৃষ্টির আগে পাকা ধান কেটে ফেলুন। পাট বীজ বপনের সময়।'], ['মে', 'বোরো কাটা-মাড়াই ও শুকানো। আউশ বপন করুন। জমি সবুজ সারের জন্য তৈরি রাখুন।'], ['জুন', 'আমনের বীজতলা তৈরি করুন। বর্ষার পানি নিষ্কাশনের নালা পরিষ্কার রাখুন।'], ['জুলাই', 'আমন রোপণ শুরু করুন (২৫-৩০ দিনের চারা)। জলাবদ্ধতা হলে দ্রুত পানি বের করুন।'], ['আগস্ট', 'আমন রোপণ শেষ করুন। শীতের সবজির বীজতলা (বেগুন, টমেটো) তৈরি শুরু করুন।'], ['সেপ্টেম্বর', 'আমনে পোকা-রোগ নজরে রাখুন, ডাল পুঁতে পাখি বসার ব্যবস্থা করুন। সবজির চারা রোপণের প্রস্তুতি নিন।'], ['অক্টোবর', 'আলু, সরিষা ও রবি ফসলের জমি তৈরি করুন। জৈব সার ও কম্পোস্ট মাটিতে মিশান।'], ['নভেম্বর', 'গম, আলু, সরিষা ও পেঁয়াজ বপন-রোপণের সময়। বোরোর বীজতলার প্রস্তুতি নিন।'], ['ডিসেম্বর', 'বোরো বীজতলা ঠান্ডা থেকে রক্ষা করুন। শীতের সবজিতে নিয়মিত সেচ দিন, কুয়াশায় রোগ দেখা দিলে আক্রান্ত অংশ সরান।']];
+const GUIDE = {
+fert: [
+{ i: '🍂', t: 'কম্পোস্ট (আবর্জনা সার)', w: 'রান্নাঘরের উচ্ছিষ্ট, খড় ও পাতা থেকে প্রায় বিনা খরচে সার', m: 'কাঁচা সবুজ (ঘাস, কচুরিপানা, শাকের অংশ) ও শুকনো (খড়, ঝরা পাতা) সমান ভাগে, গোবর, পানি', s: ['ছায়াযুক্ত জায়গায় প্রায় ১ মিটার গভীর গর্ত বা স্তূপ করুন', 'সবুজ ও শুকনো উপকরণ পরত করে দিন, প্রতি পরতে একটু গোবর ছিটান', 'ভেজা রাখুন কিন্তু পানি জমতে দেবেন না, ওপরে খড় বা চট ঢাকুন', '১৫-২০ দিন পর পর উল্টে দিন', '৩-৪ মাসে গাঢ় বাদামি ঝুরঝুরে হলে ব্যবহার করুন'], u: 'প্রতি বিঘায় ৫০০-১০০০ কেজি, জমি তৈরির সময় মাটিতে মিশিয়ে দিন', n: 'দুর্গন্ধ হলে খুব ভেজা হয়েছে। শুকনো খড় মিশিয়ে উল্টে দিন।' },
+{ i: '🪱', t: 'কেঁচো সার (ভার্মি কম্পোস্ট)', w: 'দ্রুত তৈরি, পুষ্টিসমৃদ্ধ, মাটি ঝুরঝুরে করে', m: 'কেঁচো (কৃষি অফিস বা বীজের দোকান থেকে), আধাপচা গোবর, কচুরিপানা বা পচা পাতা, ছায়াযুক্ত বাক্স বা গর্ত', s: ['৩-৪ দিন পচানো গোবর ও পাতা মিশিয়ে ৩০-৪০ সেমি পুরু বিছানা করুন', 'কেঁচো ছেড়ে দিন, ওপরে চট ঢাকুন', 'হালকা ভেজা রাখুন, রোদ ও পিঁপড়া থেকে বাঁচান', 'নতুন খাবার একটু একটু করে ওপরে দিন', '৪৫-৬০ দিনে কালচে দানাদার সার হলে কেঁচো সরিয়ে সার তুলুন'], u: 'প্রতি বিঘায় ২৫০-৫০০ কেজি', n: 'টাটকা গোবর সরাসরি দেবেন না, তাপে কেঁচো মরে যায়।' },
+{ i: '🌾', t: 'সবুজ সার (ধইঞ্চা)', w: 'মাটিতে জৈব পদার্থ ও নাইট্রোজেন বাড়ায়, খরচ কম', m: 'ধইঞ্চা বা সবুজ সারের বীজ, প্রতি বিঘায় প্রায় ৫-৬ কেজি', s: ['ফসল তোলার পর জমিতে বীজ ছিটান', '৪৫-৫০ দিন বয়সে (ফুল আসার আগে) গাছ কেটে বা চাষ দিয়ে মাটিতে মিশিয়ে দিন', 'পানি দিয়ে জমি ভিজিয়ে ১০-১৫ দিন পরে আসল ফসল রোপণ করুন'], u: 'ধান বা সবজি লাগানোর আগের পতিত সময়ে', n: 'ফুল আসার পরে কাটলে গাছ শক্ত হয়ে যায়, পচতে দেরি হয়।' },
+{ i: '🧪', t: 'তরল জৈব সার (জীবামৃত)', w: 'মাটিতে উপকারী জীবাণু বাড়ায়, গাছ সবল হয়', m: 'গোবর ১০ কেজি, গোমূত্র ১০ লিটার, গুড় ২ কেজি, ডালের গুঁড়া ২ কেজি, পুরনো গাছের নিচের মাটি এক মুঠো, পানি ২০০ লিটার, প্লাস্টিক ড্রাম', s: ['ড্রামে সব উপকরণ ভালো করে মিশিয়ে ছায়ায় রাখুন, মুখ চট দিয়ে ঢাকুন', 'দিনে ২ বার ঘড়ির কাঁটার দিকে নাড়ুন', '২-৩ দিন গাঁজন হলে ব্যবহার করুন', 'সেচের পানির সাথে বা গাছের গোড়ায় দিন'], u: 'এই পরিমাণ প্রায় ১ একর (৩ বিঘা) জমির জন্য। ১৫ দিন পর পর দিন। আগে ছোট জমিতে পরীক্ষা করুন', n: '৭ দিনের বেশি রাখবেন না। বানানো তরল সরাসরি পাতায় ঢালবেন না।' }],
+pest: [
+{ i: '🌿', t: 'নিমপাতার নির্যাস', w: 'জাব পোকা, পাতা মোড়ানো ও ছোট পোকা কমায়', m: 'নিমপাতা ১ কেজি, পানি ১০ লিটার, পরিষ্কার কাপড়', s: ['পাতা বেটে বা থেঁতো করে পানিতে ২৪ ঘণ্টা ভিজিয়ে রাখুন', 'কাপড়ে ছেঁকে নিন', 'আগে কয়েকটি গাছে পরীক্ষা করুন, ঠিক থাকলে সকালে বা বিকেলে স্প্রে করুন'], u: '৫-৭ দিন পর পর, পোকা কমা পর্যন্ত', n: 'কড়া রোদে স্প্রে করবেন না। স্প্রের পর হাত-মুখ ধুয়ে নিন।' },
+{ i: '🧄', t: 'রসুন-মরিচ স্প্রে', w: 'জাব পোকা ও ছোট পোকা তাড়ায়', m: 'রসুন ১০০ গ্রাম, কাঁচা মরিচ ৫০ গ্রাম, পানি ১ লিটার, তরল সাবান ১ চা-চামচ', s: ['রসুন ও মরিচ বেটে পানিতে মিশিয়ে ১২ ঘণ্টা রাখুন', 'ছেঁকে নিন', 'সাবান ও আরও ৩ লিটার পানি মিশিয়ে স্প্রে করুন'], u: 'সপ্তাহে ১ বার, সকালে বা বিকেলে', n: 'মরিচ কাটার সময় গ্লাভস নিন। চোখে লাগলে পানিতে ধুয়ে ফেলুন।' },
+{ i: '🧼', t: 'সাবান-পানি স্প্রে', w: 'জাব পোকা ও মাকড় নিয়ন্ত্রণের সহজ উপায়', m: 'তরল সাবান বা ব্লিচবিহীন সাবান, পানি', s: ['১ লিটার পানিতে ১ চা-চামচ তরল সাবান মেশান', 'পাতার নিচ-ওপর দুই দিকে ভিজিয়ে স্প্রে করুন'], u: '৫-৭ দিন পর পর ২-৩ বার', n: 'আগে ২-৩টি পাতায় পরীক্ষা করুন। পাতা পুড়ে গেলে সাবান কমিয়ে দিন।' },
+{ i: '🟨', t: 'হলুদ আঠালো ফাঁদ', w: 'সাদা মাছি, জাব পোকা ও ফড়িং ধরে', m: 'হলুদ রঙের প্লাস্টিক, টিন বা কাগজ, আঠা (গ্রিজ বা মোটর অয়েল), কাঠি', s: ['হলুদ পাতের দুই পাশে আঠা মাখান', 'কাঠিতে লাগিয়ে ফসলের মাথার সামান্য ওপরে সারিতে পুঁতুন', 'পোকা জমলে পরিষ্কার করে আবার আঠা দিন'], u: 'পোকা দেখা দিলেই লাগান, প্রতি সপ্তাহে দেখুন', n: 'বেশি ঘন করে লাগাবেন না, উপকারী পোকাও আটকে যেতে পারে।' },
+{ i: '🐦', t: 'পাখি বসার ডাল (পার্চিং)', w: 'ধান ও সবজির পোকা পাখিতে খেয়ে দেয়, খরচ নেই', m: 'ডালপালা বা বাঁশের খুঁটি', s: ['জমিতে ২-৩ হাত উঁচু ডালপালা বা খুঁটি পুঁতে দিন', 'কয়েক মিটার পর পর রাখুন', 'আক্রান্ত ডগা বা পাতা কেটে মাটিতে পুঁতে ফেলুন'], u: 'চারা রোপণের পর থেকে ফসল ওঠা পর্যন্ত', n: 'বেগুনের ডগা ও ফল ছিদ্রকারী পোকায় আক্রান্ত ডগা সাথে সাথে কেটে ফেলুন।' }]};
+let GT = 'fert';
+function guide() {
+  const mo = new Date().getMonth(), T = [['fert', '🌱 জৈব সার'], ['pest', '🐛 জৈব বালাইনাশক'], ['cal', '📅 মৌসুমি পরামর্শ']];
+  const body = GT === 'cal' ? MONTHS.map((m, i) => `<div class="card" style="${i === mo ? 'border:2px solid var(--acc)' : ''}"><h3>${m[0]} ${i === mo ? '<span class="tag n">এই মাস</span>' : ''}</h3><div>${m[1]}</div></div>`).join('')
+    : GUIDE[GT].map(r => `<details class="rc"><summary><span class="ri">${r.i}</span><span><b>${r.t}</b><br><small class="mut">${r.w}</small></span></summary><div class="rb"><h4>উপকরণ</h4><p>${r.m}</p><h4>তৈরির ধাপ</h4><ol>${r.s.map(x => `<li>${x}</li>`).join('')}</ol><h4>ব্যবহার</h4><p>${r.u}</p><div class="adv">⚠️ ${r.n}</div></div></details>`).join('');
+  $('app').innerHTML = `<section class="gh"><div class="m">${MONTHS[mo][0]} মাসের পরামর্শ</div><h1>🌿 কৃষি গাইড</h1><p>${MONTHS[mo][1]}</p></section><div class="chips">${T.map(t => `<button class="chip ${t[0] === GT ? 'on' : ''}" data-a="gt" data-v="${t[0]}">${t[1]}</button>`).join('')}</div>${body}<div class="card"><h3>📞 আরও সাহায্য দরকার?</h3><p class="mut">জৈব ব্যবস্থায় সমস্যা না কমলে উপজেলা কৃষি অফিসে যোগাযোগ করুন। নতুন কোনো মিশ্রণ আগে অল্প জায়গায় পরীক্ষা করে দেখুন।</p><div class="row"><a class="btn" href="tel:16123">কৃষি কল সেন্টার ১৬১২৩</a><a class="btn alt" href="#help">বিশেষজ্ঞকে প্রশ্ন করুন</a></div></div>`;
+}
+A.gt = v => { GT = v; guide(); };
+
+/* ---------- প্রোফাইল ছবি ---------- */
+const DEFPF = $('pf').innerHTML;
+function setAv() { $('pf').innerHTML = ME?.photo ? `<img src="${esc(ME.photo)}" alt="" style="width:100%;height:100%;object-fit:cover">` : DEFPF; }
+async function avatar(file) {
+  if (!file) return; toast('ছবি যাচাই হচ্ছে…');
+  try {
+    if (await adultImage(file)) return toast('এই ছবি দেওয়া যাবে না');
+    const u = await shrink(file, 160, 0.7, 20000); await updateDoc(doc(db, 'users', UID), { photo: u }); ME.photo = u; setAv(); me(); toast('প্রোফাইল ছবি বদলেছে ✅');
+  } catch (e) { console.error(e); toast('ছবি বদলানো যায়নি'); }
+}
+
+/* ---------- পপআপ নোটিফিকেশন ---------- */
+let NT = [], UNREAD = 0, NS = false, nu = [];
+try { NT = JSON.parse(localStorage.getItem('nt') || '[]'); } catch { }
+function badge() { const b = $('bdg'); b.hidden = !UNREAD; b.textContent = bn(UNREAD); }
+function notify(t, x, l) {
+  NT.unshift({ t, x, l, at: Date.now() }); NT = NT.slice(0, 30); UNREAD++; badge();
+  try { localStorage.setItem('nt', JSON.stringify(NT)); } catch { }
+  const p = $('pop'); p.innerHTML = `<b>${esc(t)}</b><div>${esc(x)}</div>`; p.dataset.l = l || ''; p.classList.add('on');
+  clearTimeout(notify.h); notify.h = setTimeout(() => p.classList.remove('on'), 6500);
+  if (navigator.vibrate) navigator.vibrate(180);
+  if ('Notification' in window && Notification.permission === 'granted' && document.hidden) { try { new Notification(t, { body: x }); } catch { } }
+}
+$('pop').onclick = e => { const p = e.currentTarget; p.classList.remove('on'); if (p.dataset.l) location.hash = p.dataset.l; };
+A.bell = () => { UNREAD = 0; badge(); modal(`<h3>🔔 নোটিফিকেশন</h3>${NT.length ? NT.map(n => `<div class="it"><b>${esc(n.t)}</b><div>${esc(n.x)}</div><div class="mut">${new Date(n.at).toLocaleString('bn-BD')}</div></div>`).join('') : '<p class="mut">এখনো কিছু নেই</p>'}<div class="row"><button class="alt" data-a="mc">বন্ধ করুন</button><button class="del" data-a="nclr">সব মুছুন</button></div>`); };
+A.nclr = () => { NT = []; try { localStorage.removeItem('nt'); } catch { } modal(''); };
+A.perm = async () => {
+  if (!('Notification' in window)) return toast('এই ব্রাউজারে সমর্থিত নয়');
+  const r = await Notification.requestPermission(); toast(r === 'granted' ? 'চালু হয়েছে ✅ (সাইট খোলা বা পটভূমিতে থাকলে ফোনে নোটিফিকেশন আসবে)' : 'অনুমতি দেওয়া হয়নি');
+};
+function startNotif() {
+  if (NS) return; NS = true; let f1 = true, f2 = true, f3 = true; const er = () => { };
+  nu.push(onSnapshot(query(col('orders'), f('sellerId', UID)), s => { if (f1) { f1 = false; return; } s.docChanges().forEach(c => { if (c.type === 'added') { const o = c.doc.data(); notify('🛒 নতুন অর্ডার', `${o.buyerName}: ${o.title} (${bn(o.qty)} ${o.mode === 'wholesale' ? 'পাইকারি' : ''})`, '#me'); } }); }, er));
+  nu.push(onSnapshot(query(col('orders'), f('buyerId', UID)), s => { if (f2) { f2 = false; return; } s.docChanges().forEach(c => { if (c.type === 'modified') { const o = c.doc.data(); notify('📦 অর্ডারের খবর', `${o.title}: ${ST[o.status]}`, '#me'); } }); }, er));
+  nu.push(onSnapshot(query(col('chats'), where('members', 'array-contains', UID)), s => { if (f3) { f3 = false; return; } s.docChanges().forEach(c => { const d = c.doc.data(); if (c.type !== 'removed' && d.lastFrom && d.lastFrom !== UID && !(location.hash === '#chat' && CUR === c.doc.id)) notify('💬 নতুন বার্তা', `${d.names?.[d.lastFrom] || ''}: ${d.last}`, '#chat'); }); }, er));
+  nu.push(onSnapshot(query(col('announcements'), orderBy('at', 'desc'), limit(1)), s => { const d = s.docs[0]; if (!d) return; let seen = ''; try { seen = localStorage.getItem('ann'); } catch { } if (seen !== d.id) { try { localStorage.setItem('ann', d.id); } catch { } notify('📢 ' + d.data().title, d.data().text || '', '#home'); } }, er));
+}
 
 /* ---------- প্রথম সেটআপ পাতা: yoursite/#setup ---------- */
 const RULES = { fs: `rules_version = '2';
@@ -449,7 +536,8 @@ service cloud.firestore {
         && request.resource.data.status == 'active'
         && clean(request.resource.data.title) && clean(request.resource.data.description)
         && request.resource.data.category in ['ধান ও শস্য', 'সবজি', 'ফল', 'মাছ', 'গবাদিপশু ও দুধ', 'বীজ ও চারা', 'সার ও কীটনাশক', 'কৃষি যন্ত্রপাতি']
-        && request.resource.data.images.size() >= 1 && request.resource.data.images.size() <= 5
+        && request.resource.data.images.size() >= 1 && request.resource.data.images.size() <= 3
+        && request.resource.data.images[0] is string
         && request.resource.data.scope in ['upazila', 'district', 'division', 'country']
         && request.resource.data.saleType in ['retail', 'wholesale', 'both']
         && request.resource.data.division == me().division
@@ -491,6 +579,7 @@ service cloud.firestore {
       allow create: if si() && request.resource.data.uid == request.auth.uid && request.resource.data.answer == '';
       allow update, delete: if adm();
     }
+    match /announcements/{a} { allow read: if si(); allow write: if adm(); }
     match /prices/{p} { allow read: if si(); allow write: if adm(); }
 
     // নীতিমালা: রিপোর্ট ও লগ
@@ -505,22 +594,9 @@ service cloud.firestore {
     }
   }
 }
-`, st: `rules_version = '2';
-service firebase.storage {
-  match /b/{bucket}/o {
-    function isAdmin() { return request.auth != null && firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid)); }
-    match /products/{uid}/{file} {
-      allow read: if request.auth != null;
-      allow create, update: if request.auth != null && request.auth.uid == uid
-        && request.resource.size < 3 * 1024 * 1024
-        && request.resource.contentType.matches('image/(jpeg|png|webp)');
-      allow delete: if request.auth != null && (request.auth.uid == uid || isAdmin());
-    }
-  }
-}
 ` };
 function setup() {
-  $('app').innerHTML = `<h2>⚙️ প্রথম সেটআপ</h2><div class="card"><h3>১. Firestore নিয়ম</h3><p class="mut">Firebase → Firestore Database → Rules ট্যাবে সব মুছে এটা বসিয়ে Publish দিন।</p><button data-a="cp" data-v="fs">নিয়ম কপি করুন</button></div><div class="card"><h3>২. Storage নিয়ম</h3><p class="mut">Firebase → Storage → Rules ট্যাবে সব মুছে এটা বসিয়ে Publish দিন।</p><button data-a="cp" data-v="st">নিয়ম কপি করুন</button></div>`;
+  $('app').innerHTML = `<h2>⚙️ প্রথম সেটআপ</h2><div class="card"><h3>Firestore নিয়ম</h3><p class="mut">নিচের বোতামে কপি করুন। তারপর Firebase → Firestore Database → Rules ট্যাবে সব মুছে এটা বসিয়ে Publish দিন। Storage লাগবে না।</p><button data-a="cp" data-v="fs">নিয়ম কপি করুন</button></div>`;
 }
 A.cp = async v => { try { await navigator.clipboard.writeText(RULES[v]); toast('কপি হয়েছে ✅'); } catch { toast('কপি করা যায়নি'); } };
 
