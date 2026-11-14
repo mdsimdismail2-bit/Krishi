@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f4c2a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%230f4c2a%27/%3E%3Ctext y=%27.72em%27 x=%2712%27 font-size=%2772%27%3E🌾%3C/text%3E%3C/svg%3E">
+<title>মাঠের হাট</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f7f4;--card:#fff;--tx:#10231a;--mut:#64766b;--pri:#0f4c2a;--pri2:#1f7a45;--prit:#fff;--acc:#e5a50a;--bd:#e3ebe5;--soft:#eaf3ec;--warn:#fff6dd;--red:#c0392b;--sh:0 6px 24px rgba(15,76,42,.09);--glass:rgba(255,255,255,.82)}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1610;--card:#142419;--tx:#e8f2ec;--mut:#9bb3a5;--pri:#5fd08a;--pri2:#3fae6a;--prit:#06200f;--acc:#f0b429;--bd:#243a2c;--soft:#1b3225;--warn:#3a3012;--red:#ff8a7a;--sh:0 6px 24px rgba(0,0,0,.35);--glass:rgba(20,36,25,.85)}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 16px/1.6 'Hind Siliguri',system-ui,sans-serif;padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+header{position:sticky;top:0;z-index:5;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px}
+.brand{font-weight:700;font-size:20px;display:flex;gap:8px;align-items:center}.logo{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#0f4c2a,#1f7a45);display:flex;align-items:center;justify-content:center;font-size:19px}
+#pf{width:42px;height:42px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--pri);border:1px solid var(--bd)}
+main{max-width:720px;margin:0 auto;padding:14px;animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font-size:22px;margin:6px 0 12px}h3{margin:2px 0 6px;font-size:18px}
+#nav{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--bd);border-radius:26px;box-shadow:var(--sh);z-index:5;max-width:560px;margin:0 auto;padding:4px 6px}
+#nav a{flex:1;text-align:center;padding:6px 2px;color:var(--mut);text-decoration:none;font-size:12px;font-weight:600;border-radius:18px}
+#nav a span{display:block;font-size:21px;line-height:1.25}#nav a.on{color:var(--pri);background:var(--soft)}
+#nav .fab{flex:none;width:58px;height:58px;margin:-26px 8px 0;padding:0;border-radius:50%;background:linear-gradient(135deg,var(--acc),#f3c13a);color:#1d1400;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(229,165,10,.45)}
+#nav .fab i{font-style:normal;font-size:32px;line-height:1;font-weight:400}
+.card,.pcard,.it{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:var(--sh)}
+.it{background:var(--soft);box-shadow:none;border-radius:14px;padding:10px 12px;margin:8px 0}
+.hero{background:linear-gradient(135deg,#0f4c2a,#1f7a45 70%,#2f9158);color:#fff;border-radius:26px;padding:22px 20px;margin-bottom:14px;box-shadow:var(--sh);position:relative;overflow:hidden}
+.hero::after{content:'🌾';position:absolute;right:-8px;bottom:-26px;font-size:120px;opacity:.16}
+.hero h1{margin:0;font-size:28px;line-height:1.25}.hero .m{opacity:.85;font-size:14px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.tile{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:14px 6px;text-align:center;text-decoration:none;color:var(--tx);font-weight:600;font-size:14px;box-shadow:var(--sh)}.tile span{display:block;font-size:30px;line-height:1.3}
+.pcard{padding:0;overflow:hidden}.ph{position:relative}.ph img{width:100%;height:210px;object-fit:cover;display:block}.pb{padding:14px 16px 16px}
+.heart{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;border:0;background:var(--glass);font-size:20px;padding:0;cursor:pointer;color:inherit}
+.mut{color:var(--mut);font-size:14px}.price{font-size:24px;font-weight:700;color:var(--pri)}.price small{font-size:14px;color:var(--mut);font-weight:500}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:99px;background:var(--soft);color:var(--pri)}.tag.n{background:var(--acc);color:#1d1400}.tag.w{background:var(--pri);color:var(--prit)}
+button{font:inherit;font-weight:600;cursor:pointer;border:0;background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--prit);padding:11px 18px;border-radius:14px}
+button.alt{background:transparent;color:var(--pri);border:1.5px solid var(--pri)}button.sm{padding:4px 12px;font-size:13px;border-radius:10px}button.del{background:transparent;color:var(--red);border:1.5px solid var(--red)}button:disabled{opacity:.6}
+input,select,textarea{width:100%;font:inherit;padding:12px 14px;border:1.5px solid var(--bd);border-radius:14px;background:var(--bg);color:var(--tx);margin-top:4px}
+label{display:block;font-weight:600;font-size:14px;margin-top:14px}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.row>*{flex:1;min-width:110px}.grid{display:grid;gap:14px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0;scrollbar-width:none}.chip{flex:none;padding:7px 15px;border-radius:99px;background:var(--card);border:1.5px solid var(--bd);font-weight:600;font-size:14px;color:var(--tx);cursor:pointer}.chip.on{background:var(--pri);color:var(--prit);border-color:var(--pri)}
+.adv{background:var(--warn);border-left:5px solid var(--acc);padding:10px 14px;border-radius:12px;margin-top:10px}
+.pr{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--bd)}.pr:last-child{border:0}
+.msg{max-width:80%;padding:9px 14px;border-radius:18px 18px 18px 4px;margin:6px 0;background:var(--soft);width:fit-content}.msg.me{background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--prit);margin-left:auto;border-radius:18px 18px 4px 18px}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.sum div{background:var(--soft);border-radius:14px;padding:10px 4px}.sum b{display:block;font-size:19px}
+.sk{height:230px;border-radius:20px;background:linear-gradient(90deg,var(--soft),var(--card),var(--soft));background-size:200% 100%;animation:sk 1.2s infinite}@keyframes sk{to{background-position:-200% 0}}
+.md{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:20;align-items:flex-end;justify-content:center;padding:0}.md.on{display:flex}.md .card{width:min(520px,100%);margin:0;border-radius:26px 26px 0 0}
+#toast{position:fixed;left:50%;bottom:calc(104px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--pri);color:var(--prit);padding:11px 20px;border-radius:14px;z-index:30;display:none;max-width:90%;box-shadow:var(--sh)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<header><div class="brand"><span class="logo">🌾</span>মাঠের হাট</div>
+<a id="pf" href="#me" aria-label="প্রোফাইল"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a></header>
+<main id="app"></main>
+<nav id="nav"><a href="#home"><span>🏠</span>হোম</a><a href="#market"><span>🛒</span>বাজার</a><a href="#post" class="fab" aria-label="পণ্য পোস্ট করুন"><i>＋</i></a><a href="#chat"><span>💬</span>বার্তা</a><a href="#help"><span>🌱</span>সহায়তা</a></nav>
+<div class="md" id="md"></div><div id="toast"></div>
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, collection, query, where, getDocs, onSnapshot, orderBy, limit, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js';
+
+// Firebase প্রজেক্ট: krishi-4b93c
+const firebaseConfig = {
+  apiKey: "AIzaSyAlAYaKVYs5eEWD69ATTMLnkkJOq98RhfA",
+  authDomain: "krishi-4b93c.firebaseapp.com",
+  projectId: "krishi-4b93c",
+  storageBucket: "krishi-4b93c.firebasestorage.app",
+  messagingSenderId: "110396719763",
+  appId: "1:110396719763:web:879304e4e8b757b0244366"
+};
+
+const G = {
+'ঢাকা':['ঢাকা','গাজীপুর','নারায়ণগঞ্জ','টাঙ্গাইল','মানিকগঞ্জ','মুন্সিগঞ্জ','নরসিংদী','কিশোরগঞ্জ','ফরিদপুর','গোপালগঞ্জ','মাদারীপুর','রাজবাড়ী','শরীয়তপুর'],
+'ময়মনসিংহ':['ময়মনসিংহ','জামালপুর','নেত্রকোনা','শেরপুর'],
+'চট্টগ্রাম':['চট্টগ্রাম','কক্সবাজার','কুমিল্লা','ফেনী','ব্রাহ্মণবাড়িয়া','রাঙ্গামাটি','নোয়াখালী','চাঁদপুর','লক্ষ্মীপুর','খাগড়াছড়ি','বান্দরবান'],
+'রাজশাহী':['রাজশাহী','বগুড়া','জয়পুরহাট','নওগাঁ','নাটোর','চাঁপাইনবাবগঞ্জ','পাবনা','সিরাজগঞ্জ'],
+'রংপুর':['রংপুর','দিনাজপুর','গাইবান্ধা','কুড়িগ্রাম','লালমনিরহাট','নীলফামারী','পঞ্চগড়','ঠাকুরগাঁও'],
+'খুলনা':['খুলনা','বাগেরহাট','চুয়াডাঙ্গা','যশোর','ঝিনাইদহ','কুষ্টিয়া','মাগুরা','মেহেরপুর','নড়াইল','সাতক্ষীরা'],
+'বরিশাল':['বরিশাল','বরগুনা','ভোলা','ঝালকাঠি','পটুয়াখালী','পিরোজপুর'],
+'সিলেট':['সিলেট','হবিগঞ্জ','মৌলভীবাজার','সুনামগঞ্জ']};
+// শুধু কয়েকটি জেলার উপজেলা দেওয়া আছে; বাকিগুলো এখানে একইভাবে যোগ করুন
+const UP = {
+'নেত্রকোনা':['নেত্রকোনা সদর','কলমাকান্দা','কেন্দুয়া','আটপাড়া','বারহাট্টা','দুর্গাপুর','খালিয়াজুরী','মদন','মোহনগঞ্জ','পূর্বধলা'],
+'ময়মনসিংহ':['ময়মনসিংহ সদর','ত্রিশাল','ভালুকা','গফরগাঁও','মুক্তাগাছা','নান্দাইল','ফুলবাড়িয়া','ফুলপুর','হালুয়াঘাট','ঈশ্বরগঞ্জ','গৌরীপুর','তারাকান্দা','ধোবাউড়া'],
+'বগুড়া':['বগুড়া সদর','শিবগঞ্জ','শেরপুর','ধুনট','গাবতলী','সারিয়াকান্দি','কাহালু','নন্দীগ্রাম','আদমদীঘি','দুপচাঁচিয়া','সোনাতলা','শাজাহানপুর'],
+'ঢাকা':['ধামরাই','দোহার','কেরানীগঞ্জ','নবাবগঞ্জ','সাভার'],
+'রংপুর':['রংপুর সদর','গঙ্গাচড়া','কাউনিয়া','বদরগঞ্জ','মিঠাপুকুর','পীরগাছা','পীরগঞ্জ','তারাগঞ্জ']};
+const upz = d => UP[d] || [d + ' সদর', 'অন্যান্য উপজেলা'];
+const CATS = ['ধান ও শস্য','সবজি','ফল','মাছ','গবাদিপশু ও দুধ','বীজ ও চারা','সার ও কীটনাশক','কৃষি যন্ত্রপাতি'];
+// বপন/রোপণের দিন থেকে গোনা কাজের সময়সূচি
+const CROPS = {
+'রোপা আমন ধান':[[10,'ইউরিয়া ১ম কিস্তি দিন'],[27,'ইউরিয়া ২য় কিস্তি ও আগাছা পরিষ্কার'],[42,'ইউরিয়া শেষ কিস্তি দিন'],[105,'জমির পানি শুকিয়ে দিন'],[120,'ধান কাটুন']],
+'বোরো ধান':[[13,'ইউরিয়া ১ম কিস্তি দিন'],[32,'ইউরিয়া ২য় কিস্তি দিন'],[52,'ইউরিয়া শেষ কিস্তি দিন'],[100,'জমির পানি শুকিয়ে দিন'],[115,'ধান কাটুন']],
+'গম':[[19,'১ম সেচ ও বাকি ইউরিয়া'],[48,'২য় সেচ দিন'],[68,'৩য় সেচ দিন'],[115,'গম কাটুন']],
+'আলু':[[28,'ইউরিয়া দিয়ে গোড়ায় মাটি তুলুন, ১ম সেচ'],[48,'২য় সেচ দিন'],[68,'৩য় সেচ দিন'],[73,'সেচ বন্ধ করুন'],[85,'আলু তুলুন']],
+'টমেটো':[[15,'ইউরিয়া ১ম কিস্তি'],[22,'খুঁটি দিয়ে বেঁধে দিন'],[30,'২য় কিস্তি সার'],[50,'৩য় কিস্তি সার'],[65,'ফল তোলা শুরু']],
+'সরিষা':[[22,'বাকি ইউরিয়া ও ১ম সেচ'],[52,'২য় সেচ দিন'],[92,'সরিষা কাটুন']]};
+
+
+const fb = initializeApp(firebaseConfig), auth = getAuth(fb), db = getFirestore(fb), st = getStorage(fb);
+const $ = i => document.getElementById(i), BN = '০১২৩৪৫৬৭৮৯', bn = n => String(n).replace(/\d/g, d => BN[d]);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const opts = a => (a || []).map(x => `<option>${esc(x)}</option>`).join('');
+const ST = { requested: 'অনুরোধ', confirmed: 'নিশ্চিত', shipped: 'পাঠানো হয়েছে', delivered: 'পৌঁছেছে', cancelled: 'বাতিল' };
+const NEAR = { 4: '📍 আপনার উপজেলা', 3: 'আপনার জেলা', 2: 'আপনার বিভাগ', 1: 'অন্য এলাকা' };
+let ME = null, UID = null, CUR = null, REG = false, ALL = [], off = [], P = {}, A = {}, FAV = new Set();
+const today = () => new Date().toISOString().slice(0, 10);
+// ১৮+ বা অশ্লীল শব্দ (Firestore rules-এও একই তালিকা আছে; এখানে বাড়াতে চাইলে দুই জায়গায় বদলান)
+const BAD = /(sex|porn|xxx|nude|naked|escort|erotic|18\s*\+|সেক্স|পর্ন|ন্যুড|নগ্ন|যৌন)/i;
+let NSFW = null;
+const loadJs = src => new Promise((res, rej) => { const e = document.createElement('script'); e.src = src; e.onload = res; e.onerror = rej; document.head.appendChild(e); });
+async function nsfwModel() {
+  if (NSFW !== null) return NSFW;
+  try { await loadJs('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js'); await loadJs('https://cdn.jsdelivr.net/npm/nsfwjs@2.4.2/dist/nsfwjs.min.js'); NSFW = await window.nsfwjs.load(); } catch { NSFW = false; }
+  return NSFW;
+}
+async function adultImage(file) {
+  const m = await nsfwModel(); if (!m) return false;
+  const img = new Image(); img.src = URL.createObjectURL(file); await img.decode();
+  const s = Object.fromEntries((await m.classify(img)).map(x => [x.className, x.probability]));
+  return (s.Porn || 0) + (s.Hentai || 0) > 0.5 || (s.Sexy || 0) > 0.8;
+}
+const toast = m => { const t = $('toast'); t.textContent = m; t.style.display = 'block'; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = 'none', 2800); };
+const modal = h => { $('md').innerHTML = h ? `<div class="card">${h}</div>` : ''; $('md').className = h ? 'md on' : 'md'; };
+const col = (...p) => collection(db, ...p), f = (k, v) => where(k, '==', v);
+
+document.addEventListener('click', e => { const b = e.target.closest('[data-a]'); if (b && A[b.dataset.a]) A[b.dataset.a](b.dataset.v, b); });
+let keep = false;
+window.addEventListener('hashchange', () => { if (keep) keep = false; else CUR = null; route(); });
+onAuthStateChanged(auth, async u => {
+  UID = u ? u.uid : null; ME = null;
+  if (u) {
+    const s = await getDoc(doc(db, 'users', u.uid));
+    if (s.exists()) ME = { id: u.uid, ...s.data() };
+    if (ME?.banned) { await signOut(auth); return toast('এই অ্যাকাউন্ট বন্ধ করা হয়েছে'); }
+  }
+  route();
+});
+
+/* ---------- রাউটার ---------- */
+function route() {
+  off.forEach(x => x()); off = [];
+  const r = (location.hash || '#home').slice(1);
+  document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + r));
+  if (r === 'setup') return setup();
+  if (!UID || !ME) return authView();
+  ({ home, market, post, chat, help, me, favs, book }[r] || home)();
+}
+
+/* ---------- লগইন / নিবন্ধন ---------- */
+function authView() {
+  $('app').innerHTML = REG
+    ? `<div class="card"><h3>নতুন অ্যাকাউন্ট</h3><label>পুরো নাম</label><input id="rn"><label>মোবাইল নম্বর</label><input id="rp" inputmode="numeric" placeholder="01XXXXXXXXX"><label>পাসওয়ার্ড (৬+ অক্ষর)</label><input id="rw" type="password">
+<label>বিভাগ</label><select id="lv">${opts(Object.keys(G))}</select><label>জেলা</label><select id="ld"></select><label>উপজেলা</label><select id="lu"></select>
+<label>আপনি কী করবেন?</label><select id="rt"><option value="both">খুচরা ও পাইকারি দুটোই</option><option value="retail">শুধু খুচরা</option><option value="wholesale">শুধু পাইকারি</option></select>
+<div class="row"><button data-a="reg">অ্যাকাউন্ট খুলুন</button><button class="alt" data-a="tog">লগইন</button></div></div>`
+    : `<div class="card"><h3>লগইন</h3><label>মোবাইল নম্বর</label><input id="lp" inputmode="numeric"><label>পাসওয়ার্ড</label><input id="lw" type="password"><div class="row"><button data-a="login">লগইন</button><button class="alt" data-a="tog">নতুন অ্যাকাউন্ট</button></div></div>`;
+  if (REG) { $('lv').onchange = () => { $('ld').innerHTML = opts(G[$('lv').value]); $('ld').onchange(); }; $('ld').onchange = () => $('lu').innerHTML = opts(upz($('ld').value)); $('lv').onchange(); }
+}
+A.tog = () => { REG = !REG; authView(); };
+A.login = async () => { try { await signInWithEmailAndPassword(auth, $('lp').value.trim() + '@mathar.app', $('lw').value); } catch { toast('নম্বর বা পাসওয়ার্ড ভুল'); } };
+A.reg = async () => {
+  const n = $('rn').value.trim(), p = $('rp').value.trim(), w = $('rw').value;
+  if (!n || !/^01[3-9]\d{8}$/.test(p) || w.length < 6) return toast('সঠিক নাম, মোবাইল নম্বর ও ৬+ অক্ষরের পাসওয়ার্ড দিন');
+  try {
+    const c = await createUserWithEmailAndPassword(auth, p + '@mathar.app', w);
+    const d = { name: n, phone: p, division: $('lv').value, district: $('ld').value, upazila: $('lu').value, type: $('rt').value, banned: false, createdAt: serverTimestamp() };
+    await setDoc(doc(db, 'users', c.user.uid), d); UID = c.user.uid; ME = { id: UID, ...d }; route();
+  } catch (e) { toast(e.code === 'auth/email-already-in-use' ? 'এই নম্বরে অ্যাকাউন্ট আছে' : 'নিবন্ধন ব্যর্থ হয়েছে'); }
+};
+
+/* ---------- হোম ---------- */
+async function home() {
+  const h = new Date().getHours(), gr = h < 12 ? 'শুভ সকাল' : h < 17 ? 'শুভ দুপুর' : h < 19 ? 'শুভ বিকেল' : 'শুভ সন্ধ্যা';
+  $('app').innerHTML = `<section class="hero"><div class="m">${gr} 👋</div><h1>${esc(ME.name)}</h1><div class="m">📍 ${esc(ME.upazila)}, ${esc(ME.district)}</div></section>
+<div class="tiles">${[['#market', '🛒', 'কিনুন'], ['#post', '📸', 'বেচুন'], ['#book', '📒', 'কৃষি খাতা'], ['#help', '🌱', 'প্রশ্ন করুন'], ['#favs', '❤️', 'পছন্দ'], ['#me', '👤', 'আমার প্রোফাইল']].map(t => `<a class="tile" href="${t[0]}"><span>${t[1]}</span>${t[2]}</a>`).join('')}</div>
+<div class="card" id="wx"><h3>☁️ আজকের আবহাওয়া</h3><button data-a="wx">আমার এলাকার আবহাওয়া দেখুন</button></div>
+<div class="card"><h3>📊 আজকের বাজার দর</h3><div id="pr" class="mut">লোড হচ্ছে…</div></div>
+<div class="card"><h3>🌾 আমার ফসল</h3><div id="mc"></div><div class="row"><select id="cs">${opts(Object.keys(CROPS))}</select><input type="date" id="cd"></div><div class="row"><button data-a="addcrop">ফসল যোগ করুন</button></div><p class="mut" style="margin-bottom:0">বপন বা রোপণের তারিখ দিন, পরের সার-সেচের কাজ কবে তা অ্যাপ বলে দেবে।</p></div>`;
+  $('cd').value = today();
+  getDocs(query(col('prices'), orderBy('createdAt', 'desc'), limit(12))).then(s => $('pr').innerHTML = s.docs.length ? s.docs.map(d => { const p = d.data(); return `<div class="pr"><span>${esc(p.crop)} <small class="mut">${esc(p.market)}</small></span><b>৳${bn(p.price)}/${esc(p.unit)}</b></div>`; }).join('') : 'এখনো দর দেওয়া হয়নি').catch(() => $('pr').textContent = 'দর আনা যায়নি');
+  crops();
+}
+A.wx = () => navigator.geolocation.getCurrentPosition(async p => {
+  try {
+    const j = await (await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${p.coords.latitude}&longitude=${p.coords.longitude}&current=temperature_2m&daily=precipitation_probability_max,temperature_2m_max&timezone=Asia%2FDhaka&forecast_days=2`)).json();
+    const pop = Math.max(...j.daily.precipitation_probability_max), tm = j.daily.temperature_2m_max[0];
+    $('wx').innerHTML = `<h3>☁️ আপনার এলাকা</h3><div style="font-size:32px;font-weight:700">${bn(Math.round(j.current.temperature_2m))}°C</div><div>আগামী ২ দিনে বৃষ্টির সম্ভাবনা ${bn(pop)}%</div><div class="adv">${pop >= 60 ? 'স্প্রে ও সার প্রয়োগ পিছিয়ে দিন, পাকা ফসল ঢেকে রাখুন।' : tm >= 35 ? 'গরম বেশি, সকাল-বিকেলে সেচ দিন।' : 'আবহাওয়া মাঠের কাজের উপযোগী।'}</div>`;
+  } catch { toast('আবহাওয়া আনা যায়নি'); }
+}, () => toast('লোকেশনের অনুমতি দিন'));
+async function crops() {
+  const s = await getDocs(col('users', UID, 'crops'));
+  $('mc').innerHTML = s.docs.length ? s.docs.map(d => {
+    const c = d.data(), n = Math.floor((Date.now() - new Date(c.date)) / 864e5), nx = (CROPS[c.crop] || []).find(t => t[0] >= n);
+    return `<div class="it"><b>${esc(c.crop)}</b> <span class="mut">• ${bn(n)} দিন হয়েছে</span><div>${nx ? (nx[0] === n ? '🔔 আজই: ' : 'পরবর্তী: ') + nx[1] + (nx[0] > n ? ` (${bn(nx[0] - n)} দিন পর)` : '') : '✅ সব কাজ শেষ'}</div><button class="sm del" data-a="dc" data-v="${d.id}">মুছুন</button></div>`;
+  }).join('') : '<p class="mut">কোনো ফসল যোগ করা হয়নি।</p>';
+}
+A.addcrop = async () => { await addDoc(col('users', UID, 'crops'), { crop: $('cs').value, date: $('cd').value }); crops(); };
+A.dc = async id => { await deleteDoc(doc(db, 'users', UID, 'crops', id)); crops(); };
+
+/* ---------- বাজার: কাছের পোস্ট আগে, তারপর সারা দেশের ---------- */
+const nearOf = p => p.upazila === ME.upazila && p.district === ME.district ? 4 : p.district === ME.district && p.division === ME.division ? 3 : p.division === ME.division ? 2 : 1;
+async function feed() {
+  const A_ = f('status', 'active'), c = f('scope', 'country'), v = f('division', ME.division), d = f('district', ME.district), u = f('upazila', ME.upazila);
+  const Q = [[A_, c, v, d, u], [A_, c, v, d], [A_, c, v], [A_, c], [A_, f('scope', 'upazila'), v, d, u], [A_, f('scope', 'district'), v, d], [A_, f('scope', 'division'), v]];
+  const m = new Map();
+  (await Promise.all(Q.map(q => getDocs(query(col('products'), ...q, limit(40)))))).forEach(s => s.docs.forEach(x => m.set(x.id, { id: x.id, ...x.data() })));
+  return [...m.values()].map(p => ({ ...p, r: nearOf(p) })).sort((a, b) => b.r - a.r || (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+}
+const card = p => `<article class="pcard">${p.urls?.[0] ? `<div class="ph"><img src="${esc(p.urls[0])}" alt="${esc(p.title)}" loading="lazy"><button class="heart" data-a="fav" data-v="${p.id}" aria-label="পছন্দ">${FAV.has(p.id) ? '❤️' : '🤍'}</button></div>` : ''}<div class="pb">
+<span class="tag ${p.r > 2 ? 'n' : ''}">${NEAR[p.r]}</span> ${p.saleType !== 'retail' ? '<span class="tag w">পাইকারি</span>' : ''}<h3>${esc(p.title)}</h3>
+<div class="price">৳${bn(p.price)}<small>/${esc(p.unit)}</small></div>${p.saleType !== 'retail' ? `<div class="mut">পাইকারি ৳${bn(p.wholesalePrice)}/${esc(p.unit)} (ন্যূনতম ${bn(p.minWholesaleQty)})</div>` : ''}
+<div class="mut">${esc(p.category)} • মজুত ${bn(p.qty)} ${esc(p.unit)}<br>📍 ${esc(p.upazila)}, ${esc(p.district)} • ${esc(p.sellerName)}</div>
+${p.sellerId !== UID ? `<div class="row"><button data-a="order" data-v="${p.id}">অর্ডার করুন</button><button class="alt" data-a="msg" data-v="${p.id}">💬</button><button class="alt" data-a="share" data-v="${p.id}">↗</button><button class="alt" data-a="rep" data-v="${p.id}" title="রিপোর্ট">🚩</button></div>` : '<div class="mut">এটি আপনার পোস্ট</div>'}</div></article>`;
+let FLT = 'all';
+async function loadFav() { try { FAV = new Set((await getDocs(col('users', UID, 'favs'))).docs.map(d => d.id)); } catch { } }
+async function market() {
+  const CH = [['all', 'সব'], ['near', '📍 কাছের'], ['ws', 'পাইকারি'], ['cheap', 'দাম কম']].concat(CATS.map(c => [c, c]));
+  $('app').innerHTML = `<input id="q" placeholder="🔍 ধান, সবজি, ট্রাক্টর…"><div class="chips" id="ch">${CH.map(c => `<button class="chip ${c[0] === FLT ? 'on' : ''}" data-a="flt" data-v="${esc(c[0])}">${esc(c[1])}</button>`).join('')}</div><div id="ml" class="grid"><div class="sk"></div><div class="sk"></div></div>`;
+  try { await loadFav(); ALL = await feed(); ALL.forEach(p => P[p.id] = p); } catch (e) { console.error(e); return $('ml').innerHTML = '<p class="mut">পোস্ট আনা যায়নি। ইন্টারনেট দেখুন।</p>'; }
+  A.draw = () => {
+    const q = $('q').value.trim(); let L = ALL.filter(p => (!q || (p.title + (p.description || '')).includes(q)) && (FLT === 'all' || FLT === 'cheap' || (FLT === 'near' ? p.r >= 3 : FLT === 'ws' ? p.saleType !== 'retail' : p.category === FLT)));
+    if (FLT === 'cheap') L = [...L].sort((a, b) => a.price - b.price);
+    $('ml').innerHTML = L.length ? L.map(card).join('') : '<p class="mut">কোনো পণ্য পাওয়া যায়নি।</p>';
+  };
+  $('q').oninput = A.draw; A.draw();
+}
+A.flt = (v, b) => { FLT = v; document.querySelectorAll('#ch .chip').forEach(c => c.classList.remove('on')); b.classList.add('on'); A.draw(); };
+A.fav = async (id, b) => { const r = doc(db, 'users', UID, 'favs', id); if (FAV.has(id)) { FAV.delete(id); await deleteDoc(r); b.textContent = '🤍'; } else { FAV.add(id); await setDoc(r, { at: serverTimestamp() }); b.textContent = '❤️'; } };
+A.share = async id => { const p = P[id], t = `${p.title} – ৳${p.price}/${p.unit} (${p.upazila}, ${p.district}) • মাঠের হাট`, u = location.href.split('#')[0]; if (navigator.share) { try { await navigator.share({ title: p.title, text: t, url: u }); } catch { } } else { try { await navigator.clipboard.writeText(t + ' ' + u); toast('কপি হয়েছে'); } catch { } } };
+async function favs() {
+  $('app').innerHTML = '<h2>❤️ পছন্দের পণ্য</h2><div id="ml" class="grid"><div class="sk"></div></div>';
+  await loadFav();
+  const L = (await Promise.all([...FAV].map(id => getDoc(doc(db, 'products', id)).then(s => s.exists() && s.data().status === 'active' ? { id, ...s.data(), r: nearOf(s.data()) } : null).catch(() => null)))).filter(Boolean);
+  L.forEach(p => P[p.id] = p);
+  $('ml').innerHTML = L.length ? L.map(card).join('') : '<p class="mut">কোনো পণ্য পছন্দের তালিকায় নেই। বাজারে 🤍 চাপুন।</p>';
+}
+
+/* ---------- কৃষি খাতা (আয়-ব্যয়) ---------- */
+function book() {
+  $('app').innerHTML = `<h2>📒 কৃষি খাতা</h2><div class="card"><div class="row"><select id="bt"><option value="in">আয় ➕</option><option value="out">খরচ ➖</option></select><input id="bdt" type="date"></div><div class="row"><input id="bn" placeholder="কীসের জন্য (যেমন: সার, ধান বিক্রি)"><input id="ba" type="number" placeholder="টাকা ৳"></div><div class="row"><button data-a="badd">খাতায় লিখুন</button></div></div><div class="card"><div class="sum" id="bs"></div></div><div id="bl"></div>`;
+  $('bdt').value = today(); bookLoad();
+}
+async function bookLoad() {
+  const L = (await getDocs(query(col('users', UID, 'ledger'), orderBy('date', 'desc'), limit(100)))).docs.map(d => ({ id: d.id, ...d.data() })), mo = today().slice(0, 7);
+  const sum = (a, f2) => a.filter(f2).reduce((t, x) => t + x.amount, 0), inc = sum(L, x => x.type === 'in'), out = sum(L, x => x.type === 'out'), mi = sum(L, x => x.type === 'in' && x.date.startsWith(mo)), mout = sum(L, x => x.type === 'out' && x.date.startsWith(mo));
+  $('bs').innerHTML = `<div>আয়<b style="color:var(--pri)">৳${bn(inc)}</b></div><div>খরচ<b style="color:var(--red)">৳${bn(out)}</b></div><div>${inc - out >= 0 ? 'লাভ' : 'ক্ষতি'}<b>৳${bn(Math.abs(inc - out))}</b></div><div style="grid-column:1/-1">এই মাসে: আয় ৳${bn(mi)} • খরচ ৳${bn(mout)}</div>`;
+  $('bl').innerHTML = L.map(x => `<div class="it"><b>${x.type === 'in' ? '➕' : '➖'} ৳${bn(x.amount)}</b> ${esc(x.note)} <span class="mut">• ${bn(x.date)}</span> <button class="sm del" data-a="bdel" data-v="${x.id}">মুছুন</button></div>`).join('') || '<p class="mut">খাতা খালি। প্রথম হিসাবটি লিখুন।</p>';
+}
+A.badd = async () => { const a = +$('ba').value; if (!a || !$('bn').value.trim()) return toast('বিবরণ ও টাকা দিন'); await addDoc(col('users', UID, 'ledger'), { type: $('bt').value, note: $('bn').value.trim().slice(0, 100), amount: a, date: $('bdt').value || today(), createdAt: serverTimestamp() }); $('bn').value = ''; $('ba').value = ''; bookLoad(); };
+A.bdel = async id => { await deleteDoc(doc(db, 'users', UID, 'ledger', id)); bookLoad(); };
+
+/* ---------- অর্ডার ও মেসেজ ---------- */
+A.order = id => {
+  const p = P[id];
+  modal(`<h3>${esc(p.title)}</h3><label>পরিমাণ (${esc(p.unit)})</label><input id="oq" type="number" min="1" value="1"><label>ধরন</label><select id="om">${p.saleType !== 'wholesale' ? `<option value="retail">খুচরা ৳${bn(p.price)}</option>` : ''}${p.saleType !== 'retail' ? `<option value="wholesale">পাইকারি ৳${bn(p.wholesalePrice)} (ন্যূনতম ${bn(p.minWholesaleQty)})</option>` : ''}</select>
+<div class="row"><button data-a="ook" data-v="${id}">নিশ্চিত করুন</button><button class="alt" data-a="mc">বাতিল</button></div>`);
+};
+A.mc = () => modal('');
+A.ook = async id => {
+  const p = P[id], q = +$('oq').value, m = $('om').value, pr = m === 'wholesale' ? p.wholesalePrice : p.price;
+  if (!q || q > p.qty) return toast('পরিমাণ ঠিক নেই (মজুতের বেশি হবে না)');
+  if (m === 'wholesale' && q < p.minWholesaleQty) return toast('পাইকারিতে ন্যূনতম ' + bn(p.minWholesaleQty) + ' ' + p.unit);
+  await addDoc(col('orders'), { productId: id, title: p.title, buyerId: UID, buyerName: ME.name, sellerId: p.sellerId, sellerName: p.sellerName, mode: m, qty: q, price: pr, total: q * pr, status: 'requested', createdAt: serverTimestamp() });
+  modal(''); await openChat(p, `আমি "${p.title}" ${q} ${p.unit} ${m === 'wholesale' ? 'পাইকারি' : ''} অর্ডার করেছি। মোট ৳${q * pr}। দয়া করে নিশ্চিত করুন।`);
+};
+A.msg = async id => openChat(P[id], '');
+async function openChat(p, first) {
+  if (p.sellerId === UID) return;
+  const cid = [UID, p.sellerId].sort().join('_') + '_' + p.id;
+  await setDoc(doc(db, 'chats', cid), { members: [UID, p.sellerId], productId: p.id, title: p.title, names: { [UID]: ME.name, [p.sellerId]: p.sellerName }, updatedAt: serverTimestamp() }, { merge: true });
+  if (first) await sendMsg(cid, first);
+  CUR = cid; if (location.hash === '#chat') route(); else { keep = true; location.hash = '#chat'; }
+}
+const sendMsg = async (cid, text) => { await addDoc(col('chats', cid, 'messages'), { from: UID, text, createdAt: serverTimestamp() }); await updateDoc(doc(db, 'chats', cid), { last: text, updatedAt: serverTimestamp() }); };
+function chat() {
+  if (CUR) {
+    $('app').innerHTML = `<button class="alt sm" data-a="back">← সব বার্তা</button><div id="th" style="min-height:50vh;margin:10px 0"></div><div class="row"><input id="mi" placeholder="মেসেজ লিখুন…" style="flex:3"><button data-a="send" style="flex:1">পাঠান</button></div>`;
+    off.push(onSnapshot(query(col('chats', CUR, 'messages'), orderBy('createdAt')), s => { $('th').innerHTML = s.docs.map(d => { const m = d.data(); return `<div class="msg ${m.from === UID ? 'me' : ''}">${esc(m.text)}</div>`; }).join(''); window.scrollTo(0, document.body.scrollHeight); }));
+    return;
+  }
+  $('app').innerHTML = '<h3>💬 বার্তা</h3><div id="cl"><p class="mut">লোড হচ্ছে…</p></div>';
+  off.push(onSnapshot(query(col('chats'), where('members', 'array-contains', UID)), s => {
+    const L = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.updatedAt?.seconds || 0) - (a.updatedAt?.seconds || 0));
+    $('cl').innerHTML = L.length ? L.map(c => { const o = c.members.find(x => x !== UID); return `<div class="card" data-a="open" data-v="${c.id}" style="cursor:pointer"><b>${esc(c.names?.[o] || '')}</b> <span class="mut">• ${esc(c.title)}</span><div class="mut">${esc(c.last || '')}</div></div>`; }).join('') : '<p class="mut">এখনো কোনো কথা হয়নি। বাজার থেকে পণ্যে “মেসেজ” চাপুন।</p>';
+  }));
+}
+A.open = id => { CUR = id; route(); };
+A.back = () => { CUR = null; route(); };
+A.send = async () => { const t = $('mi').value.trim(); if (!t) return; $('mi').value = ''; await sendMsg(CUR, t); };
+
+/* ---------- পণ্য পোস্ট (ছবিসহ) ---------- */
+function post() {
+  const t = ME.type;
+  $('app').innerHTML = `<div class="card"><h3>নতুন পণ্য পোস্ট</h3><label>ছবি (১ থেকে ৫টি) *</label><input id="pi" type="file" accept="image/*" multiple>
+<label>পণ্যের নাম</label><input id="pt"><label>ধরন</label><select id="pc">${opts(CATS)}</select>
+<div class="row"><div><label>মজুত পরিমাণ</label><input id="pq" type="number" min="1"></div><div><label>একক</label><select id="pu">${opts(['মণ', 'কেজি', 'পিস', 'লিটার', 'টন', 'টি'])}</select></div></div>
+<label>বিক্রির ধরন</label><select id="ps">${t !== 'wholesale' ? '<option value="retail">খুচরা</option>' : ''}${t !== 'retail' ? '<option value="wholesale">পাইকারি</option>' : ''}${t === 'both' ? '<option value="both">খুচরা ও পাইকারি</option>' : ''}</select>
+<div class="row" id="rtf"><div><label>খুচরা দাম (৳ প্রতি একক)</label><input id="pp" type="number" min="0"></div></div><div class="row" id="wsf"><div><label>পাইকারি দাম (৳)</label><input id="pw" type="number" min="0"></div><div><label>পাইকারি ন্যূনতম পরিমাণ</label><input id="pm" type="number" min="0"></div></div>
+<label>বিবরণ</label><textarea id="pd" rows="3"></textarea>
+<label>কোথায় বিক্রি করবেন?</label><select id="pr"><option value="upazila">আমার উপজেলা (${esc(ME.upazila)})</option><option value="district">আমার জেলা (${esc(ME.district)})</option><option value="division">আমার বিভাগ (${esc(ME.division)})</option><option value="country">সারা দেশ</option></select>
+<p class="mut">শুধু কৃষি পণ্য ও কৃষি যন্ত্রপাতি পোস্ট করুন। ১৮+ বা অন্য কিছু দিলে পোস্ট সাথে সাথে বাতিল হবে এবং বারবার করলে অ্যাকাউন্ট বন্ধ হবে।</p>
+<button id="pb" data-a="doPost" style="width:100%">পোস্ট করুন</button></div>`;
+  const sc = () => { const v = $('ps').value; $('wsf').hidden = v === 'retail'; $('rtf').hidden = v === 'wholesale'; }; $('ps').onchange = sc; sc();
+}
+const shrink = file => new Promise(r => { const i = new Image(); i.onload = () => { const k = Math.min(1, 1200 / Math.max(i.width, i.height)), c = document.createElement('canvas'); c.width = i.width * k; c.height = i.height * k; c.getContext('2d').drawImage(i, 0, 0, c.width, c.height); c.toBlob(r, 'image/jpeg', .8); }; i.src = URL.createObjectURL(file); });
+A.doPost = async () => {
+  const fl = [...$('pi').files].slice(0, 5), title = $('pt').value.trim(), qty = +$('pq').value, price = +$('pp').value, sale = $('ps').value;
+  const ws = +$('pw').value || 0, mn = +$('pm').value || 0;
+  if (!fl.length || !title || !qty || (sale !== 'wholesale' && !price)) return toast('ছবি, নাম, পরিমাণ ও দাম দিন');
+  if (sale !== 'retail' && (!ws || !mn)) return toast('পাইকারি দাম ও ন্যূনতম পরিমাণ দিন');
+  const b = $('pb'); b.disabled = true; b.textContent = 'যাচাই হচ্ছে…';
+  let why = BAD.test(title + ' ' + $('pd').value) ? 'নিষিদ্ধ শব্দ' : '';
+  if (!why) for (const x of fl) if (await adultImage(x)) { why = '১৮+ ছবি'; break; }
+  if (why) { await addDoc(col('violations'), { uid: UID, name: ME.name, title, reason: why, at: serverTimestamp() }).catch(() => {}); b.disabled = false; b.textContent = 'পোস্ট করুন'; return toast('এই পোস্ট নীতিমালা-বিরোধী (' + why + ')। বাতিল করা হয়েছে।'); }
+  b.textContent = 'ছবি আপলোড হচ্ছে…';
+  try {
+    const images = [], urls = [];
+    for (let i = 0; i < fl.length; i++) { const path = `products/${UID}/${Date.now()}_${i}.jpg`, r = ref(st, path); await uploadBytes(r, await shrink(fl[i]), { contentType: 'image/jpeg' }); images.push(path); urls.push(await getDownloadURL(r)); }
+    await addDoc(col('products'), { sellerId: UID, sellerName: ME.name, title, description: $('pd').value.trim(), category: $('pc').value, price: price || ws, unit: $('pu').value, qty, saleType: sale, wholesalePrice: ws, minWholesaleQty: mn, scope: $('pr').value, division: ME.division, district: ME.district, upazila: ME.upazila, images, urls, status: 'active', createdAt: serverTimestamp() });
+    toast('পোস্ট প্রকাশিত হয়েছে ✅'); location.hash = '#market';
+  } catch (e) { console.error(e); toast('পোস্ট ব্যর্থ হয়েছে'); b.disabled = false; b.textContent = 'পোস্ট করুন'; }
+};
+
+/* ---------- কৃষি সহায়তা: AI প্রশ্ন + হিসাব ---------- */
+function help() {
+  $('app').innerHTML = `<div class="card"><h3>🌱 কৃষি বিশেষজ্ঞকে প্রশ্ন</h3><label>আপনার প্রশ্ন</label><textarea id="qt" rows="3" placeholder="যেমন: ধানে পাতা পোড়া রোগ হলে কী করব?"></textarea><div class="row"><button data-a="ask">প্রশ্ন পাঠান</button></div><div id="qa"></div></div>
+<div class="card"><h3>🧮 লাভ-ক্ষতির হিসাব</h3><div class="row"><input id="c1" type="number" placeholder="বীজ ও চারা খরচ ৳"><input id="c2" type="number" placeholder="সার ও ওষুধ ৳"><input id="c3" type="number" placeholder="শ্রম ও সেচ ৳"></div><div class="row"><input id="c4" type="number" placeholder="অন্যান্য ৳"><input id="c5" type="number" placeholder="মোট ফলন (মণ)"><input id="c6" type="number" placeholder="মণ প্রতি দাম ৳"></div><div class="row"><button data-a="calc">হিসাব করুন</button></div><div id="cr"></div></div>`;
+  off.push(onSnapshot(query(col('questions'), f('uid', UID)), s => {
+    const L = s.docs.map(d => d.data()).sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+    $('qa').innerHTML = L.map(q => `<div class="it"><b>${esc(q.text)}</b><div>${q.answer ? esc(q.answer) + `<div class="mut">কৃষি বিশেষজ্ঞ</div>` : '<span class="mut">উত্তরের অপেক্ষায়…</span>'}</div></div>`).join('');
+  }));
+}
+A.ask = async () => { const t = $('qt').value.trim(); if (!t) return; await addDoc(col('questions'), { uid: UID, text: t.slice(0, 1000), answer: '', answeredBy: '', createdAt: serverTimestamp() }); $('qt').value = ''; };
+A.calc = () => { const v = i => +$(i).value || 0, cost = v('c1') + v('c2') + v('c3') + v('c4'), inc = v('c5') * v('c6'), pf = inc - cost; $('cr').innerHTML = `<div class="adv">মোট খরচ ৳${bn(cost)} • আয় ৳${bn(inc)}<br><b>${pf >= 0 ? 'লাভ' : 'ক্ষতি'}: ৳${bn(Math.abs(pf))}</b>${v('c5') ? `<br>প্রতি মণে খরচ ৳${bn(Math.round(cost / v('c5')))}` : ''}</div>`; };
+
+/* ---------- প্রোফাইল (উপরে ডানে আইকন) ---------- */
+async function me() {
+  $('app').innerHTML = `<div class="card"><h3>👤 ${esc(ME.name)}</h3><div class="mut">${esc(ME.phone)} • ${esc(ME.upazila)}, ${esc(ME.district)}, ${esc(ME.division)}</div>
+<label>আমি করতে চাই</label><select id="ut"><option value="both">খুচরা ও পাইকারি</option><option value="retail">শুধু খুচরা</option><option value="wholesale">শুধু পাইকারি</option></select>
+<div class="row"><button data-a="ut">সংরক্ষণ</button><button class="alt" data-a="out">লগ আউট</button></div></div>
+<div class="card"><h3>আমার পোস্ট</h3><div id="mp"></div></div><div class="card"><h3>আমার ক্রয় (অর্ডার)</h3><div id="ob"></div></div><div class="card"><h3>আমার কাছে আসা অর্ডার</h3><div id="os"></div></div>`;
+  $('ut').value = ME.type;
+  const ord = (id, q, seller) => off.push(onSnapshot(q, s => {
+    const L = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+    $(id).innerHTML = L.length ? L.map(o => `<div class="it"><b>${esc(o.title)}</b> <span class="tag">${ST[o.status]}</span><div class="mut">${seller ? 'ক্রেতা: ' + esc(o.buyerName) : 'বিক্রেতা: ' + esc(o.sellerName)} • ${bn(o.qty)} • ${o.mode === 'wholesale' ? 'পাইকারি' : 'খুচরা'} • মোট ৳${bn(o.total)}</div>
+${seller && o.status === 'requested' ? `<button class="sm" data-a="os" data-v="${o.id}|confirmed">নিশ্চিত করুন</button> ` : ''}${seller && o.status === 'confirmed' ? `<button class="sm" data-a="os" data-v="${o.id}|shipped">পাঠানো হয়েছে</button> ` : ''}${seller && o.status === 'shipped' ? `<button class="sm" data-a="os" data-v="${o.id}|delivered">পৌঁছেছে</button> ` : ''}${(seller && ['requested', 'confirmed'].includes(o.status)) || (!seller && o.status === 'requested') ? `<button class="sm del" data-a="os" data-v="${o.id}|cancelled">বাতিল</button>` : ''}</div>`).join('') : '<p class="mut">কিছু নেই</p>';
+  }));
+  ord('ob', query(col('orders'), f('buyerId', UID)), false); ord('os', query(col('orders'), f('sellerId', UID)), true);
+  off.push(onSnapshot(query(col('products'), f('sellerId', UID)), s => {
+    const PS = { pending: 'যাচাই চলছে', active: 'প্রকাশিত', review: 'অ্যাডমিন দেখছেন', hidden: 'লুকানো' };
+    $('mp').innerHTML = s.docs.length ? s.docs.map(d => { const p = d.data(); return `<div class="it"><b>${esc(p.title)}</b> <span class="tag">${PS[p.status] || p.status}</span> <button class="sm del" data-a="dp" data-v="${d.id}">মুছুন</button></div>`; }).join('') : '<p class="mut">কোনো পোস্ট নেই</p>';
+  }));
+}
+A.ut = async (v, b) => { if (b.tagName === 'BUTTON' && !v) { await updateDoc(doc(db, 'users', UID), { type: $('ut').value }); ME.type = $('ut').value; toast('সংরক্ষিত'); } };
+A.out = () => signOut(auth);
+A.os = async v => { const [id, s] = v.split('|'); await updateDoc(doc(db, 'orders', id), { status: s, updatedAt: serverTimestamp() }); };
+A.dp = async id => { if (confirm('পোস্টটি মুছবেন?')) await deleteDoc(doc(db, 'products', id)); };
+
+
+
+/* ---------- প্রথম সেটআপ পাতা: yoursite/#setup ---------- */
+const RULES = { fs: `rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function si() { return request.auth != null; }
+    function adm() { return si() && exists(/databases/$(db)/documents/admins/$(request.auth.uid)); }
+    function mine(u) { return si() && request.auth.uid == u; }
+    function me() { return get(/databases/$(db)/documents/users/$(request.auth.uid)).data; }
+    // ১৮+ বা অশ্লীল শব্দ থাকলে পোস্ট সেভই হবে না
+    function clean(t) { return !t.lower().matches('(?s).*(sex|porn|xxx|nude|naked|escort|erotic|18[+]|সেক্স|পর্ন|ন্যুড|নগ্ন|যৌন).*'); }
+    function near(p) {
+      return si() && me().division == p.division &&
+        (p.scope == 'division' || (me().district == p.district &&
+        (p.scope == 'district' || me().upazila == p.upazila)));
+    }
+    function onlyStatus() {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt']);
+    }
+
+    // অ্যাডমিন তালিকা: শুধু Firebase Console থেকে বসানো যাবে
+    match /admins/{a} { allow read: if mine(a); }
+
+    match /users/{u} {
+      allow read: if mine(u) || adm();
+      allow create: if mine(u) && request.resource.data.banned == false
+        && request.resource.data.type in ['retail', 'wholesale', 'both'];
+      allow update: if adm() || (mine(u) &&
+        !request.resource.data.diff(resource.data).affectedKeys().hasAny(['banned']));
+    }
+    match /users/{u}/{sub}/{id} { allow read, write: if mine(u) && sub in ['crops', 'favs', 'ledger']; }
+
+    match /products/{p} {
+      allow read: if adm() || (si() && resource.data.sellerId == request.auth.uid) ||
+        (resource.data.status == 'active' && (resource.data.scope == 'country' || near(resource.data)));
+      allow create: if si() && !me().banned
+        && request.resource.data.sellerId == request.auth.uid
+        && request.resource.data.status == 'active'
+        && clean(request.resource.data.title) && clean(request.resource.data.description)
+        && request.resource.data.category in ['ধান ও শস্য', 'সবজি', 'ফল', 'মাছ', 'গবাদিপশু ও দুধ', 'বীজ ও চারা', 'সার ও কীটনাশক', 'কৃষি যন্ত্রপাতি']
+        && request.resource.data.images.size() >= 1 && request.resource.data.images.size() <= 5
+        && request.resource.data.scope in ['upazila', 'district', 'division', 'country']
+        && request.resource.data.saleType in ['retail', 'wholesale', 'both']
+        && request.resource.data.division == me().division
+        && request.resource.data.district == me().district
+        && request.resource.data.upazila == me().upazila;
+      // মালিক শুধু দাম ও পরিমাণ বদলাতে পারবে
+      allow update: if adm() || (mine(resource.data.sellerId)
+        && request.resource.data.diff(resource.data).affectedKeys()
+           .hasOnly(['price', 'qty', 'wholesalePrice', 'minWholesaleQty', 'updatedAt']));
+      allow delete: if adm() || mine(resource.data.sellerId);
+    }
+
+    match /orders/{o} {
+      allow read: if adm() || mine(resource.data.buyerId) || mine(resource.data.sellerId);
+      allow create: if si() && request.resource.data.buyerId == request.auth.uid
+        && request.resource.data.sellerId != request.auth.uid
+        && request.resource.data.status == 'requested'
+        && request.resource.data.mode in ['retail', 'wholesale'];
+      allow update: if adm() || (onlyStatus() && (
+        (mine(resource.data.sellerId) && request.resource.data.status in ['confirmed', 'shipped', 'delivered', 'cancelled']) ||
+        (mine(resource.data.buyerId) && resource.data.status == 'requested' && request.resource.data.status == 'cancelled')));
+    }
+
+    match /chats/{c} {
+      allow read: if adm() || (si() && request.auth.uid in resource.data.members);
+      allow create: if si() && request.auth.uid in request.resource.data.members
+        && request.resource.data.members.size() == 2;
+      allow update: if si() && request.auth.uid in resource.data.members;
+      match /messages/{m} {
+        allow read: if si() && request.auth.uid in get(/databases/$(db)/documents/chats/$(c)).data.members;
+        allow create: if si() && request.resource.data.from == request.auth.uid
+          && request.resource.data.text.size() <= 1000
+          && request.auth.uid in get(/databases/$(db)/documents/chats/$(c)).data.members;
+      }
+    }
+
+    match /questions/{q} {
+      allow read: if si();
+      allow create: if si() && request.resource.data.uid == request.auth.uid && request.resource.data.answer == '';
+      allow update, delete: if adm();
+    }
+    match /prices/{p} { allow read: if si(); allow write: if adm(); }
+
+    // নীতিমালা: রিপোর্ট ও লগ
+    match /reports/{r} {
+      allow create: if si() && request.resource.data.uid == request.auth.uid
+        && r == request.resource.data.pid + '_' + request.auth.uid;
+      allow read, delete: if adm();
+    }
+    match /violations/{v} {
+      allow create: if si() && (request.resource.data.uid == request.auth.uid || adm());
+      allow read, delete: if adm();
+    }
+  }
+}
+`, st: `rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isAdmin() { return request.auth != null && firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid)); }
+    match /products/{uid}/{file} {
+      allow read: if request.auth != null;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.size < 3 * 1024 * 1024
+        && request.resource.contentType.matches('image/(jpeg|png|webp)');
+      allow delete: if request.auth != null && (request.auth.uid == uid || isAdmin());
+    }
+  }
+}
+` };
+function setup() {
+  $('app').innerHTML = `<h2>⚙️ প্রথম সেটআপ</h2><div class="card"><h3>১. Firestore নিয়ম</h3><p class="mut">Firebase → Firestore Database → Rules ট্যাবে সব মুছে এটা বসিয়ে Publish দিন।</p><button data-a="cp" data-v="fs">নিয়ম কপি করুন</button></div><div class="card"><h3>২. Storage নিয়ম</h3><p class="mut">Firebase → Storage → Rules ট্যাবে সব মুছে এটা বসিয়ে Publish দিন।</p><button data-a="cp" data-v="st">নিয়ম কপি করুন</button></div>`;
+}
+A.cp = async v => { try { await navigator.clipboard.writeText(RULES[v]); toast('কপি হয়েছে ✅'); } catch { toast('কপি করা যায়নি'); } };
+</script>
+</body>
+</html>
+
+A.rep = async id => { if (!confirm('এই পোস্টটি অনুপযুক্ত (১৮+ বা কৃষি-বহির্ভূত) বলে রিপোর্ট করবেন?')) return; try { await setDoc(doc(db, 'reports', id + '_' + UID), { pid: id, uid: UID, at: serverTimestamp() }); toast('রিপোর্ট জমা হয়েছে, ধন্যবাদ'); } catch { toast('রিপোর্ট করা যায়নি'); } };
