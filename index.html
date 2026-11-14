@@ -76,6 +76,182 @@ a.btn{display:block;text-align:center;text-decoration:none;font-weight:600;paddi
 </style>
 </head>
 <body>
+  <!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>মাঠের হাট - লোডিং স্ক্রিন</title>
+    <!-- বাংলা সুন্দর ফন্টের জন্য Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        /* লোডিং স্ক্রিন কন্টেইনার */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            /* সবুজ প্রকৃতি ও ফসলের মাঠের আবহ তৈরি করতে গ্রেডিয়েন্ট ব্যাকগ্রাউন্ড */
+            background: linear-gradient(180deg, #f4f9f4 0%, #c8e6c9 45%, #2e7d32 80%, #1b5e20 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* অ্যাপের নাম: মাঠের হাট */
+        .app-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #1b5e20;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        /* মাঝখানের লোগো ও ঘূর্ণায়মান স্পিনার */
+        .logo-wrapper {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        /* সাদা ঘূর্ণায়মান রিং */
+        .spinner-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.25);
+            border-top: 4px solid #ffffff;
+            border-right: 4px solid #ffffff;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+            animation: spin 1.5s linear infinite;
+        }
+
+        /* ভেতরের গ্লোয়িং সবুজ বৃত্ত */
+        .logo-circle {
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #e8f5e9 0%, #a5d6a7 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 25px rgba(102, 187, 106, 0.9), inset 0 0 10px rgba(27, 94, 32, 0.2);
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        /* ধানের শীষের ভেক্টর আইকন */
+        .paddy-icon {
+            width: 65px;
+            height: 65px;
+            fill: #1b5e20;
+        }
+
+        /* নিচের স্লোগান */
+        .tagline {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #ffffff;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            letter-spacing: 0.5px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* লোড শেষ হলে হাইড করার ক্লাস */
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* অ্যানিমেশন সমূহ */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- লোডিং / স্প্ল্যাশ স্ক্রিন -->
+    <div id="splash-screen">
+        <div class="app-title">মাঠের হাট</div>
+        
+        <div class="logo-wrapper">
+            <div class="spinner-ring"></div>
+            <div class="logo-circle">
+                <!-- ধানের শীষের লোগো (SVG) -->
+                <svg class="paddy-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32 58C32 58 31 40 31 24C31 14 37 6 37 6C37 6 33 15 33 24C33 40 34 58 34 58H32Z"/>
+                    <path d="M31 46C24 44 19 38 19 38C19 38 25 39 31 43V46Z"/>
+                    <path d="M31 38C23 35 18 28 18 28C18 28 25 30 31 35V38Z"/>
+                    <path d="M31 30C24 26 20 19 20 19C20 19 26 22 31 27V30Z"/>
+                    <path d="M32 22C26 18 24 11 24 11C24 11 29 14 32 19V22Z"/>
+                    <path d="M33 43C40 41 45 35 45 35C45 35 39 36 33 40V43Z"/>
+                    <path d="M33 35C41 32 46 25 46 25C46 25 39 27 33 32V35Z"/>
+                    <path d="M33 27C40 23 44 16 44 16C44 16 38 19 33 24V27Z"/>
+                    <path d="M33 19C39 15 41 8 41 8C41 8 36 11 33 16V19Z"/>
+                    <!-- নিচের পাতা -->
+                    <path d="M31 54C20 52 13 43 13 43C13 43 22 46 31 51V54Z"/>
+                    <path d="M34 52C45 50 51 41 51 41C51 41 43 44 34 49V52Z"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="tagline">প্রয়োজনীয় কৃষি তথ্য এক জায়গায়</div>
+    </div>
+
+    <!-- আপনার মূল ওয়েবসাইটের কন্টেন্ট এখান থেকে শুরু হবে -->
+    <div id="main-content">
+        <!-- আপনার বর্তমান ওয়েবসাইটের কোড এখানে থাকবে -->
+    </div>
+
+    <script>
+        // পেজ লোড হওয়ার ২.৫ সেকেন্ড (2500ms) পর লোডিং স্ক্রিনটি অদৃশ্য হয়ে যাবে
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const splash = document.getElementById('splash-screen');
+                splash.classList.add('hidden');
+            }, 2500);
+        });
+    </script>
+
+</body>
+</html>
+
 <header><div class="brand"><span class="logo">🌾</span>মাঠের হাট</div>
 <div class="hb"><button id="bell" data-a="bell" aria-label="নোটিফিকেশন">🔔<i id="bdg" hidden></i></button><a id="pf" href="#me" aria-label="প্রোফাইল"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a></div></header>
 <main id="app"></main>
