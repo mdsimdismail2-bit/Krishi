@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%230f4c2a%27/%3E%3Ctext y=%27.72em%27 x=%2712%27 font-size=%2772%27%3E🌾%3C/text%3E%3C/svg%3E">
 <title>মাঠের হাট – অ্যাডমিন প্যানেল</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -24,6 +25,7 @@ input,select,textarea{font:inherit;padding:8px 10px;border:1px solid var(--bd);b
 img.th{width:56px;height:56px;object-fit:cover;border-radius:8px}
 #login{max-width:360px;margin:12vh auto}
 @media(max-width:720px){.wrap{grid-template-columns:1fr}aside{display:flex;flex-wrap:wrap;gap:4px}aside h2{width:100%}}
+.lg{display:inline-block;width:30px;height:30px;vertical-align:middle;margin-right:6px}.lg svg{width:100%;height:100%;display:block}
 </style>
 </head>
 <body>
@@ -32,7 +34,6 @@ img.th{width:56px;height:56px;object-fit:cover;border-radius:8px}
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
 import { getFirestore, doc, getDoc, addDoc, deleteDoc, updateDoc, setDoc, collection, query, orderBy, limit, getDocs, getCountFromServer, where, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
-import { getStorage, ref as sref, deleteObject } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js';
 const firebaseConfig = {
   apiKey: "AIzaSyAlAYaKVYs5eEWD69ATTMLnkkJOq98RhfA",
   authDomain: "krishi-4b93c.firebaseapp.com",
@@ -41,9 +42,10 @@ const firebaseConfig = {
   messagingSenderId: "110396719763",
   appId: "1:110396719763:web:879304e4e8b757b0244366"
 };
-const fb = initializeApp(firebaseConfig), auth = getAuth(fb), db = getFirestore(fb), storage = getStorage(fb);
+const fb = initializeApp(firebaseConfig), auth = getAuth(fb), db = getFirestore(fb);
 const $ = i => document.getElementById(i), esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const col = n => collection(db, n), dt = t => t?.seconds ? new Date(t.seconds * 1000).toLocaleString('bn-BD') : '';
+const LOGO = '<div style="width:100%;aspect-ratio:1;border-radius:26px;background:linear-gradient(135deg,#0f4c2a,#1f7a45);display:flex;align-items:center;justify-content:center;font-size:52px">🌾</div>';
 const BAD = /(sex|porn|xxx|nude|naked|escort|erotic|18\s*\+|সেক্স|পর্ন|ন্যুড|নগ্ন|যৌন)/i;
 let TAB = 'posts', A = {}, V = {}, PL = [], FIL = { v: '', d: '', u: '' };
 document.addEventListener('click', e => { const b = e.target.closest('[data-a]'); if (b && A[b.dataset.a]) A[b.dataset.a](b.dataset.v, b); });
@@ -54,24 +56,27 @@ onAuthStateChanged(auth, async u => {
   if (!u) return loginView();
   let ok = false;
   try { ok = (await getDoc(doc(db, 'admins', u.uid))).exists(); } catch { }
-  if (!ok) { await signOut(auth); return loginView('এই অ্যাকাউন্ট অ্যাডমিন নয় (অথবা rules বসানো হয়নি)'); }
+  if (!ok) return uidView(u);
   shell(); sweep().then(n => { if (n) { alert(n + 'টি নীতিমালা-বিরোধী পোস্ট স্বয়ংক্রিয়ভাবে মুছে ফেলা হয়েছে'); V[TAB](); } });
 });
-function loginView(msg) { $('root').innerHTML = `<div class="card" id="login"><h2 style="margin-top:0">🌾 অ্যাডমিন লগইন</h2><p style="color:var(--red)">${msg || ''}</p><div class="row"><input id="u" placeholder="মোবাইল নম্বর" inputmode="numeric"></div><div class="row"><input id="p" type="password" placeholder="পাসওয়ার্ড"></div><button data-a="login" style="width:100%">প্রবেশ করুন</button></div>`; }
+function loginView(msg) { $('root').innerHTML = `<div class="card" id="login"><div style="text-align:center"><div style="width:84px;margin:auto">${LOGO}</div><h2 style="margin:8px 0 4px">অ্যাডমিন লগইন</h2></div><p style="color:var(--red)">${msg || ''}</p><p style="color:var(--mut);font-size:14px">নতুন কোনো পাসওয়ার্ড নেই। <b>ওয়েবসাইটে নিবন্ধনের সময় যে মোবাইল নম্বর ও পাসওয়ার্ড দিয়েছিলেন সেটাই</b> এখানে দিন। এখনো নিবন্ধন না করে থাকলে আগে <a href="./">ওয়েবসাইটে</a> গিয়ে নিবন্ধন করুন।</p><div class="row"><input id="u" placeholder="মোবাইল নম্বর" inputmode="numeric"></div><div class="row"><input id="p" type="password" placeholder="পাসওয়ার্ড"></div><button data-a="login" style="width:100%">প্রবেশ করুন</button></div>`; }
+function uidView(u) {
+  $('root').innerHTML = `<div class="card" id="login"><h2 style="margin-top:0">আপনি এখনো অ্যাডমিন নন</h2><p>লগইন সফল হয়েছে ✅ এবার নিজেকে অ্যাডমিন বানাতে এই কোডটি (User UID) কপি করুন:</p><input id="uid" readonly value="${u.uid}"><div class="row"><button data-a="cuid">কোড কপি করুন</button></div><ol style="padding-left:20px"><li>Firebase Console → Firestore Database খুলুন</li><li><b>Start collection</b> চাপুন, নাম দিন <b>admins</b></li><li>Document ID-তে ওপরের কোডটি বসান</li><li>Field name: <b>ok</b>, Type: <b>boolean</b>, Value: <b>true</b> দিয়ে Save করুন</li><li>এই পাতা রিফ্রেশ করুন</li></ol><p style="color:var(--mut);font-size:14px">আগেই করে থাকলে সম্ভবত Firestore নিয়ম বসানো হয়নি। ওয়েবসাইটের ঠিকানার শেষে <b>/#setup</b> যোগ করে খুলে নিয়ম কপি করে Publish দিন।</p><button class="alt" data-a="out" style="width:100%">লগ আউট</button></div>`;
+}
+A.cuid = async () => { try { await navigator.clipboard.writeText(auth.currentUser.uid); alert('কপি হয়েছে'); } catch { $('uid').select(); } };
 A.login = async () => { const u = $('u').value.trim(); try { await signInWithEmailAndPassword(auth, u.includes('@') ? u : u + '@mathar.app', $('p').value); } catch { loginView('নম্বর বা পাসওয়ার্ড ভুল'); } };
-const T = [['posts', '🛒 পোস্ট (এলাকা অনুযায়ী)'], ['dash', '📊 ড্যাশবোর্ড'], ['users', '👥 সদস্য'], ['mod', '🚫 নীতিমালা ও রিপোর্ট'], ['qs', '🌱 প্রশ্ন'], ['prices', '💰 বাজার দর']];
+const T = [['posts', '🛒 পোস্ট (এলাকা অনুযায়ী)'], ['dash', '📊 ড্যাশবোর্ড'], ['users', '👥 সদস্য'], ['mod', '🚫 নীতিমালা ও রিপোর্ট'], ['ann', '📢 ঘোষণা (পপআপ)'], ['qs', '🌱 প্রশ্ন'], ['prices', '💰 বাজার দর']];
 function shell() { $('root').innerHTML = `<div class="wrap"><aside><h2>🌾 মাঠের হাট</h2>${T.map(t => `<a data-a="tab" data-v="${t[0]}" class="${t[0] === TAB ? 'on' : ''}">${t[1]}</a>`).join('')}<a data-a="out">⎋ বের হন</a></aside><main id="m">লোড হচ্ছে…</main></div>`; V[TAB](); }
 A.tab = v => { TAB = v; shell(); }; A.out = () => signOut(auth);
 
 /* ---------- স্বয়ংক্রিয় পরিষ্কার: অ্যাডমিন প্যানেল খুললেই চলে ---------- */
 async function rmPost(p, reason) {
-  for (const path of p.images || []) await deleteObject(sref(storage, path)).catch(() => {});
   await deleteDoc(doc(db, 'products', p.id));
   if (reason) await addDoc(col('violations'), { uid: p.sellerId, name: p.sellerName, title: p.title, reason, at: serverTimestamp() }).catch(() => {});
 }
 async function sweep() {
   let n = 0;
-  for (const p of await rows('products')) if (BAD.test((p.title || '') + ' ' + (p.description || ''))) { await rmPost(p, 'অটো-ডিলিট: নিষিদ্ধ শব্দ'); n++; }
+  for (const p of await rows('products', 'createdAt', 100)) if (BAD.test((p.title || '') + ' ' + (p.description || ''))) { await rmPost(p, 'অটো-ডিলিট: নিষিদ্ধ শব্দ'); n++; }
   const c = {}; (await getDocs(col('reports'))).docs.forEach(d => { const r = d.data(); c[r.pid] = (c[r.pid] || 0) + 1; });
   for (const pid in c) if (c[pid] >= 3) { const s = await getDoc(doc(db, 'products', pid)); if (s.exists()) { await rmPost({ id: pid, ...s.data() }, 'অটো-ডিলিট: ৩+ রিপোর্ট'); n++; } }
   const v = {}; (await getDocs(col('violations'))).docs.forEach(d => { const x = d.data(); v[x.uid] = (v[x.uid] || 0) + 1; });
@@ -82,12 +87,12 @@ async function sweep() {
 /* ---------- পোস্ট: বিভাগ → জেলা → উপজেলা ফিল্টার ---------- */
 const uniq = a => [...new Set(a.filter(Boolean))].sort();
 const sel = (c, arr, cur, ph) => `<select data-c="${c}"><option value="">${ph}</option>${arr.map(x => `<option ${x === cur ? 'selected' : ''}>${esc(x)}</option>`).join('')}</select>`;
-V.posts = async () => { PL = await rows('products'); drawPosts(); };
+V.posts = async () => { PL = await rows('products', 'createdAt', 100); drawPosts(); };
 function drawPosts() {
   const byV = PL.filter(p => !FIL.v || p.division === FIL.v), byD = byV.filter(p => !FIL.d || p.district === FIL.d), L = byD.filter(p => !FIL.u || p.upazila === FIL.u), cnt = {};
   byD.forEach(p => cnt[p.upazila] = (cnt[p.upazila] || 0) + 1);
   $('m').innerHTML = `<h2>পোস্ট (${L.length}টি)</h2><div class="card"><div class="row">${sel('fv', uniq(PL.map(p => p.division)), FIL.v, 'সব বিভাগ')}${sel('fd', uniq(byV.map(p => p.district)), FIL.d, 'সব জেলা')}${sel('fu', uniq(byD.map(p => p.upazila)), FIL.u, 'সব উপজেলা')}</div><div>উপজেলা অনুযায়ী: ${Object.entries(cnt).map(([u, n]) => `<span class="tag" style="cursor:pointer;margin:2px" data-a="fu" data-v="${esc(u)}">${esc(u)}: ${n}</span>`).join('') || '—'}</div></div>
-<div class="card"><table><tr><th></th><th>পণ্য</th><th>বিক্রেতা ও এলাকা</th><th>অবস্থা</th><th></th></tr>${L.map(p => `<tr><td>${p.urls?.[0] ? `<img class="th" src="${esc(p.urls[0])}" alt="">` : ''}</td><td>${esc(p.title)}<br><small>${esc(p.category)} • ৳${p.price}/${esc(p.unit)}<br>${esc(p.description || '').slice(0, 80)}</small></td><td>${esc(p.sellerName)}<br><small>${esc(p.upazila)}, ${esc(p.district)}, ${esc(p.division)}</small></td><td><span class="tag">${p.status === 'active' ? 'চালু' : 'লুকানো'}</span></td>
+<div class="card"><table><tr><th></th><th>পণ্য</th><th>বিক্রেতা ও এলাকা</th><th>অবস্থা</th><th></th></tr>${L.map(p => `<tr><td>${p.images?.[0] ? `<img class="th" src="${esc(p.images[0])}" alt="">` : ''}</td><td>${esc(p.title)}<br><small>${esc(p.category)} • ৳${p.price}/${esc(p.unit)}<br>${esc(p.description || '').slice(0, 80)}</small></td><td>${esc(p.sellerName)}<br><small>${esc(p.upazila)}, ${esc(p.district)}, ${esc(p.division)}</small></td><td><span class="tag">${p.status === 'active' ? 'চালু' : 'লুকানো'}</span></td>
 <td><button class="alt" data-a="pst" data-v="${p.id}|${p.status === 'active' ? 'hidden' : 'active'}">${p.status === 'active' ? 'লুকান' : 'চালু'}</button> <button class="del" data-a="pdel" data-v="${p.id}|0">মুছুন</button> <button class="del" data-a="pdel" data-v="${p.id}|1" title="মুছে বিক্রেতাকে সতর্ক করুন">🚫 ১৮+</button></td></tr>`).join('') || '<tr><td colspan="5">কোনো পোস্ট নেই</td></tr>'}</table></div>`;
 }
 A.fv = v => { FIL = { v, d: '', u: '' }; drawPosts(); }; A.fd = v => { FIL.d = v; FIL.u = ''; drawPosts(); }; A.fu = v => { FIL.u = v; drawPosts(); };
@@ -101,17 +106,23 @@ V.dash = async () => {
 };
 V.users = async () => {
   const L = await rows('users'), vs = await rows('violations', 'at', 500), c = {}; vs.forEach(v => c[v.uid] = (c[v.uid] || 0) + 1);
-  $('m').innerHTML = `<h2>সদস্য</h2><div class="card"><table><tr><th>নাম</th><th>মোবাইল</th><th>এলাকা</th><th>ধরন</th><th>নীতিভঙ্গ</th><th></th></tr>${L.map(u => `<tr><td>${esc(u.name)}</td><td>${esc(u.phone)}</td><td>${esc(u.upazila)}, ${esc(u.district)}</td><td>${esc(u.type)}</td><td>${c[u.id] || 0}</td><td><button class="${u.banned ? '' : 'del'}" data-a="ban" data-v="${u.id}|${u.banned ? 0 : 1}">${u.banned ? 'চালু করুন' : 'বন্ধ করুন'}</button></td></tr>`).join('')}</table></div>`;
+  $('m').innerHTML = `<h2>সদস্য</h2><div class="card"><table><tr><th>নাম</th><th>মোবাইল</th><th>এলাকা</th><th>ধরন</th><th>নীতিভঙ্গ</th><th></th></tr>${L.map(u => `<tr><td>${esc(u.name)}</td><td>${esc(u.phone)}</td><td>${esc(u.village ? u.village + ', ' : '')}${esc(u.upazila)}, ${esc(u.district)}</td><td>${esc(u.type)}</td><td>${c[u.id] || 0}</td><td><button class="${u.banned ? '' : 'del'}" data-a="ban" data-v="${u.id}|${u.banned ? 0 : 1}">${u.banned ? 'চালু করুন' : 'বন্ধ করুন'}</button></td></tr>`).join('')}</table></div>`;
 };
 A.ban = async v => { const [id, b] = v.split('|'); await updateDoc(doc(db, 'users', id), { banned: b === '1' }); V.users(); };
 V.mod = async () => {
   const vs = await rows('violations', 'at', 100), c = {}; (await getDocs(col('reports'))).docs.forEach(d => { const r = d.data(); c[r.pid] = (c[r.pid] || 0) + 1; });
   const it = (await Promise.all(Object.keys(c).map(async pid => { const s = await getDoc(doc(db, 'products', pid)); return s.exists() ? { id: pid, ...s.data(), n: c[pid] } : null; }))).filter(Boolean);
   PL = it;
-  $('m').innerHTML = `<h2>নীতিমালা ও রিপোর্ট</h2><div class="card"><h3>🚩 রিপোর্ট হওয়া পোস্ট (৩টি রিপোর্টে অটো-ডিলিট)</h3>${it.map(p => `<div style="padding:6px 0;border-bottom:1px solid var(--bd)">${p.urls?.[0] ? `<img class="th" src="${esc(p.urls[0])}" alt=""> ` : ''}<b>${esc(p.title)}</b> • ${esc(p.upazila)} • ${p.n}টি রিপোর্ট <button class="del" data-a="pdel" data-v="${p.id}|1">🚫 মুছুন</button> <button class="alt" data-a="rclr" data-v="${p.id}">ঠিক আছে</button></div>`).join('') || '<p>কিছু নেই</p>'}</div>
+  $('m').innerHTML = `<h2>নীতিমালা ও রিপোর্ট</h2><div class="card"><h3>🚩 রিপোর্ট হওয়া পোস্ট (৩টি রিপোর্টে অটো-ডিলিট)</h3>${it.map(p => `<div style="padding:6px 0;border-bottom:1px solid var(--bd)">${p.images?.[0] ? `<img class="th" src="${esc(p.images[0])}" alt=""> ` : ''}<b>${esc(p.title)}</b> • ${esc(p.upazila)} • ${p.n}টি রিপোর্ট <button class="del" data-a="pdel" data-v="${p.id}|1">🚫 মুছুন</button> <button class="alt" data-a="rclr" data-v="${p.id}">ঠিক আছে</button></div>`).join('') || '<p>কিছু নেই</p>'}</div>
 <div class="card"><h3>বাতিল ও মুছে ফেলা পোস্টের লগ</h3><table><tr><th>সময়</th><th>বিক্রেতা</th><th>পোস্ট</th><th>কারণ</th></tr>${vs.map(l => `<tr><td>${dt(l.at)}</td><td>${esc(l.name)}</td><td>${esc(l.title)}</td><td>${esc(l.reason)}</td></tr>`).join('') || '<tr><td colspan="4">কিছু নেই</td></tr>'}</table></div>`;
 };
 A.rclr = async pid => { const s = await getDocs(query(col('reports'), where('pid', '==', pid))); for (const d of s.docs) await deleteDoc(d.ref); V.mod(); };
+V.ann = async () => {
+  const L = await rows('announcements', 'at', 20);
+  $('m').innerHTML = `<h2>ঘোষণা (সবার ফোনে পপআপ)</h2><div class="card"><div class="row"><input id="at" placeholder="শিরোনাম (যেমন: আজ ধানের দাম বেড়েছে)"></div><div class="row"><textarea id="ax" rows="3" placeholder="বিস্তারিত…"></textarea></div><button data-a="aadd">সবাইকে পাঠান</button><p style="color:var(--mut)">যাদের সাইট এখন খোলা আছে তারা সাথে সাথে পপআপ পাবেন, বাকিরা সাইটে ঢুকলে পাবেন।</p></div><div class="card"><table><tr><th>সময়</th><th>ঘোষণা</th><th></th></tr>${L.map(x => `<tr><td>${dt(x.at)}</td><td><b>${esc(x.title)}</b><br>${esc(x.text)}</td><td><button class="del" data-a="adel" data-v="${x.id}">মুছুন</button></td></tr>`).join('') || '<tr><td colspan="3">কোনো ঘোষণা নেই</td></tr>'}</table></div>`;
+};
+A.aadd = async () => { const t = $('at').value.trim(); if (!t) return alert('শিরোনাম দিন'); await addDoc(col('announcements'), { title: t.slice(0, 80), text: $('ax').value.trim().slice(0, 300), at: serverTimestamp() }); V.ann(); };
+A.adel = async id => { await deleteDoc(doc(db, 'announcements', id)); V.ann(); };
 V.qs = async () => {
   const L = await rows('questions', 'createdAt', 50);
   $('m').innerHTML = `<h2>কৃষকের প্রশ্ন</h2>${L.map(q => `<div class="card"><b>${esc(q.text)}</b><div style="color:var(--mut)">${dt(q.createdAt)}</div><textarea id="a_${q.id}" rows="3" style="margin-top:8px" placeholder="উত্তর লিখুন…">${esc(q.answer)}</textarea><div class="row"><button data-a="qs" data-v="${q.id}">উত্তর প্রকাশ</button><button class="del" data-a="qdel" data-v="${q.id}">মুছুন</button></div></div>`).join('') || '<p>কোনো প্রশ্ন নেই</p>'}`;
