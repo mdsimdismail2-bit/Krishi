@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f4c2a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%230f4c2a%27/%3E%3Ctext y=%27.72em%27 x=%2712%27 font-size=%2772%27%3E🌾%3C/text%3E%3C/svg%3E">
+<title>মাঠের হাট</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f7f4;--card:#fff;--tx:#10231a;--mut:#64766b;--pri:#0f4c2a;--pri2:#1f7a45;--prit:#fff;--acc:#e5a50a;--bd:#e3ebe5;--soft:#eaf3ec;--warn:#fff6dd;--red:#c0392b;--sh:0 6px 24px rgba(15,76,42,.09);--glass:rgba(255,255,255,.82)}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1610;--card:#142419;--tx:#e8f2ec;--mut:#9bb3a5;--pri:#5fd08a;--pri2:#3fae6a;--prit:#06200f;--acc:#f0b429;--bd:#243a2c;--soft:#1b3225;--warn:#3a3012;--red:#ff8a7a;--sh:0 6px 24px rgba(0,0,0,.35);--glass:rgba(20,36,25,.85)}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 16px/1.6 'Hind Siliguri',system-ui,sans-serif;padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+header{position:sticky;top:0;z-index:5;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px}
+.brand{font-weight:700;font-size:20px;display:flex;gap:8px;align-items:center}.logo{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#0f4c2a,#1f7a45);display:flex;align-items:center;justify-content:center;font-size:19px}
+#pf{width:42px;height:42px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--pri);border:1px solid var(--bd)}
+main{max-width:720px;margin:0 auto;padding:14px;animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font-size:22px;margin:6px 0 12px}h3{margin:2px 0 6px;font-size:18px}
+#nav{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--bd);border-radius:26px;box-shadow:var(--sh);z-index:5;max-width:560px;margin:0 auto;padding:4px 6px}
+#nav a{flex:1;text-align:center;padding:6px 2px;color:var(--mut);text-decoration:none;font-size:12px;font-weight:600;border-radius:18px}
+#nav a span{display:block;font-size:21px;line-height:1.25}#nav a.on{color:var(--pri);background:var(--soft)}
+#nav .fab{flex:none;width:58px;height:58px;margin:-26px 8px 0;padding:0;border-radius:50%;background:linear-gradient(135deg,var(--acc),#f3c13a);color:#1d1400;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(229,165,10,.45)}
+#nav .fab i{font-style:normal;font-size:32px;line-height:1;font-weight:400}
+.card,.pcard,.it{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:var(--sh)}
+.it{background:var(--soft);box-shadow:none;border-radius:14px;padding:10px 12px;margin:8px 0}
+.hero{background:linear-gradient(135deg,#0f4c2a,#1f7a45 70%,#2f9158);color:#fff;border-radius:26px;padding:22px 20px;margin-bottom:14px;box-shadow:var(--sh);position:relative;overflow:hidden}
+.hero::after{content:'🌾';position:absolute;right:-8px;bottom:-26px;font-size:120px;opacity:.16}
+.hero h1{margin:0;font-size:28px;line-height:1.25}.hero .m{opacity:.85;font-size:14px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.tile{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:14px 6px;text-align:center;text-decoration:none;color:var(--tx);font-weight:600;font-size:14px;box-shadow:var(--sh)}.tile span{display:block;font-size:30px;line-height:1.3}
+.pcard{padding:0;overflow:hidden}.ph{position:relative}.ph img{width:100%;height:210px;object-fit:cover;display:block}.pb{padding:14px 16px 16px}
+.heart{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;border:0;background:var(--glass);font-size:20px;padding:0;cursor:pointer;color:inherit}
+.mut{color:var(--mut);font-size:14px}.price{font-size:24px;font-weight:700;color:var(--pri)}.price small{font-size:14px;color:var(--mut);font-weight:500}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:99px;background:var(--soft);color:var(--pri)}.tag.n{background:var(--acc);color:#1d1400}.tag.w{background:var(--pri);color:var(--prit)}
+button{font:inherit;font-weight:600;cursor:pointer;border:0;background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--prit);padding:11px 18px;border-radius:14px}
+button.alt{background:transparent;color:var(--pri);border:1.5px solid var(--pri)}button.sm{padding:4px 12px;font-size:13px;border-radius:10px}button.del{background:transparent;color:var(--red);border:1.5px solid var(--red)}button:disabled{opacity:.6}
+input,select,textarea{width:100%;font:inherit;padding:12px 14px;border:1.5px solid var(--bd);border-radius:14px;background:var(--bg);color:var(--tx);margin-top:4px}
+label{display:block;font-weight:600;font-size:14px;margin-top:14px}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.row>*{flex:1;min-width:110px}.grid{display:grid;gap:14px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0;scrollbar-width:none}.chip{flex:none;padding:7px 15px;border-radius:99px;background:var(--card);border:1.5px solid var(--bd);font-weight:600;font-size:14px;color:var(--tx);cursor:pointer}.chip.on{background:var(--pri);color:var(--prit);border-color:var(--pri)}
+.adv{background:var(--warn);border-left:5px solid var(--acc);padding:10px 14px;border-radius:12px;margin-top:10px}
+.pr{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--bd)}.pr:last-child{border:0}
+.msg{max-width:80%;padding:9px 14px;border-radius:18px 18px 18px 4px;margin:6px 0;background:var(--soft);width:fit-content}.msg.me{background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--prit);margin-left:auto;border-radius:18px 18px 4px 18px}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.sum div{background:var(--soft);border-radius:14px;padding:10px 4px}.sum b{display:block;font-size:19px}
+.sk{height:230px;border-radius:20px;background:linear-gradient(90deg,var(--soft),var(--card),var(--soft));background-size:200% 100%;animation:sk 1.2s infinite}@keyframes sk{to{background-position:-200% 0}}
+.md{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:20;align-items:flex-end;justify-content:center;padding:0}.md.on{display:flex}.md .card{width:min(520px,100%);margin:0;border-radius:26px 26px 0 0}
+#toast{position:fixed;left:50%;bottom:calc(104px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--pri);color:var(--prit);padding:11px 20px;border-radius:14px;z-index:30;display:none;max-width:90%;box-shadow:var(--sh)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+
+.wx{border-radius:28px;color:#fff;padding:18px;margin-bottom:14px;box-shadow:var(--sh);position:relative;overflow:hidden}
+.wx::after{content:attr(data-e);position:absolute;right:-6px;top:30px;font-size:120px;opacity:.18}
+.wx .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}.wx .loc{font-weight:600}.wx .dt{font-size:14px;opacity:.9}
+.wx .clk{font-size:30px;font-weight:700;letter-spacing:.5px;line-height:1.2}
+.wx .tb{display:flex;gap:6px}.wx .tb button{background:rgba(255,255,255,.2);color:#fff;padding:6px 10px;border-radius:12px;font-size:14px;border:0}
+.wx .big{font-size:68px;font-weight:700;line-height:1;margin-top:8px}.wx .cond{font-size:19px;font-weight:600}
+.wx .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.wx .gi{background:rgba(255,255,255,.17);border-radius:16px;padding:8px 4px;text-align:center;font-size:12px}.wx .gi b{display:block;font-size:16px}
+.hrs{display:flex;gap:8px;overflow-x:auto;margin-top:12px;padding-bottom:4px;scrollbar-width:none}.hrw{flex:none;min-width:64px;text-align:center;background:rgba(255,255,255,.15);border-radius:16px;padding:8px 4px;font-size:12px}.hrw b{display:block;font-size:15px}
+.wx .adv{background:rgba(255,255,255,.2);border-left-color:#ffd54f;color:#fff}
+.wx .upd{font-size:12px;opacity:.8;margin-top:8px}
+.fcd{display:grid;grid-template-columns:1fr auto auto auto;gap:10px;padding:8px 0;border-bottom:1px dashed var(--bd);align-items:center}.fcd:last-child{border:0}
+
+.hb{display:flex;align-items:center;gap:10px}#bell{position:relative;width:42px;height:42px;border-radius:50%;background:var(--soft);border:1px solid var(--bd);padding:0;font-size:19px;color:inherit;cursor:pointer}
+#bdg{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;border-radius:10px;background:#e53935;color:#fff;font:700 11px/20px 'Hind Siliguri',sans-serif;font-style:normal;padding:0 5px}#bdg[hidden]{display:none}
+#pf{overflow:hidden}
+#pop{position:fixed;left:12px;right:12px;top:calc(12px + env(safe-area-inset-top,0px));max-width:520px;margin:0 auto;z-index:40;background:linear-gradient(135deg,#0f4c2a,#1f7a45);color:#fff;border-radius:20px;padding:14px 18px;box-shadow:0 14px 40px rgba(0,0,0,.35);transform:translateY(-140%);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);cursor:pointer;border-left:6px solid #ffd54f}#pop.on{transform:none}
+.av{width:38px;height:38px;border-radius:50%;object-fit:cover;background:var(--soft);display:inline-flex;align-items:center;justify-content:center;flex:none}
+.sl{display:flex;gap:10px;align-items:center;margin-top:8px}.sl span{line-height:1.35;font-size:14px}
+.pav{position:relative;display:block;width:98px;height:98px;margin:6px auto 0;border-radius:50%;background:var(--soft);border:3px solid var(--acc);cursor:pointer}.pav img{width:100%;height:100%;border-radius:50%;object-fit:cover}.pav>span{font-size:46px;line-height:92px;display:block}.pav i{position:absolute;right:-2px;bottom:0;width:32px;height:32px;border-radius:50%;background:var(--pri);color:var(--prit);font-style:normal;line-height:32px;font-size:16px}
+.gh{background:linear-gradient(135deg,#14532d,#2f9158);color:#fff;border-radius:26px;padding:20px;margin-bottom:12px;box-shadow:var(--sh);position:relative;overflow:hidden}.gh::after{content:'🌿';position:absolute;right:-6px;bottom:-24px;font-size:110px;opacity:.18}.gh h1{margin:2px 0 6px;font-size:27px}.gh p{margin:0;opacity:.95}.gh .m{font-size:13px;opacity:.85}
+details.rc{background:var(--card);border:1px solid var(--bd);border-radius:20px;margin-bottom:12px;box-shadow:var(--sh);overflow:hidden}details.rc summary{display:flex;gap:12px;align-items:center;padding:14px 16px;cursor:pointer;list-style:none}details.rc summary::-webkit-details-marker{display:none}
+.ri{width:48px;height:48px;border-radius:16px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:26px;flex:none}.rb{padding:0 18px 16px}.rb h4{margin:14px 0 4px;color:var(--pri)}.rb p{margin:0}.rb ol{margin:0;padding-left:20px}.rb li{margin-bottom:4px}
+a.btn{display:block;text-align:center;text-decoration:none;font-weight:600;padding:11px 18px;border-radius:14px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--prit)}a.btn.alt{background:transparent;color:var(--pri);border:1.5px solid var(--pri)}
+.say{background:var(--soft);color:var(--pri);border:1px solid var(--bd);padding:2px 10px;border-radius:99px;font-size:14px;margin-left:6px;cursor:pointer}
+#tts{position:fixed;left:14px;bottom:calc(104px + env(safe-area-inset-bottom,0px));width:50px;height:50px;border-radius:50%;z-index:6;padding:0;font-size:22px;box-shadow:var(--sh);background:linear-gradient(135deg,var(--acc),#f3c13a);color:#1d1400;border:0}
+</style>
+</head>
+<body>
+<header><div class="brand"><span class="logo">🌾</span>মাঠের হাট</div>
+<div class="hb"><button id="bell" data-a="bell" aria-label="নোটিফিকেশন">🔔<i id="bdg" hidden></i></button><a id="pf" href="#me" aria-label="প্রোফাইল"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a></div></header>
+<main id="app"></main>
+<nav id="nav"><a href="#home"><span>🏠</span>হোম</a><a href="#market"><span>🛒</span>বাজার</a><a href="#post" class="fab" aria-label="পণ্য পোস্ট করুন"><i>＋</i></a><a href="#chat"><span>💬</span>বার্তা</a><a href="#guide"><span>🌿</span>গাইড</a></nav>
+<button id="tts" data-a="sayPage" aria-label="এই পাতা পড়ে শোনাও">🔊</button><div id="pop" role="alert"></div><div class="md" id="md"></div><div id="toast"></div>
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, collection, query, where, getDocs, onSnapshot, orderBy, limit, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+
+// Firebase প্রজেক্ট: krishi-4b93c
+const firebaseConfig = {
+  apiKey: "AIzaSyAlAYaKVYs5eEWD69ATTMLnkkJOq98RhfA",
+  authDomain: "krishi-4b93c.firebaseapp.com",
+  projectId: "krishi-4b93c",
+  storageBucket: "krishi-4b93c.firebasestorage.app",
+  messagingSenderId: "110396719763",
+  appId: "1:110396719763:web:879304e4e8b757b0244366"
+};
+
+const G = {
+'ঢাকা':['ঢাকা','গাজীপুর','নারায়ণগঞ্জ','টাঙ্গাইল','মানিকগঞ্জ','মুন্সিগঞ্জ','নরসিংদী','কিশোরগঞ্জ','ফরিদপুর','গোপালগঞ্জ','মাদারীপুর','রাজবাড়ী','শরীয়তপুর'],
+'ময়মনসিংহ':['ময়মনসিংহ','জামালপুর','নেত্রকোনা','শেরপুর'],
+'চট্টগ্রাম':['চট্টগ্রাম','কক্সবাজার','কুমিল্লা','ফেনী','ব্রাহ্মণবাড়িয়া','রাঙ্গামাটি','নোয়াখালী','চাঁদপুর','লক্ষ্মীপুর','খাগড়াছড়ি','বান্দরবান'],
+'রাজশাহী':['রাজশাহী','বগুড়া','জয়পুরহাট','নওগাঁ','নাটোর','চাঁপাইনবাবগঞ্জ','পাবনা','সিরাজগঞ্জ'],
+'রংপুর':['রংপুর','দিনাজপুর','গাইবান্ধা','কুড়িগ্রাম','লালমনিরহাট','নীলফামারী','পঞ্চগড়','ঠাকুরগাঁও'],
+'খুলনা':['খুলনা','বাগেরহাট','চুয়াডাঙ্গা','যশোর','ঝিনাইদহ','কুষ্টিয়া','মাগুরা','মেহেরপুর','নড়াইল','সাতক্ষীরা'],
+'বরিশাল':['বরিশাল','বরগুনা','ভোলা','ঝালকাঠি','পটুয়াখালী','পিরোজপুর'],
+'সিলেট':['সিলেট','হবিগঞ্জ','মৌলভীবাজার','সুনামগঞ্জ']};
+// শুধু কয়েকটি জেলার উপজেলা দেওয়া আছে; বাকিগুলো এখানে একইভাবে যোগ করুন
+const UP = {
+'নেত্রকোনা':['নেত্রকোনা সদর','কলমাকান্দা','কেন্দুয়া','আটপাড়া','বারহাট্টা','দুর্গাপুর','খালিয়াজুরী','মদন','মোহনগঞ্জ','পূর্বধলা'],
+'ময়মনসিংহ':['ময়মনসিংহ সদর','ত্রিশাল','ভালুকা','গফরগাঁও','মুক্তাগাছা','নান্দাইল','ফুলবাড়িয়া','ফুলপুর','হালুয়াঘাট','ঈশ্বরগঞ্জ','গৌরীপুর','তারাকান্দা','ধোবাউড়া'],
+'বগুড়া':['বগুড়া সদর','শিবগঞ্জ','শেরপুর','ধুনট','গাবতলী','সারিয়াকান্দি','কাহালু','নন্দীগ্রাম','আদমদীঘি','দুপচাঁচিয়া','সোনাতলা','শাজাহানপুর'],
+'ঢাকা':['ধামরাই','দোহার','কেরানীগঞ্জ','নবাবগঞ্জ','সাভার'],
+'রংপুর':['রংপুর সদর','গঙ্গাচড়া','কাউনিয়া','বদরগঞ্জ','মিঠাপুকুর','পীরগাছা','পীরগঞ্জ','তারাগঞ্জ']};
+const upz = d => UP[d] || [d + ' সদর', 'অন্যান্য উপজেলা'];
+const CATS = ['ধান ও শস্য','সবজি','ফল','মাছ','গবাদিপশু ও দুধ','বীজ ও চারা','সার ও কীটনাশক','কৃষি যন্ত্রপাতি'];
+// বপন/রোপণের দিন থেকে গোনা কাজের সময়সূচি
+const FN = { u: 'ইউরিয়া', t: 'টিএসপি', m: 'এমওপি (পটাশ)', g: 'জিপসাম', z: 'জিংক সালফেট', o: 'জৈব সার (গোবর/কম্পোস্ট)', b: 'বোরাক্স' };
+const UN = { 'শতক': 1, 'বিঘা': 33, 'একর': 100 };
+// f = মোট সার (কেজি, প্রতি ১ বিঘা = ৩৩ শতক), d = সার প্রয়োগের দিন (বপন/রোপণ থেকে গোনা) ও মোটের কত ভাগ, t = অন্যান্য কাজ
+const CROPS = {
+'রোপা আমন ধান': { f: { u: 20, t: 13, m: 9, g: 8, z: 1.3 }, d: [[0, 'জমি তৈরির শেষ চাষে', { t: 1, m: 1, g: 1, z: 1 }], [10, '১ম কিস্তি', { u: 1 / 3 }], [27, '২য় কিস্তি', { u: 1 / 3 }], [42, 'শেষ কিস্তি (শীষ আসার আগে)', { u: 1 / 3 }]], t: [[27, 'আগাছা পরিষ্কার করুন'], [105, 'জমির পানি শুকিয়ে দিন'], [120, 'ধান কাটুন']] },
+'বোরো ধান': { f: { u: 33, t: 13, m: 13, g: 9 }, d: [[0, 'জমি তৈরির শেষ চাষে', { t: 1, m: 1, g: 1 }], [13, '১ম কিস্তি', { u: 1 / 3 }], [32, '২য় কিস্তি', { u: 1 / 3 }], [52, 'শেষ কিস্তি (থোড় আসার আগে)', { u: 1 / 3 }]], t: [[100, 'জমির পানি শুকিয়ে দিন'], [115, 'ধান কাটুন']] },
+'গম': { f: { u: 28, t: 19, m: 8 }, d: [[0, 'শেষ চাষে', { t: 1, m: 1, u: .5 }], [19, '১ম সেচের সময় বাকি', { u: .5 }]], t: [[19, '১ম সেচ দিন'], [48, '২য় সেচ দিন'], [68, '৩য় সেচ দিন'], [115, 'গম কাটুন']] },
+'ভুট্টা': { f: { u: 70, t: 33, m: 27, g: 27, z: 1.3 }, d: [[0, 'শেষ চাষে', { t: 1, m: 1, g: 1, z: 1, u: 1 / 3 }], [25, '২য় কিস্তি', { u: 1 / 3 }], [50, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[25, '১ম সেচ দিন'], [50, '২য় সেচ দিন'], [70, '৩য় সেচ দিন (মোচা আসার সময়)'], [135, 'মোচা পাকলে তুলুন']] },
+'আলু': { f: { u: 30, t: 20, m: 30, o: 1000 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: 1, u: .5 }], [28, 'গোড়ায় মাটি তোলার সময়', { u: .5 }]], t: [[28, '১ম সেচ দিন'], [48, '২য় সেচ দিন'], [68, '৩য় সেচ দিন'], [73, 'সেচ বন্ধ করুন'], [85, 'আলু তুলুন']] },
+'টমেটো': { f: { u: 35, t: 22, m: 27, o: 1000 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [50, '৩য় কিস্তি', { u: 1 / 3 }]], t: [[22, 'খুঁটি দিয়ে বেঁধে দিন'], [65, 'ফল তোলা শুরু']] },
+'বেগুন': { f: { u: 35, t: 20, m: 25, o: 1000 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: .5 }], [20, '১ম কিস্তি', { u: .25 }], [40, '২য় কিস্তি', { u: .25, m: .5 }], [60, '৩য় কিস্তি', { u: .25 }], [80, 'শেষ কিস্তি', { u: .25 }]], t: [[65, 'ফল তোলা শুরু']] },
+'ফুলকপি': { f: { u: 35, t: 25, m: 25, o: 1000, b: 1 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, b: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [45, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[15, 'সেচ ও আগাছা দমন করুন'], [65, 'কপি তুলুন (জাতভেদে ৬০-৮০ দিন)']] },
+'বাঁধাকপি': { f: { u: 40, t: 25, m: 25, o: 1000 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [45, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[15, 'সেচ ও আগাছা দমন করুন'], [75, 'কপি শক্ত হলে তুলুন']] },
+'পেঁয়াজ': { f: { u: 20, t: 20, m: 20, o: 800 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: .5 }], [20, '১ম কিস্তি', { u: .5, m: .5 }], [40, 'শেষ কিস্তি', { u: .5 }]], t: [[85, 'তোলার ১৫ দিন আগে সেচ বন্ধ করুন'], [100, 'গাছের মাথা নুয়ে পড়লে তুলুন']] },
+'সরিষা': { f: { u: 25, t: 20, m: 10, g: 15 }, d: [[0, 'শেষ চাষে', { t: 1, m: 1, g: 1, u: .5 }], [22, 'বাকি অংশ (১ম সেচের সময়)', { u: .5 }]], t: [[22, '১ম সেচ দিন'], [52, '২য় সেচ দিন'], [92, 'সরিষা কাটুন']] },
+'মরিচ': { f: { u: 30, t: 20, m: 20, o: 1000 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: .5 }], [20, '১ম কিস্তি', { u: 1 / 3 }], [40, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [60, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[70, 'কাঁচা মরিচ তোলা শুরু']] },
+'লাউ': { f: { u: 17, t: 13, m: 13, o: 1000 }, d: [[0, 'মাদা তৈরির সময়', { o: 1, t: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [50, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[20, 'মাচা বা বাউনি দিন'], [60, 'লাউ তোলা শুরু']] },
+'ঢেঁড়স': { f: { u: 28, t: 15, m: 15 }, d: [[0, 'জমি তৈরির সময়', { t: 1, m: .5 }], [20, '১ম কিস্তি', { u: 1 / 3 }], [40, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [60, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[50, 'ঢেঁড়স তোলা শুরু (২ দিন পর পর)']] },
+'শসা': { f: { u: 20, t: 15, m: 15, o: 1000 }, d: [[0, 'মাদা তৈরির সময়', { o: 1, t: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [45, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[20, 'মাচা দিন'], [45, 'শসা তোলা শুরু']] },
+'মসুর': { f: { u: 5, t: 13, m: 7 }, d: [[0, 'শেষ চাষে (একবারে)', { u: 1, t: 1, m: 1 }]], t: [[105, '৮০% ফল পাকলে কাটুন']] },
+'মুগডাল': { f: { u: 5, t: 13, m: 7 }, d: [[0, 'শেষ চাষে (একবারে)', { u: 1, t: 1, m: 1 }]], t: [[65, '৮০% ফল পাকলে তুলুন']] }};
+const kgs = k => k >= 1 ? bn(+(Math.round(k * 10) / 10)) + ' কেজি' : bn(Math.round(k * 100) * 10) + ' গ্রাম';
+const areaTxt = a => a % 33 === 0 ? bn(a / 33) + ' বিঘা' : bn(+a.toFixed(1)) + ' শতক';
+function plan(name, areaSh) {
+  const c = CROPS[name]; if (!c) return []; const bg = areaSh / 33;
+  return c.d.map(([day, label, fx]) => ({ day, label, fert: Object.entries(fx).map(([k, fr]) => [FN[k], c.f[k] * fr * bg]) })).concat(c.t.map(([day, x]) => ({ day, label: x, fert: [] }))).sort((a, b) => a.day - b.day);
+}
+const evText = e => e.label + (e.fert.length ? ' → ' + e.fert.map(([n, k]) => n + ' ' + kgs(k)).join(', ') : '');
+
+
+const fb = initializeApp(firebaseConfig), auth = getAuth(fb), db = getFirestore(fb);
+const $ = i => document.getElementById(i), BN = '০১২৩৪৫৬৭৮৯', bn = n => String(n).replace(/\d/g, d => BN[d]);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const opts = a => (a || []).map(x => `<option>${esc(x)}</option>`).join('');
+const ST = { requested: 'অনুরোধ', confirmed: 'নিশ্চিত', shipped: 'পাঠানো হয়েছে', delivered: 'পৌঁছেছে', cancelled: 'বাতিল' };
+const NEAR = { 4: '📍 আপনার উপজেলা', 3: 'আপনার জেলা', 2: 'আপনার বিভাগ', 1: 'অন্য এলাকা' };
+let ME = null, UID = null, CUR = null, REG = false, ALL = [], off = [], P = {}, A = {}, FAV = new Set();
+const LOGO = '<div style="width:100%;aspect-ratio:1;border-radius:26px;background:linear-gradient(135deg,#0f4c2a,#1f7a45);display:flex;align-items:center;justify-content:center;font-size:52px">🌾</div>';
+const today = () => new Date().toISOString().slice(0, 10);
+// ১৮+ বা অশ্লীল শব্দ (Firestore rules-এও একই তালিকা আছে; এখানে বাড়াতে চাইলে দুই জায়গায় বদলান)
+const BAD = /(sex|porn|xxx|nude|naked|escort|erotic|18\s*\+|সেক্স|পর্ন|ন্যুড|নগ্ন|যৌন)/i;
+let NSFW = null;
+const loadJs = src => new Promise((res, rej) => { const e = document.createElement('script'); e.src = src; e.onload = res; e.onerror = rej; document.head.appendChild(e); });
+async function nsfwModel() {
+  if (NSFW !== null) return NSFW;
+  try { await loadJs('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js'); await loadJs('https://cdn.jsdelivr.net/npm/nsfwjs@2.4.2/dist/nsfwjs.min.js'); NSFW = await window.nsfwjs.load(); } catch { NSFW = false; }
+  return NSFW;
+}
+async function adultImage(file) {
+  const m = await nsfwModel(); if (!m) return false;
+  const img = new Image(); img.src = URL.createObjectURL(file); await img.decode();
+  const s = Object.fromEntries((await m.classify(img)).map(x => [x.className, x.probability]));
+  return (s.Porn || 0) + (s.Hentai || 0) > 0.5 || (s.Sexy || 0) > 0.8;
+}
+const toast = m => { const t = $('toast'); t.textContent = m; t.style.display = 'block'; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = 'none', 2800); };
+const modal = h => { $('md').innerHTML = h ? `<div class="card">${h}</div>` : ''; $('md').className = h ? 'md on' : 'md'; };
+const col = (...p) => collection(db, ...p), f = (k, v) => where(k, '==', v);
+
+document.addEventListener('click', e => { const b = e.target.closest('[data-a]'); if (b && A[b.dataset.a]) A[b.dataset.a](b.dataset.v, b); });
+let keep = false;
+window.addEventListener('hashchange', () => { if (keep) keep = false; else CUR = null; route(); });
+onAuthStateChanged(auth, async u => {
+  UID = u ? u.uid : null; ME = null;
+  if (!u) { nu.forEach(x => x()); nu = []; NS = false; }
+  if (u) {
+    const s = await getDoc(doc(db, 'users', u.uid));
+    if (s.exists()) ME = { id: u.uid, ...s.data() };
+    if (ME?.banned) { await signOut(auth); return toast('এই অ্যাকাউন্ট বন্ধ করা হয়েছে'); }
+  }
+  route();
+});
+
+/* ---------- রাউটার ---------- */
+function route() {
+  off.forEach(x => x()); off = [];
+  if (SPK) { speechSynthesis.cancel(); SPK = false; $('tts').textContent = '🔊'; }
+  setAv();
+  const r = (location.hash || '#home').slice(1);
+  document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + r));
+  if (r === 'setup') return setup();
+  if (!UID || !ME) return authView();
+  startNotif();
+  ({ home, market, post, chat, help, me, favs, book, guide, fert, svc }[r] || home)();
+}
+
+/* ---------- লগইন / নিবন্ধন ---------- */
+function authView() {
+  $('app').innerHTML = REG
+    ? `<div class="card"><h3>নতুন অ্যাকাউন্ট</h3><label>পুরো নাম</label><input id="rn"><label>মোবাইল নম্বর</label><input id="rp" inputmode="numeric" placeholder="01XXXXXXXXX"><label>পাসওয়ার্ড (৬+ অক্ষর)</label><input id="rw" type="password"><label>গ্রামের নাম</label><input id="rv" placeholder="যেমন: কালিয়াগঞ্জ">
+<label>বিভাগ</label><select id="lv">${opts(Object.keys(G))}</select><label>জেলা</label><select id="ld"></select><label>উপজেলা</label><select id="lu"></select>
+<label>আপনি কী করবেন?</label><select id="rt"><option value="both">খুচরা ও পাইকারি দুটোই</option><option value="retail">শুধু খুচরা</option><option value="wholesale">শুধু পাইকারি</option></select>
+<div class="row"><button data-a="reg">অ্যাকাউন্ট খুলুন</button><button class="alt" data-a="tog">লগইন</button></div></div>`
+    : `<div class="card"><h3>লগইন</h3><label>মোবাইল নম্বর</label><input id="lp" inputmode="numeric"><label>পাসওয়ার্ড</label><input id="lw" type="password"><div class="row"><button data-a="login">লগইন</button><button class="alt" data-a="tog">নতুন অ্যাকাউন্ট</button></div></div>`;
+  $('app').insertAdjacentHTML('afterbegin', `<div style="text-align:center;margin:8px 0 14px"><div style="width:92px;margin:auto">${LOGO}</div><h2 style="margin:8px 0 0">মাঠের হাট</h2><div class="mut">কৃষকের নিজের বাজার</div></div>`);
+  if (REG) { $('lv').onchange = () => { $('ld').innerHTML = opts(G[$('lv').value]); $('ld').onchange(); }; $('ld').onchange = () => $('lu').innerHTML = opts(upz($('ld').value)); $('lv').onchange(); }
+}
+A.tog = () => { REG = !REG; authView(); };
+A.login = async () => { try { await signInWithEmailAndPassword(auth, $('lp').value.trim() + '@mathar.app', $('lw').value); } catch { toast('নম্বর বা পাসওয়ার্ড ভুল'); } };
+A.reg = async () => {
+  const n = $('rn').value.trim(), p = $('rp').value.trim(), w = $('rw').value;
+  if (!n || !/^01[3-9]\d{8}$/.test(p) || w.length < 6) return toast('সঠিক নাম, মোবাইল নম্বর ও ৬+ অক্ষরের পাসওয়ার্ড দিন');
+  try {
+    const c = await createUserWithEmailAndPassword(auth, p + '@mathar.app', w);
+    const d = { name: n, phone: p, village: $('rv').value.trim().slice(0, 60), division: $('lv').value, district: $('ld').value, upazila: $('lu').value, type: $('rt').value, banned: false, createdAt: serverTimestamp() };
+    await setDoc(doc(db, 'users', c.user.uid), d); UID = c.user.uid; ME = { id: UID, ...d }; route();
+  } catch (e) { toast(e.code === 'auth/email-already-in-use' ? 'এই নম্বরে অ্যাকাউন্ট আছে' : 'নিবন্ধন ব্যর্থ হয়েছে'); }
+};
+
+/* ---------- হোম ---------- */
+async function home() {
+  const h = new Date().getHours(), gr = h < 12 ? 'শুভ সকাল' : h < 17 ? 'শুভ দুপুর' : h < 19 ? 'শুভ বিকেল' : 'শুভ সন্ধ্যা';
+  $('app').innerHTML = `<section class="hero"><div class="m">${gr} 👋</div><h1>${esc(ME.name)}</h1><div class="m">📍 ${esc(ME.upazila)}, ${esc(ME.district)}</div></section>
+<div class="tiles">${[['#market', '🛒', 'কিনুন'], ['#post', '📸', 'বেচুন'], ['#book', '📒', 'কৃষি খাতা'], ['#fert', '🧪', 'সারের হিসাব'], ['#guide', '🌿', 'কৃষি গাইড'], ['#help', '🌱', 'প্রশ্ন করুন'], ['#favs', '❤️', 'পছন্দ'], ['#svc', '📞', 'জরুরি সেবা'], ['#me', '👤', 'প্রোফাইল']].map(t => `<a class="tile" href="${t[0]}"><span>${t[1]}</span>${t[2]}</a>`).join('')}</div>
+<div class="card"><h3>💡 আজকের কৃষি পরামর্শ <button class="say sm" data-a="say" aria-label="শুনুন">🔊</button></h3><div>${MONTHS[new Date().getMonth()][1]}</div></div>
+<div id="wx"><div class="sk" style="height:300px"></div></div>
+<div class="card"><h3>📊 আজকের বাজার দর <button class="say sm" data-a="say" aria-label="শুনুন">🔊</button></h3><div id="pr" class="mut">লোড হচ্ছে…</div></div>
+<div class="card"><h3>🌾 আমার ফসল</h3><div id="mc"></div><label>ফসল</label><select id="cs">${opts(Object.keys(CROPS))}</select><div class="row"><div><label>বপন বা রোপণের তারিখ</label><input type="date" id="cd"></div></div><div class="row"><div><label>জমির পরিমাণ</label><input id="ca" type="number" min="0" step="any" value="1"></div><div><label>একক</label><select id="cu"><option>বিঘা</option><option>শতক</option><option>একর</option></select></div></div><div class="row"><button data-a="addcrop">ফসল যোগ করুন</button></div><p class="mut" style="margin-bottom:0">তারিখ ও জমির পরিমাণ দিলে অ্যাপ বলে দেবে কবে কোন সার কতটুকু দিতে হবে।</p></div>`;
+  $('cd').value = today();
+  const tk = setInterval(tick, 1000), rf = setInterval(() => wxLoad(), 600000);
+  off.push(() => { clearInterval(tk); clearInterval(rf); });
+  wxLoad();
+  getDocs(query(col('prices'), orderBy('createdAt', 'desc'), limit(12))).then(s => $('pr').innerHTML = s.docs.length ? s.docs.map(d => { const p = d.data(); return `<div class="pr"><span>${esc(p.crop)} <small class="mut">${esc(p.market)}</small></span><b>৳${bn(p.price)}/${esc(p.unit)}</b></div>`; }).join('') : 'এখনো দর দেওয়া হয়নি').catch(() => $('pr').textContent = 'দর আনা যায়নি');
+  crops();
+}
+const DC = {"ঢাকা": [23.81, 90.41], "গাজীপুর": [24.0, 90.42], "নারায়ণগঞ্জ": [23.62, 90.5], "টাঙ্গাইল": [24.25, 89.92], "মানিকগঞ্জ": [23.86, 90.0], "মুন্সিগঞ্জ": [23.55, 90.53], "নরসিংদী": [23.92, 90.72], "কিশোরগঞ্জ": [24.43, 90.78], "ফরিদপুর": [23.61, 89.84], "গোপালগঞ্জ": [23.01, 89.83], "মাদারীপুর": [23.17, 90.2], "রাজবাড়ী": [23.76, 89.64], "শরীয়তপুর": [23.22, 90.35], "ময়মনসিংহ": [24.75, 90.41], "জামালপুর": [24.92, 89.94], "নেত্রকোনা": [24.87, 90.73], "শেরপুর": [25.02, 90.02], "চট্টগ্রাম": [22.36, 91.78], "কক্সবাজার": [21.43, 91.98], "কুমিল্লা": [23.46, 91.18], "ফেনী": [23.02, 91.4], "ব্রাহ্মণবাড়িয়া": [23.96, 91.11], "রাঙ্গামাটি": [22.65, 92.17], "নোয়াখালী": [22.87, 91.1], "চাঁদপুর": [23.23, 90.67], "লক্ষ্মীপুর": [22.94, 90.84], "খাগড়াছড়ি": [23.12, 91.98], "বান্দরবান": [22.19, 92.22], "রাজশাহী": [24.37, 88.6], "বগুড়া": [24.85, 89.37], "জয়পুরহাট": [25.1, 89.02], "নওগাঁ": [24.8, 88.93], "নাটোর": [24.41, 89.0], "চাঁপাইনবাবগঞ্জ": [24.6, 88.28], "পাবনা": [24.0, 89.23], "সিরাজগঞ্জ": [24.45, 89.7], "রংপুর": [25.75, 89.25], "দিনাজপুর": [25.63, 88.64], "গাইবান্ধা": [25.33, 89.53], "কুড়িগ্রাম": [25.81, 89.65], "লালমনিরহাট": [25.99, 89.45], "নীলফামারী": [25.93, 88.86], "পঞ্চগড়": [26.34, 88.55], "ঠাকুরগাঁও": [26.03, 88.46], "খুলনা": [22.82, 89.55], "বাগেরহাট": [22.65, 89.79], "চুয়াডাঙ্গা": [23.64, 88.85], "যশোর": [23.17, 89.21], "ঝিনাইদহ": [23.54, 89.17], "কুষ্টিয়া": [23.9, 89.12], "মাগুরা": [23.49, 89.42], "মেহেরপুর": [23.76, 88.63], "নড়াইল": [23.17, 89.5], "সাতক্ষীরা": [22.72, 89.07], "বরিশাল": [22.7, 90.37], "বরগুনা": [22.15, 90.13], "ভোলা": [22.69, 90.65], "ঝালকাঠি": [22.64, 90.2], "পটুয়াখালী": [22.36, 90.33], "পিরোজপুর": [22.58, 89.97], "সিলেট": [24.9, 91.87], "হবিগঞ্জ": [24.38, 91.42], "মৌলভীবাজার": [24.48, 91.77], "সুনামগঞ্জ": [25.07, 91.4]};
+const WC = (c, day = 1) => c === 0 ? (day ? ['☀️', 'পরিষ্কার আকাশ', 'clear'] : ['🌙', 'পরিষ্কার রাত', 'night']) : c <= 3 ? ['⛅', 'আংশিক মেঘলা', 'cloud'] : c <= 48 ? ['🌫️', 'কুয়াশা', 'fog'] : c <= 57 ? ['🌦️', 'গুঁড়ি বৃষ্টি', 'rain'] : c <= 67 ? ['🌧️', 'বৃষ্টি', 'rain'] : c <= 82 ? ['🌧️', 'ভারী বৃষ্টি', 'rain'] : ['⛈️', 'বজ্রসহ বৃষ্টি', 'storm'];
+const SKY = { clear: '#1e88e5,#64b5f6', night: '#0d1b3e,#26397a', cloud: '#546e7a,#90a4ae', fog: '#78909c,#b0bec5', rain: '#37474f,#5c7a89', storm: '#2b2b45,#55557a' };
+let WX = null, WPOS = null, WSAY = '';
+const tm = (t, o) => new Date(t).toLocaleTimeString('bn-BD', o);
+function tick() {
+  const d = new Date(), c = $('wclk'), e = $('wdt');
+  if (c) { const h = d.getHours(), pd = h < 5 ? 'রাত' : h < 12 ? 'সকাল' : h < 15 ? 'দুপুর' : h < 18 ? 'বিকেল' : h < 20 ? 'সন্ধ্যা' : 'রাত', z = n => String(n).padStart(2, '0'); c.textContent = pd + ' ' + bn(z(h % 12 || 12) + ':' + z(d.getMinutes()) + ':' + z(d.getSeconds())); }
+  if (e) e.textContent = d.toLocaleDateString('bn-BD', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+}
+async function wxLoad(pos) {
+  const box = $('wx'); if (!box) return;
+  const c = pos || WPOS || (DC[ME.district] ? { la: DC[ME.district][0], lo: DC[ME.district][1], label: ME.district + ' জেলা' } : null);
+  if (!c) return box.innerHTML = '<div class="card">আবহাওয়ার স্থান পাওয়া যায়নি</div>';
+  WPOS = c;
+  try {
+    const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.la}&longitude=${c.lo}&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,wind_speed_10m,weather_code,is_day&hourly=temperature_2m,precipitation_probability,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset&timezone=Asia%2FDhaka&forecast_days=7`);
+    if (!r.ok) throw 0; WX = await r.json(); WX.at = new Date(); wxDraw();
+  } catch { if ($('wx') && !WX) $('wx').innerHTML = '<div class="card"><h3>☁️ আবহাওয়া</h3><p class="mut">তথ্য আনা যায়নি। ইন্টারনেট দেখুন।</p><button data-a="wxr">আবার চেষ্টা করুন</button></div>'; }
+}
+function wxDraw() {
+  const box = $('wx'); if (!box || !WX) return;
+  const j = WX, c = j.current, d = j.daily, h = j.hourly, w = WC(c.weather_code, c.is_day), i0 = Math.max(0, h.time.findIndex(t => t >= c.time.slice(0, 13) + ':00'));
+  const pop = Math.max(d.precipitation_probability_max[0] || 0, d.precipitation_probability_max[1] || 0), AD = [];
+  if (pop >= 60) AD.push('আগামী দুই দিনে বৃষ্টির সম্ভাবনা বেশি। সার ও কীটনাশক স্প্রে পিছিয়ে দিন, পাকা ফসল ঢেকে রাখুন, জমির পানি বের হওয়ার পথ খোলা রাখুন।');
+  else if (pop < 30 && d.temperature_2m_max[0] >= 35) AD.push('গরম ও শুকনো আবহাওয়া। জমিতে সেচ দিন, সকাল বা বিকেলে দেওয়া ভালো।');
+  if (c.wind_speed_10m >= 30) AD.push('বাতাস জোরালো। আজ স্প্রে করবেন না, ওষুধ উড়ে নষ্ট হবে।');
+  if (d.temperature_2m_min[0] <= 12) AD.push('ঠান্ডা বেশি। বীজতলা ও চারা পলিথিন বা খড় দিয়ে ঢেকে রাখুন।');
+  if (!AD.length) AD.push('আবহাওয়া স্বাভাবিক, মাঠের কাজের উপযোগী।');
+  WSAY = `${WPOS.label}। এখন ${Math.round(c.temperature_2m)} ডিগ্রি সেলসিয়াস, ${w[1]}। আর্দ্রতা ${c.relative_humidity_2m} শতাংশ, বাতাস ঘণ্টায় ${Math.round(c.wind_speed_10m)} কিলোমিটার। বৃষ্টির সম্ভাবনা ${d.precipitation_probability_max[0] || 0} শতাংশ। ${AD.join('। ')}`;
+  const hrs = Array.from({ length: 12 }, (_, k) => i0 + k).filter(i => h.time[i]).map(i => { const x = WC(h.weather_code[i], new Date(h.time[i]).getHours() >= 6 && new Date(h.time[i]).getHours() < 18 ? 1 : 0); return `<div class="hrw">${tm(h.time[i], { hour: 'numeric', hour12: true })}<br><span style="font-size:22px">${x[0]}</span><b>${bn(Math.round(h.temperature_2m[i]))}°</b>☔${bn(h.precipitation_probability[i] || 0)}%</div>`; }).join('');
+  box.innerHTML = `<section class="wx" data-e="${w[0]}" style="background:linear-gradient(145deg,${SKY[w[2]]})"><div class="top"><div><div class="loc">📍 ${esc(WPOS.label)}</div><div class="dt" id="wdt"></div><div class="clk" id="wclk"></div></div><div class="tb"><button data-a="sayWx" aria-label="শুনুন">🔊</button><button data-a="gps" aria-label="আমার অবস্থান">📍</button><button data-a="wxr" aria-label="নতুন করে আনুন">🔄</button></div></div>
+<div class="big">${bn(Math.round(c.temperature_2m))}°</div><div class="cond">${w[0]} ${w[1]}</div><div class="dt">অনুভূত ${bn(Math.round(c.apparent_temperature))}° • সর্বোচ্চ ${bn(Math.round(d.temperature_2m_max[0]))}° / সর্বনিম্ন ${bn(Math.round(d.temperature_2m_min[0]))}°</div>
+<div class="g3"><div class="gi">💧 আর্দ্রতা<b>${bn(c.relative_humidity_2m)}%</b></div><div class="gi">💨 বাতাস<b>${bn(Math.round(c.wind_speed_10m))} কিমি/ঘ</b></div><div class="gi">🌧️ বৃষ্টি<b>${bn(c.precipitation)} মিমি</b></div><div class="gi">🌅 সূর্যোদয়<b>${tm(d.sunrise[0], { hour: 'numeric', minute: '2-digit' })}</b></div><div class="gi">🌇 সূর্যাস্ত<b>${tm(d.sunset[0], { hour: 'numeric', minute: '2-digit' })}</b></div><div class="gi">☔ বৃষ্টির সম্ভাবনা<b>${bn(d.precipitation_probability_max[0] || 0)}%</b></div></div>
+<div class="hrs">${hrs}</div><div class="adv">🌱 ${AD.join('<br>🌱 ')}</div><div class="upd">সর্বশেষ হালনাগাদ: ${tm(WX.at, { hour: 'numeric', minute: '2-digit' })} • প্রতি ১০ মিনিটে নিজে নতুন হয়</div></section>
+<div class="card"><h3>📅 ৭ দিনের পূর্বাভাস</h3>${d.time.map((t, i) => { const x = WC(d.weather_code[i]); return `<div class="fcd"><span>${i === 0 ? 'আজ' : new Date(t + 'T12:00:00').toLocaleDateString('bn-BD', { weekday: 'long' })}</span><span>${x[0]}</span><span>${bn(Math.round(d.temperature_2m_min[i]))}° / ${bn(Math.round(d.temperature_2m_max[i]))}°</span><span class="mut">☔ ${bn(d.precipitation_probability_max[i] || 0)}%</span></div>`; }).join('')}</div>`;
+  tick();
+}
+A.wxr = () => wxLoad();
+A.gps = () => navigator.geolocation ? navigator.geolocation.getCurrentPosition(p => wxLoad({ la: p.coords.latitude, lo: p.coords.longitude, label: 'আপনার বর্তমান অবস্থান' }), () => toast('লোকেশনের অনুমতি দিন')) : toast('ফোনে লোকেশন সমর্থিত নয়');
+async function crops() {
+  const s = await getDocs(col('users', UID, 'crops'));
+  $('mc').innerHTML = s.docs.length ? s.docs.map(d => {
+    const c = d.data(), n = Math.floor((Date.now() - new Date(c.date)) / 864e5), ar = c.area || 33, ev = plan(c.crop, ar), nx = ev.find(e => e.day >= n);
+    const dt = e => new Date(new Date(c.date).getTime() + e.day * 864e5).toLocaleDateString('bn-BD', { day: 'numeric', month: 'long' });
+    return `<div class="it"><b>${esc(c.crop)}</b> <span class="mut">• ${bn(n)} দিন • জমি ${areaTxt(ar)}</span><button class="say sm" data-a="say" aria-label="শুনুন">🔊</button>
+<div style="margin-top:4px">${nx ? (nx.day === n ? '🔔 আজই: ' : 'পরবর্তী (' + dt(nx) + '): ') + esc(evText(nx)) : '✅ সব কাজ শেষ'}</div>
+<details><summary class="mut" style="cursor:pointer;padding:4px 0">পুরো সময়সূচি ও সারের পরিমাণ</summary>${ev.map(e => `<div class="mut" style="padding:3px 0">${e.day < n ? '✅' : '⏳'} ${dt(e)} (${bn(e.day)} দিন): ${esc(evText(e))}</div>`).join('')}</details>
+<button class="sm del" data-a="dc" data-v="${d.id}">মুছুন</button></div>`;
+  }).join('') : '<p class="mut">কোনো ফসল যোগ করা হয়নি।</p>';
+}
+A.addcrop = async () => { const a = (+$('ca').value || 1) * UN[$('cu').value]; await addDoc(col('users', UID, 'crops'), { crop: $('cs').value, date: $('cd').value, area: a }); crops(); };
+A.dc = async id => { await deleteDoc(doc(db, 'users', UID, 'crops', id)); crops(); };
+
+/* ---------- বাজার: কাছের পোস্ট আগে, তারপর সারা দেশের ---------- */
+const nearOf = p => p.upazila === ME.upazila && p.district === ME.district ? 4 : p.district === ME.district && p.division === ME.division ? 3 : p.division === ME.division ? 2 : 1;
+async function feed() {
+  const A_ = f('status', 'active'), c = f('scope', 'country'), v = f('division', ME.division), d = f('district', ME.district), u = f('upazila', ME.upazila);
+  const Q = [[A_, c, v, d, u], [A_, c, v, d], [A_, c, v], [A_, c], [A_, f('scope', 'upazila'), v, d, u], [A_, f('scope', 'district'), v, d], [A_, f('scope', 'division'), v]];
+  const m = new Map();
+  (await Promise.all(Q.map(q => getDocs(query(col('products'), ...q, limit(25)))))).forEach(s => s.docs.forEach(x => m.set(x.id, { id: x.id, ...x.data() })));
+  return [...m.values()].map(p => ({ ...p, r: nearOf(p) })).sort((a, b) => b.r - a.r || (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+}
+const card = p => `<article class="pcard">${p.images?.[0] ? `<div class="ph"><img src="${esc(p.images[0])}" alt="${esc(p.title)}" loading="lazy"><button class="heart" data-a="fav" data-v="${p.id}" aria-label="পছন্দ">${FAV.has(p.id) ? '❤️' : '🤍'}</button></div>` : ''}<div class="pb">
+<span class="tag ${p.r > 2 ? 'n' : ''}">${NEAR[p.r]}</span> ${p.saleType !== 'retail' ? '<span class="tag w">পাইকারি</span>' : ''}<button class="say sm" data-a="say" aria-label="শুনুন">🔊</button><h3>${esc(p.title)}</h3>
+<div class="price">৳${bn(p.price)}<small>/${esc(p.unit)}</small></div>${p.saleType !== 'retail' ? `<div class="mut">পাইকারি ৳${bn(p.wholesalePrice)}/${esc(p.unit)} (ন্যূনতম ${bn(p.minWholesaleQty)})</div>` : ''}
+<div class="mut">${esc(p.category)} • মজুত ${bn(p.qty)} ${esc(p.unit)}</div><div class="sl">${p.sellerPhoto ? `<img class="av" src="${esc(p.sellerPhoto)}" alt="" loading="lazy">` : '<span class="av">👤</span>'}<span><b>${esc(p.sellerName)}</b><br>📍 ${p.sellerVillage ? esc(p.sellerVillage) + ', ' : ''}${esc(p.upazila)}, ${esc(p.district)}</span></div>
+${p.sellerId !== UID ? `<div class="row"><button data-a="order" data-v="${p.id}">অর্ডার করুন</button><button class="alt" data-a="msg" data-v="${p.id}">💬</button><button class="alt" data-a="share" data-v="${p.id}">↗</button><button class="alt" data-a="rep" data-v="${p.id}" title="রিপোর্ট">🚩</button></div>` : '<div class="mut">এটি আপনার পোস্ট</div>'}</div></article>`;
+let FLT = 'all';
+async function loadFav() { try { FAV = new Set((await getDocs(col('users', UID, 'favs'))).docs.map(d => d.id)); } catch { } }
+async function market() {
+  const CH = [['all', 'সব'], ['near', '📍 কাছের'], ['ws', 'পাইকারি'], ['cheap', 'দাম কম']].concat(CATS.map(c => [c, c]));
+  $('app').innerHTML = `<input id="q" placeholder="🔍 ধান, সবজি, ট্রাক্টর…"><div class="chips" id="ch">${CH.map(c => `<button class="chip ${c[0] === FLT ? 'on' : ''}" data-a="flt" data-v="${esc(c[0])}">${esc(c[1])}</button>`).join('')}</div><div id="ml" class="grid"><div class="sk"></div><div class="sk"></div></div>`;
+  try { await loadFav(); ALL = await feed(); ALL.forEach(p => P[p.id] = p); } catch (e) { console.error(e); return $('ml').innerHTML = '<p class="mut">পোস্ট আনা যায়নি। ইন্টারনেট দেখুন।</p>'; }
+  A.draw = () => {
+    const q = $('q').value.trim(); let L = ALL.filter(p => (!q || (p.title + (p.description || '')).includes(q)) && (FLT === 'all' || FLT === 'cheap' || (FLT === 'near' ? p.r >= 3 : FLT === 'ws' ? p.saleType !== 'retail' : p.category === FLT)));
+    if (FLT === 'cheap') L = [...L].sort((a, b) => a.price - b.price);
+    $('ml').innerHTML = L.length ? L.map(card).join('') : '<p class="mut">কোনো পণ্য পাওয়া যায়নি।</p>';
+  };
+  $('q').oninput = A.draw; A.draw();
+}
+A.flt = (v, b) => { FLT = v; document.querySelectorAll('#ch .chip').forEach(c => c.classList.remove('on')); b.classList.add('on'); A.draw(); };
+A.fav = async (id, b) => { const r = doc(db, 'users', UID, 'favs', id); if (FAV.has(id)) { FAV.delete(id); await deleteDoc(r); b.textContent = '🤍'; } else { FAV.add(id); await setDoc(r, { at: serverTimestamp() }); b.textContent = '❤️'; } };
+A.share = async id => { const p = P[id], t = `${p.title} – ৳${p.price}/${p.unit} (${p.upazila}, ${p.district}) • মাঠের হাট`, u = location.href.split('#')[0]; if (navigator.share) { try { await navigator.share({ title: p.title, text: t, url: u }); } catch { } } else { try { await navigator.clipboard.writeText(t + ' ' + u); toast('কপি হয়েছে'); } catch { } } };
+async function favs() {
+  $('app').innerHTML = '<h2>❤️ পছন্দের পণ্য</h2><div id="ml" class="grid"><div class="sk"></div></div>';
+  await loadFav();
+  const L = (await Promise.all([...FAV].map(id => getDoc(doc(db, 'products', id)).then(s => s.exists() && s.data().status === 'active' ? { id, ...s.data(), r: nearOf(s.data()) } : null).catch(() => null)))).filter(Boolean);
+  L.forEach(p => P[p.id] = p);
+  $('ml').innerHTML = L.length ? L.map(card).join('') : '<p class="mut">কোনো পণ্য পছন্দের তালিকায় নেই। বাজারে 🤍 চাপুন।</p>';
+}
+
+/* ---------- কৃষি খাতা (আয়-ব্যয়) ---------- */
+function book() {
+  $('app').innerHTML = `<h2>📒 কৃষি খাতা</h2><div class="card"><div class="row"><select id="bt"><option value="in">আয় ➕</option><option value="out">খরচ ➖</option></select><input id="bdt" type="date"></div><div class="row"><input id="bn" placeholder="কীসের জন্য (যেমন: সার, ধান বিক্রি)"><input id="ba" type="number" placeholder="টাকা ৳"></div><div class="row"><button data-a="badd">খাতায় লিখুন</button></div></div><div class="card"><div class="sum" id="bs"></div></div><div id="bl"></div>`;
+  $('bdt').value = today(); bookLoad();
+}
+async function bookLoad() {
+  const L = (await getDocs(query(col('users', UID, 'ledger'), orderBy('date', 'desc'), limit(100)))).docs.map(d => ({ id: d.id, ...d.data() })), mo = today().slice(0, 7);
+  const sum = (a, f2) => a.filter(f2).reduce((t, x) => t + x.amount, 0), inc = sum(L, x => x.type === 'in'), out = sum(L, x => x.type === 'out'), mi = sum(L, x => x.type === 'in' && x.date.startsWith(mo)), mout = sum(L, x => x.type === 'out' && x.date.startsWith(mo));
+  $('bs').innerHTML = `<div>আয়<b style="color:var(--pri)">৳${bn(inc)}</b></div><div>খরচ<b style="color:var(--red)">৳${bn(out)}</b></div><div>${inc - out >= 0 ? 'লাভ' : 'ক্ষতি'}<b>৳${bn(Math.abs(inc - out))}</b></div><div style="grid-column:1/-1">এই মাসে: আয় ৳${bn(mi)} • খরচ ৳${bn(mout)}</div>`;
+  $('bl').innerHTML = L.map(x => `<div class="it"><b>${x.type === 'in' ? '➕' : '➖'} ৳${bn(x.amount)}</b> ${esc(x.note)} <span class="mut">• ${bn(x.date)}</span> <button class="sm del" data-a="bdel" data-v="${x.id}">মুছুন</button></div>`).join('') || '<p class="mut">খাতা খালি। প্রথম হিসাবটি লিখুন।</p>';
+}
+A.badd = async () => { const a = +$('ba').value; if (!a || !$('bn').value.trim()) return toast('বিবরণ ও টাকা দিন'); await addDoc(col('users', UID, 'ledger'), { type: $('bt').value, note: $('bn').value.trim().slice(0, 100), amount: a, date: $('bdt').value || today(), createdAt: serverTimestamp() }); $('bn').value = ''; $('ba').value = ''; bookLoad(); };
+A.bdel = async id => { await deleteDoc(doc(db, 'users', UID, 'ledger', id)); bookLoad(); };
+
+/* ---------- অর্ডার ও মেসেজ ---------- */
+A.order = id => {
+  const p = P[id];
+  modal(`<h3>${esc(p.title)}</h3><label>পরিমাণ (${esc(p.unit)})</label><input id="oq" type="number" min="1" value="1"><label>ধরন</label><select id="om">${p.saleType !== 'wholesale' ? `<option value="retail">খুচরা ৳${bn(p.price)}</option>` : ''}${p.saleType !== 'retail' ? `<option value="wholesale">পাইকারি ৳${bn(p.wholesalePrice)} (ন্যূনতম ${bn(p.minWholesaleQty)})</option>` : ''}</select>
+<div class="row"><button data-a="ook" data-v="${id}">নিশ্চিত করুন</button><button class="alt" data-a="mc">বাতিল</button></div>`);
+};
+A.mc = () => modal('');
+A.ook = async id => {
+  const p = P[id], q = +$('oq').value, m = $('om').value, pr = m === 'wholesale' ? p.wholesalePrice : p.price;
+  if (!q || q > p.qty) return toast('পরিমাণ ঠিক নেই (মজুতের বেশি হবে না)');
+  if (m === 'wholesale' && q < p.minWholesaleQty) return toast('পাইকারিতে ন্যূনতম ' + bn(p.minWholesaleQty) + ' ' + p.unit);
+  await addDoc(col('orders'), { productId: id, title: p.title, buyerId: UID, buyerName: ME.name, sellerId: p.sellerId, sellerName: p.sellerName, mode: m, qty: q, price: pr, total: q * pr, status: 'requested', createdAt: serverTimestamp() });
+  modal(''); await openChat(p, `আমি "${p.title}" ${q} ${p.unit} ${m === 'wholesale' ? 'পাইকারি' : ''} অর্ডার করেছি। মোট ৳${q * pr}। দয়া করে নিশ্চিত করুন।`);
+};
+A.msg = async id => openChat(P[id], '');
+async function openChat(p, first) {
+  if (p.sellerId === UID) return;
+  const cid = [UID, p.sellerId].sort().join('_') + '_' + p.id;
+  await setDoc(doc(db, 'chats', cid), { members: [UID, p.sellerId], productId: p.id, title: p.title, names: { [UID]: ME.name, [p.sellerId]: p.sellerName }, updatedAt: serverTimestamp() }, { merge: true });
+  if (first) await sendMsg(cid, first);
+  CUR = cid; if (location.hash === '#chat') route(); else { keep = true; location.hash = '#chat'; }
+}
+const sendMsg = async (cid, text) => { await addDoc(col('chats', cid, 'messages'), { from: UID, text, createdAt: serverTimestamp() }); await updateDoc(doc(db, 'chats', cid), { last: text, lastFrom: UID, updatedAt: serverTimestamp() }); };
+function chat() {
+  if (CUR) {
+    $('app').innerHTML = `<button class="alt sm" data-a="back">← সব বার্তা</button><div id="th" style="min-height:50vh;margin:10px 0"></div><div class="row"><input id="mi" placeholder="মেসেজ লিখুন…" style="flex:3"><button data-a="send" style="flex:1">পাঠান</button></div>`;
+    off.push(onSnapshot(query(col('chats', CUR, 'messages'), orderBy('createdAt')), s => { $('th').innerHTML = s.docs.map(d => { const m = d.data(); return `<div class="msg ${m.from === UID ? 'me' : ''}">${esc(m.text)}</div>`; }).join(''); window.scrollTo(0, document.body.scrollHeight); }));
+    return;
+  }
+  $('app').innerHTML = '<h3>💬 বার্তা</h3><div id="cl"><p class="mut">লোড হচ্ছে…</p></div>';
+  off.push(onSnapshot(query(col('chats'), where('members', 'array-contains', UID)), s => {
+    const L = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.updatedAt?.seconds || 0) - (a.updatedAt?.seconds || 0));
+    $('cl').innerHTML = L.length ? L.map(c => { const o = c.members.find(x => x !== UID); return `<div class="card" data-a="open" data-v="${c.id}" style="cursor:pointer"><b>${esc(c.names?.[o] || '')}</b> <span class="mut">• ${esc(c.title)}</span><div class="mut">${esc(c.last || '')}</div></div>`; }).join('') : '<p class="mut">এখনো কোনো কথা হয়নি। বাজার থেকে পণ্যে “মেসেজ” চাপুন।</p>';
+  }));
+}
+A.open = id => { CUR = id; route(); };
+A.back = () => { CUR = null; route(); };
+A.send = async () => { const t = $('mi').value.trim(); if (!t) return; $('mi').value = ''; await sendMsg(CUR, t); };
+
+/* ---------- পণ্য পোস্ট (ছবিসহ) ---------- */
+function post() {
+  const t = ME.type;
+  $('app').innerHTML = `<div class="card"><h3>নতুন পণ্য পোস্ট</h3><label>ছবি (১ থেকে ৩টি) *</label><input id="pi" type="file" accept="image/*" multiple>
+<label>পণ্যের নাম</label><input id="pt"><label>ধরন</label><select id="pc">${opts(CATS)}</select>
+<div class="row"><div><label>মজুত পরিমাণ</label><input id="pq" type="number" min="1"></div><div><label>একক</label><select id="pu">${opts(['মণ', 'কেজি', 'পিস', 'লিটার', 'টন', 'টি'])}</select></div></div>
+<label>বিক্রির ধরন</label><select id="ps">${t !== 'wholesale' ? '<option value="retail">খুচরা</option>' : ''}${t !== 'retail' ? '<option value="wholesale">পাইকারি</option>' : ''}${t === 'both' ? '<option value="both">খুচরা ও পাইকারি</option>' : ''}</select>
+<div class="row" id="rtf"><div><label>খুচরা দাম (৳ প্রতি একক)</label><input id="pp" type="number" min="0"></div></div><div class="row" id="wsf"><div><label>পাইকারি দাম (৳)</label><input id="pw" type="number" min="0"></div><div><label>পাইকারি ন্যূনতম পরিমাণ</label><input id="pm" type="number" min="0"></div></div>
+<label>বিবরণ</label><textarea id="pd" rows="3"></textarea>
+<label>কোথায় বিক্রি করবেন?</label><select id="pr"><option value="upazila">আমার উপজেলা (${esc(ME.upazila)})</option><option value="district">আমার জেলা (${esc(ME.district)})</option><option value="division">আমার বিভাগ (${esc(ME.division)})</option><option value="country">সারা দেশ</option></select>
+<p class="mut">শুধু কৃষি পণ্য ও কৃষি যন্ত্রপাতি পোস্ট করুন। ১৮+ বা অন্য কিছু দিলে পোস্ট সাথে সাথে বাতিল হবে এবং বারবার করলে অ্যাকাউন্ট বন্ধ হবে।</p>
+<button id="pb" data-a="doPost" style="width:100%">পোস্ট করুন</button></div>`;
+  const sc = () => { const v = $('ps').value; $('wsf').hidden = v === 'retail'; $('rtf').hidden = v === 'wholesale'; }; $('ps').onchange = sc; sc();
+}
+const shrink = (file, mx = 560, q = 0.55, cap = 80000) => new Promise((res, rej) => {
+  const i = new Image();
+  i.onload = () => {
+    const k = Math.min(1, mx / Math.max(i.width, i.height)), c = document.createElement('canvas'); c.width = Math.round(i.width * k); c.height = Math.round(i.height * k);
+    c.getContext('2d').drawImage(i, 0, 0, c.width, c.height);
+    let d = c.toDataURL('image/jpeg', q); while (d.length > cap && q > 0.3) { q -= 0.1; d = c.toDataURL('image/jpeg', q); }
+    URL.revokeObjectURL(i.src); d.length > cap * 1.8 ? rej(new Error('big')) : res(d);
+  };
+  i.onerror = rej; i.src = URL.createObjectURL(file);
+});
+A.doPost = async () => {
+  const fl = [...$('pi').files].slice(0, 3), title = $('pt').value.trim(), qty = +$('pq').value, price = +$('pp').value, sale = $('ps').value;
+  const ws = +$('pw').value || 0, mn = +$('pm').value || 0;
+  if (!fl.length || !title || !qty || (sale !== 'wholesale' && !price)) return toast('ছবি, নাম, পরিমাণ ও দাম দিন');
+  if (sale !== 'retail' && (!ws || !mn)) return toast('পাইকারি দাম ও ন্যূনতম পরিমাণ দিন');
+  const b = $('pb'); b.disabled = true; b.textContent = 'যাচাই হচ্ছে…';
+  let why = BAD.test(title + ' ' + $('pd').value) ? 'নিষিদ্ধ শব্দ' : '';
+  if (!why) for (const x of fl) if (await adultImage(x)) { why = '১৮+ ছবি'; break; }
+  if (why) { await addDoc(col('violations'), { uid: UID, name: ME.name, title, reason: why, at: serverTimestamp() }).catch(() => {}); b.disabled = false; b.textContent = 'পোস্ট করুন'; return toast('এই পোস্ট নীতিমালা-বিরোধী (' + why + ')। বাতিল করা হয়েছে।'); }
+  b.textContent = 'পোস্ট হচ্ছে…';
+  try {
+    const images = [];
+    for (const x of fl) images.push(await shrink(x));
+    if (images.join('').length > 600000) throw new Error('big');
+    await addDoc(col('products'), { sellerId: UID, sellerName: ME.name, sellerVillage: ME.village || '', sellerPhoto: ME.photo || '', title, description: $('pd').value.trim(), category: $('pc').value, price: price || ws, unit: $('pu').value, qty, saleType: sale, wholesalePrice: ws, minWholesaleQty: mn, scope: $('pr').value, division: ME.division, district: ME.district, upazila: ME.upazila, images, status: 'active', createdAt: serverTimestamp() });
+    toast('পোস্ট প্রকাশিত হয়েছে ✅'); location.hash = '#market';
+  } catch (e) { console.error(e); toast(e.message === 'big' ? 'ছবিগুলো বেশি বড়, কম ছবি দিন' : 'পোস্ট ব্যর্থ হয়েছে'); b.disabled = false; b.textContent = 'পোস্ট করুন'; }
+};
+
+/* ---------- কৃষি সহায়তা: AI প্রশ্ন + হিসাব ---------- */
+function help() {
+  $('app').innerHTML = `<div class="card"><h3>🌱 কৃষি বিশেষজ্ঞকে প্রশ্ন</h3><label>আপনার প্রশ্ন</label><textarea id="qt" rows="3" placeholder="যেমন: ধানে পাতা পোড়া রোগ হলে কী করব?"></textarea><div class="row"><button data-a="ask">প্রশ্ন পাঠান</button></div><div id="qa"></div></div>
+<div class="card"><h3>🧮 লাভ-ক্ষতির হিসাব</h3><div class="row"><input id="c1" type="number" placeholder="বীজ ও চারা খরচ ৳"><input id="c2" type="number" placeholder="সার ও ওষুধ ৳"><input id="c3" type="number" placeholder="শ্রম ও সেচ ৳"></div><div class="row"><input id="c4" type="number" placeholder="অন্যান্য ৳"><input id="c5" type="number" placeholder="মোট ফলন (মণ)"><input id="c6" type="number" placeholder="মণ প্রতি দাম ৳"></div><div class="row"><button data-a="calc">হিসাব করুন</button></div><div id="cr"></div></div>`;
+  off.push(onSnapshot(query(col('questions'), f('uid', UID)), s => {
+    const L = s.docs.map(d => d.data()).sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+    $('qa').innerHTML = L.map(q => `<div class="it"><button class="say sm" data-a="say" aria-label="শুনুন" style="float:right">🔊</button><b>${esc(q.text)}</b><div>${q.answer ? esc(q.answer) + `<div class="mut">কৃষি বিশেষজ্ঞ</div>` : '<span class="mut">উত্তরের অপেক্ষায়…</span>'}</div></div>`).join('');
+  }));
+}
+A.ask = async () => { const t = $('qt').value.trim(); if (!t) return; await addDoc(col('questions'), { uid: UID, text: t.slice(0, 1000), answer: '', answeredBy: '', createdAt: serverTimestamp() }); $('qt').value = ''; };
+A.calc = () => { const v = i => +$(i).value || 0, cost = v('c1') + v('c2') + v('c3') + v('c4'), inc = v('c5') * v('c6'), pf = inc - cost; $('cr').innerHTML = `<div class="adv">মোট খরচ ৳${bn(cost)} • আয় ৳${bn(inc)}<br><b>${pf >= 0 ? 'লাভ' : 'ক্ষতি'}: ৳${bn(Math.abs(pf))}</b>${v('c5') ? `<br>প্রতি মণে খরচ ৳${bn(Math.round(cost / v('c5')))}` : ''}</div>`; };
+
+/* ---------- প্রোফাইল (উপরে ডানে আইকন) ---------- */
+async function me() {
+  $('app').innerHTML = `<div class="card" style="text-align:center"><label class="pav" for="pph">${ME.photo ? `<img src="${esc(ME.photo)}" alt="">` : '<span>👤</span>'}<i>📷</i></label><input id="pph" type="file" accept="image/*" hidden><h3 style="margin-top:10px">${esc(ME.name)}</h3><div class="mut">${ME.village ? '🏡 ' + esc(ME.village) + ' • ' : ''}${esc(ME.upazila)}, ${esc(ME.district)}, ${esc(ME.division)}</div><div class="mut">${esc(ME.phone)}</div></div>
+<div class="card"><label>আমার গ্রামের নাম</label><input id="pv" value="${esc(ME.village || '')}" placeholder="যেমন: কালিয়াগঞ্জ"><label>আমি করতে চাই</label><select id="ut"><option value="both">খুচরা ও পাইকারি</option><option value="retail">শুধু খুচরা</option><option value="wholesale">শুধু পাইকারি</option></select><div class="row"><button data-a="ut">সংরক্ষণ</button><button class="alt" data-a="perm">🔔 ফোন নোটিফিকেশন চালু</button></div><div class="row"><button class="alt" data-a="out">লগ আউট</button></div></div>
+<div class="card"><h3>আমার পোস্ট</h3><div id="mp"></div></div><div class="card"><h3>আমার ক্রয় (অর্ডার)</h3><div id="ob"></div></div><div class="card"><h3>আমার কাছে আসা অর্ডার</h3><div id="os"></div></div>`;
+  $('ut').value = ME.type; $('pph').onchange = e => avatar(e.target.files[0]);
+  const ord = (id, q, seller) => off.push(onSnapshot(q, s => {
+    const L = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+    $(id).innerHTML = L.length ? L.map(o => `<div class="it"><b>${esc(o.title)}</b> <span class="tag">${ST[o.status]}</span><div class="mut">${seller ? 'ক্রেতা: ' + esc(o.buyerName) : 'বিক্রেতা: ' + esc(o.sellerName)} • ${bn(o.qty)} • ${o.mode === 'wholesale' ? 'পাইকারি' : 'খুচরা'} • মোট ৳${bn(o.total)}</div>
+${seller && o.status === 'requested' ? `<button class="sm" data-a="os" data-v="${o.id}|confirmed">নিশ্চিত করুন</button> ` : ''}${seller && o.status === 'confirmed' ? `<button class="sm" data-a="os" data-v="${o.id}|shipped">পাঠানো হয়েছে</button> ` : ''}${seller && o.status === 'shipped' ? `<button class="sm" data-a="os" data-v="${o.id}|delivered">পৌঁছেছে</button> ` : ''}${(seller && ['requested', 'confirmed'].includes(o.status)) || (!seller && o.status === 'requested') ? `<button class="sm del" data-a="os" data-v="${o.id}|cancelled">বাতিল</button>` : ''}</div>`).join('') : '<p class="mut">কিছু নেই</p>';
+  }));
+  ord('ob', query(col('orders'), f('buyerId', UID)), false); ord('os', query(col('orders'), f('sellerId', UID)), true);
+  off.push(onSnapshot(query(col('products'), f('sellerId', UID)), s => {
+    const PS = { pending: 'যাচাই চলছে', active: 'প্রকাশিত', review: 'অ্যাডমিন দেখছেন', hidden: 'লুকানো' };
+    $('mp').innerHTML = s.docs.length ? s.docs.map(d => { const p = d.data(); return `<div class="it"><b>${esc(p.title)}</b> <span class="tag">${PS[p.status] || p.status}</span> <button class="sm del" data-a="dp" data-v="${d.id}">মুছুন</button></div>`; }).join('') : '<p class="mut">কোনো পোস্ট নেই</p>';
+  }));
+}
+A.ut = async (v, b) => { if (b.tagName === 'BUTTON' && !v) { const vl = $('pv').value.trim().slice(0, 60); await updateDoc(doc(db, 'users', UID), { type: $('ut').value, village: vl }); ME.type = $('ut').value; ME.village = vl; toast('সংরক্ষিত ✅'); me(); } };
+A.out = () => signOut(auth);
+A.os = async v => { const [id, s] = v.split('|'); await updateDoc(doc(db, 'orders', id), { status: s, updatedAt: serverTimestamp() }); };
+A.dp = async id => { if (confirm('পোস্টটি মুছবেন?')) await deleteDoc(doc(db, 'products', id)); };
+
+
+
+
+/* ---------- কৃষি গাইড: জৈব সার, জৈব বালাইনাশক, মৌসুমি পরামর্শ ---------- */
+const MONTHS = [['জানুয়ারি', 'বোরো চারা রোপণ শেষ করুন। ঠান্ডায় বীজতলা পলিথিনে ঢাকুন। আলুতে কুয়াশা-মেঘলায় নাবী ধসা রোগ নজরে রাখুন।'], ['ফেব্রুয়ারি', 'গমে শেষ সেচ দিন, সরিষা পাকলে কাটুন। আমের মুকুলে ছত্রাকের দিকে নজর রাখুন।'], ['মার্চ', 'বোরো ধানে থোড় অবস্থায় জমিতে পানি রাখুন। গ্রীষ্মকালীন সবজি (ঢেঁড়স, করলা, লাউ) বীজ বপন করুন।'], ['এপ্রিল', 'বোরো কাটার প্রস্তুতি নিন। ঝড়-বৃষ্টির আগে পাকা ধান কেটে ফেলুন। পাট বীজ বপনের সময়।'], ['মে', 'বোরো কাটা-মাড়াই ও শুকানো। আউশ বপন করুন। জমি সবুজ সারের জন্য তৈরি রাখুন।'], ['জুন', 'আমনের বীজতলা তৈরি করুন। বর্ষার পানি নিষ্কাশনের নালা পরিষ্কার রাখুন।'], ['জুলাই', 'আমন রোপণ শুরু করুন (২৫-৩০ দিনের চারা)। জলাবদ্ধতা হলে দ্রুত পানি বের করুন।'], ['আগস্ট', 'আমন রোপণ শেষ করুন। শীতের সবজির বীজতলা (বেগুন, টমেটো) তৈরি শুরু করুন।'], ['সেপ্টেম্বর', 'আমনে পোকা-রোগ নজরে রাখুন, ডাল পুঁতে পাখি বসার ব্যবস্থা করুন। সবজির চারা রোপণের প্রস্তুতি নিন।'], ['অক্টোবর', 'আলু, সরিষা ও রবি ফসলের জমি তৈরি করুন। জৈব সার ও কম্পোস্ট মাটিতে মিশান।'], ['নভেম্বর', 'গম, আলু, সরিষা ও পেঁয়াজ বপন-রোপণের সময়। বোরোর বীজতলার প্রস্তুতি নিন।'], ['ডিসেম্বর', 'বোরো বীজতলা ঠান্ডা থেকে রক্ষা করুন। শীতের সবজিতে নিয়মিত সেচ দিন, কুয়াশায় রোগ দেখা দিলে আক্রান্ত অংশ সরান।']];
+const GUIDE = {
+fert: [
+{ i: '🍂', t: 'কম্পোস্ট (আবর্জনা সার)', w: 'রান্নাঘরের উচ্ছিষ্ট, খড় ও পাতা থেকে প্রায় বিনা খরচে সার', m: 'কাঁচা সবুজ (ঘাস, কচুরিপানা, শাকের অংশ) ও শুকনো (খড়, ঝরা পাতা) সমান ভাগে, গোবর, পানি', s: ['ছায়াযুক্ত জায়গায় প্রায় ১ মিটার গভীর গর্ত বা স্তূপ করুন', 'সবুজ ও শুকনো উপকরণ পরত করে দিন, প্রতি পরতে একটু গোবর ছিটান', 'ভেজা রাখুন কিন্তু পানি জমতে দেবেন না, ওপরে খড় বা চট ঢাকুন', '১৫-২০ দিন পর পর উল্টে দিন', '৩-৪ মাসে গাঢ় বাদামি ঝুরঝুরে হলে ব্যবহার করুন'], u: 'প্রতি বিঘায় ৫০০-১০০০ কেজি, জমি তৈরির সময় মাটিতে মিশিয়ে দিন', n: 'দুর্গন্ধ হলে খুব ভেজা হয়েছে। শুকনো খড় মিশিয়ে উল্টে দিন।' },
+{ i: '🪱', t: 'কেঁচো সার (ভার্মি কম্পোস্ট)', w: 'দ্রুত তৈরি, পুষ্টিসমৃদ্ধ, মাটি ঝুরঝুরে করে', m: 'কেঁচো (কৃষি অফিস বা বীজের দোকান থেকে), আধাপচা গোবর, কচুরিপানা বা পচা পাতা, ছায়াযুক্ত বাক্স বা গর্ত', s: ['৩-৪ দিন পচানো গোবর ও পাতা মিশিয়ে ৩০-৪০ সেমি পুরু বিছানা করুন', 'কেঁচো ছেড়ে দিন, ওপরে চট ঢাকুন', 'হালকা ভেজা রাখুন, রোদ ও পিঁপড়া থেকে বাঁচান', 'নতুন খাবার একটু একটু করে ওপরে দিন', '৪৫-৬০ দিনে কালচে দানাদার সার হলে কেঁচো সরিয়ে সার তুলুন'], u: 'প্রতি বিঘায় ২৫০-৫০০ কেজি', n: 'টাটকা গোবর সরাসরি দেবেন না, তাপে কেঁচো মরে যায়।' },
+{ i: '🌾', t: 'সবুজ সার (ধইঞ্চা)', w: 'মাটিতে জৈব পদার্থ ও নাইট্রোজেন বাড়ায়, খরচ কম', m: 'ধইঞ্চা বা সবুজ সারের বীজ, প্রতি বিঘায় প্রায় ৫-৬ কেজি', s: ['ফসল তোলার পর জমিতে বীজ ছিটান', '৪৫-৫০ দিন বয়সে (ফুল আসার আগে) গাছ কেটে বা চাষ দিয়ে মাটিতে মিশিয়ে দিন', 'পানি দিয়ে জমি ভিজিয়ে ১০-১৫ দিন পরে আসল ফসল রোপণ করুন'], u: 'ধান বা সবজি লাগানোর আগের পতিত সময়ে', n: 'ফুল আসার পরে কাটলে গাছ শক্ত হয়ে যায়, পচতে দেরি হয়।' },
+{ i: '🧪', t: 'তরল জৈব সার (জীবামৃত)', w: 'মাটিতে উপকারী জীবাণু বাড়ায়, গাছ সবল হয়', m: 'গোবর ১০ কেজি, গোমূত্র ১০ লিটার, গুড় ২ কেজি, ডালের গুঁড়া ২ কেজি, পুরনো গাছের নিচের মাটি এক মুঠো, পানি ২০০ লিটার, প্লাস্টিক ড্রাম', s: ['ড্রামে সব উপকরণ ভালো করে মিশিয়ে ছায়ায় রাখুন, মুখ চট দিয়ে ঢাকুন', 'দিনে ২ বার ঘড়ির কাঁটার দিকে নাড়ুন', '২-৩ দিন গাঁজন হলে ব্যবহার করুন', 'সেচের পানির সাথে বা গাছের গোড়ায় দিন'], u: 'এই পরিমাণ প্রায় ১ একর (৩ বিঘা) জমির জন্য। ১৫ দিন পর পর দিন। আগে ছোট জমিতে পরীক্ষা করুন', n: '৭ দিনের বেশি রাখবেন না। বানানো তরল সরাসরি পাতায় ঢালবেন না।' }],
+pest: [
+{ i: '🌿', t: 'নিমপাতার নির্যাস', w: 'জাব পোকা, পাতা মোড়ানো ও ছোট পোকা কমায়', m: 'নিমপাতা ১ কেজি, পানি ১০ লিটার, পরিষ্কার কাপড়', s: ['পাতা বেটে বা থেঁতো করে পানিতে ২৪ ঘণ্টা ভিজিয়ে রাখুন', 'কাপড়ে ছেঁকে নিন', 'আগে কয়েকটি গাছে পরীক্ষা করুন, ঠিক থাকলে সকালে বা বিকেলে স্প্রে করুন'], u: '৫-৭ দিন পর পর, পোকা কমা পর্যন্ত', n: 'কড়া রোদে স্প্রে করবেন না। স্প্রের পর হাত-মুখ ধুয়ে নিন।' },
+{ i: '🧄', t: 'রসুন-মরিচ স্প্রে', w: 'জাব পোকা ও ছোট পোকা তাড়ায়', m: 'রসুন ১০০ গ্রাম, কাঁচা মরিচ ৫০ গ্রাম, পানি ১ লিটার, তরল সাবান ১ চা-চামচ', s: ['রসুন ও মরিচ বেটে পানিতে মিশিয়ে ১২ ঘণ্টা রাখুন', 'ছেঁকে নিন', 'সাবান ও আরও ৩ লিটার পানি মিশিয়ে স্প্রে করুন'], u: 'সপ্তাহে ১ বার, সকালে বা বিকেলে', n: 'মরিচ কাটার সময় গ্লাভস নিন। চোখে লাগলে পানিতে ধুয়ে ফেলুন।' },
+{ i: '🧼', t: 'সাবান-পানি স্প্রে', w: 'জাব পোকা ও মাকড় নিয়ন্ত্রণের সহজ উপায়', m: 'তরল সাবান বা ব্লিচবিহীন সাবান, পানি', s: ['১ লিটার পানিতে ১ চা-চামচ তরল সাবান মেশান', 'পাতার নিচ-ওপর দুই দিকে ভিজিয়ে স্প্রে করুন'], u: '৫-৭ দিন পর পর ২-৩ বার', n: 'আগে ২-৩টি পাতায় পরীক্ষা করুন। পাতা পুড়ে গেলে সাবান কমিয়ে দিন।' },
+{ i: '🟨', t: 'হলুদ আঠালো ফাঁদ', w: 'সাদা মাছি, জাব পোকা ও ফড়িং ধরে', m: 'হলুদ রঙের প্লাস্টিক, টিন বা কাগজ, আঠা (গ্রিজ বা মোটর অয়েল), কাঠি', s: ['হলুদ পাতের দুই পাশে আঠা মাখান', 'কাঠিতে লাগিয়ে ফসলের মাথার সামান্য ওপরে সারিতে পুঁতুন', 'পোকা জমলে পরিষ্কার করে আবার আঠা দিন'], u: 'পোকা দেখা দিলেই লাগান, প্রতি সপ্তাহে দেখুন', n: 'বেশি ঘন করে লাগাবেন না, উপকারী পোকাও আটকে যেতে পারে।' },
+{ i: '🐦', t: 'পাখি বসার ডাল (পার্চিং)', w: 'ধান ও সবজির পোকা পাখিতে খেয়ে দেয়, খরচ নেই', m: 'ডালপালা বা বাঁশের খুঁটি', s: ['জমিতে ২-৩ হাত উঁচু ডালপালা বা খুঁটি পুঁতে দিন', 'কয়েক মিটার পর পর রাখুন', 'আক্রান্ত ডগা বা পাতা কেটে মাটিতে পুঁতে ফেলুন'], u: 'চারা রোপণের পর থেকে ফসল ওঠা পর্যন্ত', n: 'বেগুনের ডগা ও ফল ছিদ্রকারী পোকায় আক্রান্ত ডগা সাথে সাথে কেটে ফেলুন।' }]};
+GUIDE.live = [
+{ i: '🐄', t: 'গরুর টিকা', w: 'রোগ ঠেকাতে সময়মতো টিকা', l: ['কোথায় পাবেন', 'কী করবেন', 'কখন'], m: 'উপজেলা প্রাণিসম্পদ অফিস বা সরকারি ভেটেরিনারি ডাক্তার', s: ['তড়কা, বাদলা, গলাফুলা ও ক্ষুরারোগের টিকা সরকারি প্রাণিসম্পদ অফিসে পাওয়া যায়', 'গরু সুস্থ থাকা অবস্থায় টিকা দিন', 'টিকার তারিখ লিখে রাখুন'], u: 'কোন টিকা কখন দেবেন তা প্রাণিসম্পদ অফিস জানাবে। সাধারণত বর্ষার আগে দেওয়া হয়', n: 'অসুস্থ বা গর্ভের শেষ সময়ের গরুতে টিকা দেওয়ার আগে ডাক্তারের পরামর্শ নিন।' },
+{ i: '🐐', t: 'কৃমিনাশক ও পশুর যত্ন', w: 'গরু-ছাগলের ওজন ও দুধ বাড়াতে', l: ['প্রয়োজন', 'কী করবেন', 'কখন'], m: 'কৃমিনাশক ওষুধ (প্রাণিসম্পদ অফিস বা ডাক্তারের পরামর্শে), পরিষ্কার পানি, শুকনো ঘর', s: ['বছরে ২ বার কৃমিনাশক খাওয়ান', 'ঘর শুকনো ও পরিষ্কার রাখুন, গোবর-চনা জমতে দেবেন না', 'ভেজা বা জমে থাকা পানির ঘাস খাওয়ানো এড়ান'], u: 'বর্ষার আগে ও শীতের শুরুতে। ওষুধের মাত্রা ডাক্তার বলে দেবেন', n: 'নিজে থেকে ওষুধের মাত্রা ঠিক করবেন না।' },
+{ i: '🐟', t: 'পুকুর প্রস্তুতি', w: 'ভালো ফলনের জন্য পোনা ছাড়ার আগে', l: ['লাগবে', 'ধাপ', 'কখন'], m: 'চুন, জাল, পুকুর শুকানোর সুবিধা', s: ['পুকুর শুকিয়ে বা জাল টেনে অনাকাঙ্ক্ষিত মাছ ও আগাছা সরান', 'প্রতি শতকে প্রায় ১ কেজি চুন ছিটান', '৫-৭ দিন পর পানি ভরুন', 'পানির রঙ হালকা সবুজ হলে সকালে বা বিকেলে পোনা ছাড়ুন'], u: 'পোনা ছাড়ার ৫-৭ দিন আগে প্রস্তুতি শেষ করুন', n: 'পানি খুব গাঢ় সবুজ বা দুর্গন্ধ হলে আংশিক পানি বদলান।' },
+{ i: '🐠', t: 'মাছের যত্ন ও রোগ', w: 'মড়ক ও ক্ষতি কমাতে', l: ['প্রয়োজন', 'কী করবেন', 'কখন'], m: 'জাল, পরিষ্কার পানির উৎস, সুষম খাবার', s: ['ভোরে মাছ ভেসে উঠলে অক্সিজেন কম, সাথে সাথে পানি দিন বা ঢেউ তুলুন', 'খাবার একসাথে বেশি না দিয়ে দিনে ২ বার অল্প করে দিন', 'অসুস্থ মাছ আলাদা করুন, মরা মাছ তুলে মাটিতে পুঁতুন', 'মাসে ১-২ বার জাল টেনে মাছের স্বাস্থ্য দেখুন'], u: 'প্রতিদিন সকালে পুকুর দেখুন', n: 'রোগ বা মড়ক হলে উপজেলা মৎস্য অফিসে যোগাযোগ করুন।' }];
+const SEASONS = [
+{ n: 'রবি / শীতকাল', m: 'অক্টোবর – ফেব্রুয়ারি', mo: [9, 10, 11, 0, 1], i: '❄️', c: { 'ধান ও শস্য': 'বোরো ধান (বীজতলা নভেম্বর-ডিসেম্বর), গম, ভুট্টা', 'ডাল ও তেল': 'মসুর, ছোলা, খেসারি, মটর, সরিষা, তিসি', 'সবজি': 'আলু, টমেটো, বেগুন, ফুলকপি, বাঁধাকপি, শিম, মুলা, গাজর, পালংশাক, লালশাক, ধনিয়া', 'মসলা': 'পেঁয়াজ, রসুন, মরিচ' } },
+{ n: 'খরিফ-১ / গ্রীষ্মকাল', m: 'মার্চ – জুন', mo: [2, 3, 4, 5], i: '☀️', c: { 'ধান ও শস্য': 'আউশ ধান (মার্চ-মে), ভুট্টা', 'ডাল ও তেল': 'মুগডাল, তিল, চিনাবাদাম', 'সবজি': 'ঢেঁড়স, করলা, ঝিঙা, চিচিঙ্গা, পটল, কচু, ডাঁটা, পুঁইশাক, লাউ, শসা', 'আঁশ': 'পাট (মার্চ-এপ্রিল)', 'ফল': 'আম, কাঁঠাল, লিচু, তরমুজ' } },
+{ n: 'খরিফ-২ / বর্ষাকাল', m: 'জুলাই – সেপ্টেম্বর', mo: [6, 7, 8], i: '🌧️', c: { 'ধান ও শস্য': 'রোপা আমন ধান (জুলাই-আগস্ট)', 'সবজি': 'কলমি, ডাঁটা, পুঁইশাক, কচু, বরবটি, লাউ, কুমড়া, ঝিঙা', 'বীজতলা': 'শীতের সবজির বীজতলা আগস্ট-সেপ্টেম্বরে শুরু করুন', 'ফল': 'পেয়ারা, কলা, কাঁঠাল' } }];
+let GT = 'season';
+function guide() {
+  const mo = new Date().getMonth(), T = [['season', '🌾 মৌসুমি ফসল'], ['fert', '🌱 জৈব সার'], ['pest', '🐛 জৈব বালাইনাশক'], ['live', '🐄 পশু ও মাছ'], ['cal', '📅 মাসিক পরামর্শ']], SB = '<button class="say sm" data-a="say" aria-label="শুনুন">🔊</button>';
+  const body = GT === 'cal' ? MONTHS.map((m, i) => `<div class="card" style="${i === mo ? 'border:2px solid var(--acc)' : ''}">${SB}<h3>${m[0]} ${i === mo ? '<span class="tag n">এই মাস</span>' : ''}</h3><div>${m[1]}</div></div>`).join('')
+    : GT === 'season' ? SEASONS.map(x => `<div class="card" style="${x.mo.includes(mo) ? 'border:2px solid var(--acc)' : ''}">${SB}<h3>${x.i} ${x.n} ${x.mo.includes(mo) ? '<span class="tag n">এখন চলছে</span>' : ''}</h3><div class="mut">${x.m}</div>${Object.entries(x.c).map(([k, v]) => `<p style="margin:8px 0 0"><b>${k}:</b> ${v}</p>`).join('')}</div>`).join('') + '<p class="mut">কোন ফসলে কবে কত সার দেবেন জানতে <a href="#fert">সারের হিসাব</a> দেখুন।</p>'
+    : GUIDE[GT].map(r => { const l = r.l || ['উপকরণ', 'তৈরির ধাপ', 'ব্যবহার']; return `<details class="rc"><summary><span class="ri">${r.i}</span><span><b>${r.t}</b><br><small class="mut">${r.w}</small></span></summary><div class="rb">${SB}<h4>${l[0]}</h4><p>${r.m}</p><h4>${l[1]}</h4><ol>${r.s.map(x => `<li>${x}</li>`).join('')}</ol><h4>${l[2]}</h4><p>${r.u}</p><div class="adv">⚠️ ${r.n}</div></div></details>`; }).join('');
+  $('app').innerHTML = `<section class="gh"><div class="m">${MONTHS[mo][0]} মাসের পরামর্শ</div><h1>🌿 কৃষি গাইড</h1><p>${MONTHS[mo][1]}</p></section><div class="chips">${T.map(t => `<button class="chip ${t[0] === GT ? 'on' : ''}" data-a="gt" data-v="${t[0]}">${t[1]}</button>`).join('')}</div>${body}<div class="card"><h3>📞 আরও সাহায্য দরকার?</h3><p class="mut">জৈব ব্যবস্থায় সমস্যা না কমলে উপজেলা কৃষি অফিসে যোগাযোগ করুন। নতুন কোনো মিশ্রণ আগে অল্প জায়গায় পরীক্ষা করে দেখুন।</p><div class="row"><a class="btn" href="tel:16123">কৃষি কল সেন্টার ১৬১২৩</a><a class="btn alt" href="#help">বিশেষজ্ঞকে প্রশ্ন করুন</a></div></div>`;
+}
+A.gt = v => { GT = v; guide(); };
+
+/* ---------- প্রোফাইল ছবি ---------- */
+const DEFPF = $('pf').innerHTML;
+function setAv() { $('pf').innerHTML = ME?.photo ? `<img src="${esc(ME.photo)}" alt="" style="width:100%;height:100%;object-fit:cover">` : DEFPF; }
+async function avatar(file) {
+  if (!file) return; toast('ছবি যাচাই হচ্ছে…');
+  try {
+    if (await adultImage(file)) return toast('এই ছবি দেওয়া যাবে না');
+    const u = await shrink(file, 160, 0.7, 20000); await updateDoc(doc(db, 'users', UID), { photo: u }); ME.photo = u; setAv(); me(); toast('প্রোফাইল ছবি বদলেছে ✅');
+  } catch (e) { console.error(e); toast('ছবি বদলানো যায়নি'); }
+}
+
+/* ---------- পপআপ নোটিফিকেশন ---------- */
+let NT = [], UNREAD = 0, NS = false, nu = [];
+try { NT = JSON.parse(localStorage.getItem('nt') || '[]'); } catch { }
+function badge() { const b = $('bdg'); b.hidden = !UNREAD; b.textContent = bn(UNREAD); }
+function notify(t, x, l) {
+  NT.unshift({ t, x, l, at: Date.now() }); NT = NT.slice(0, 30); UNREAD++; badge();
+  try { localStorage.setItem('nt', JSON.stringify(NT)); } catch { }
+  const p = $('pop'); p.innerHTML = `<b>${esc(t)}</b><div>${esc(x)}</div>`; p.dataset.l = l || ''; p.classList.add('on');
+  clearTimeout(notify.h); notify.h = setTimeout(() => p.classList.remove('on'), 6500);
+  if (navigator.vibrate) navigator.vibrate(180);
+  if ('Notification' in window && Notification.permission === 'granted' && document.hidden) { try { new Notification(t, { body: x }); } catch { } }
+}
+$('pop').onclick = e => { const p = e.currentTarget; p.classList.remove('on'); if (p.dataset.l) location.hash = p.dataset.l; };
+A.bell = () => { UNREAD = 0; badge(); modal(`<h3>🔔 নোটিফিকেশন</h3>${NT.length ? NT.map(n => `<div class="it"><b>${esc(n.t)}</b><div>${esc(n.x)}</div><div class="mut">${new Date(n.at).toLocaleString('bn-BD')}</div></div>`).join('') : '<p class="mut">এখনো কিছু নেই</p>'}<div class="row"><button class="alt" data-a="mc">বন্ধ করুন</button><button class="del" data-a="nclr">সব মুছুন</button></div>`); };
+A.nclr = () => { NT = []; try { localStorage.removeItem('nt'); } catch { } modal(''); };
+A.perm = async () => {
+  if (!('Notification' in window)) return toast('এই ব্রাউজারে সমর্থিত নয়');
+  const r = await Notification.requestPermission(); toast(r === 'granted' ? 'চালু হয়েছে ✅ (সাইট খোলা বা পটভূমিতে থাকলে ফোনে নোটিফিকেশন আসবে)' : 'অনুমতি দেওয়া হয়নি');
+};
+function startNotif() {
+  if (NS) return; NS = true; let f1 = true, f2 = true, f3 = true; const er = () => { };
+  nu.push(onSnapshot(query(col('orders'), f('sellerId', UID)), s => { if (f1) { f1 = false; return; } s.docChanges().forEach(c => { if (c.type === 'added') { const o = c.doc.data(); notify('🛒 নতুন অর্ডার', `${o.buyerName}: ${o.title} (${bn(o.qty)} ${o.mode === 'wholesale' ? 'পাইকারি' : ''})`, '#me'); } }); }, er));
+  nu.push(onSnapshot(query(col('orders'), f('buyerId', UID)), s => { if (f2) { f2 = false; return; } s.docChanges().forEach(c => { if (c.type === 'modified') { const o = c.doc.data(); notify('📦 অর্ডারের খবর', `${o.title}: ${ST[o.status]}`, '#me'); } }); }, er));
+  nu.push(onSnapshot(query(col('chats'), where('members', 'array-contains', UID)), s => { if (f3) { f3 = false; return; } s.docChanges().forEach(c => { const d = c.doc.data(); if (c.type !== 'removed' && d.lastFrom && d.lastFrom !== UID && !(location.hash === '#chat' && CUR === c.doc.id)) notify('💬 নতুন বার্তা', `${d.names?.[d.lastFrom] || ''}: ${d.last}`, '#chat'); }); }, er));
+  nu.push(onSnapshot(query(col('announcements'), orderBy('at', 'desc'), limit(1)), s => { const d = s.docs[0]; if (!d) return; let seen = ''; try { seen = localStorage.getItem('ann'); } catch { } if (seen !== d.id) { try { localStorage.setItem('ann', d.id); } catch { } notify('📢 ' + d.data().title, d.data().text || '', '#home'); } }, er));
+}
+
+
+/* ---------- সারের হিসাব ---------- */
+function fert() {
+  $('app').innerHTML = `<section class="gh"><h1>🧪 সারের হিসাব</h1><p>ফসল ও জমির পরিমাণ দিন, কবে কোন সার কতটুকু লাগবে অ্যাপ হিসাব করে দেবে।</p></section><div class="card"><label>ফসল</label><select id="fc">${opts(Object.keys(CROPS))}</select><div class="row"><div><label>জমির পরিমাণ</label><input id="fa" type="number" min="0" step="any" value="1"></div><div><label>একক</label><select id="fu"><option>বিঘা</option><option>শতক</option><option>একর</option></select></div></div><div class="row"><button data-a="fcalc">হিসাব করুন</button></div></div><div id="fr"></div>`;
+}
+A.fcalc = () => {
+  const nm = $('fc').value, a = (+$('fa').value || 0) * UN[$('fu').value]; if (!a) return toast('জমির পরিমাণ দিন');
+  const c = CROPS[nm], bg = a / 33, ev = plan(nm, a), SB = '<button class="say sm" data-a="say" aria-label="শুনুন" style="float:right">🔊</button>';
+  $('fr').innerHTML = `<div class="card">${SB}<h3>${esc(nm)}: ${areaTxt(a)} জমির মোট সার</h3>${Object.entries(c.f).map(([k, v]) => `<div class="pr"><span>${FN[k]}</span><b>${kgs(v * bg)}</b></div>`).join('')}</div>
+<div class="card">${SB}<h3>কবে কী করবেন</h3><p class="mut">দিন গোনা হবে বপন বা রোপণের দিন থেকে (০ দিন = জমি তৈরির সময়)</p>${ev.map(e => `<div class="it"><b>${e.day === 0 ? 'শুরুতে (০ দিন)' : bn(e.day) + ' দিনের মাথায়'}</b><div>${esc(evText(e))}</div></div>`).join('')}</div>
+<p class="mut">এটি আনুমানিক সাধারণ নির্দেশিকা। মাটি, জাত ও এলাকাভেদে বদলায়। মাটি পরীক্ষা বা উপজেলা কৃষি অফিসের পরামর্শ নিন। জৈব সার দিলে রাসায়নিক সার কিছুটা কমানো যায়।</p>`;
+};
+
+/* ---------- জরুরি সেবা ---------- */
+function svc() {
+  const L = [['📞', 'কৃষি কল সেন্টার', '১৬১২৩', '16123', 'ফসল, সার, পোকা-রোগ নিয়ে কৃষি বিশেষজ্ঞের পরামর্শ'], ['🐄', 'প্রাণিসম্পদ হেল্পলাইন', '১৬৩৫৮', '16358', 'গবাদিপশু ও হাঁস-মুরগির রোগ ও টিকা'], ['🏛️', 'সরকারি তথ্য ও সেবা', '৩৩৩', '333', 'সরকারি সেবা ও তথ্য'], ['🚨', 'জরুরি সেবা', '৯৯৯', '999', 'পুলিশ, ফায়ার সার্ভিস, অ্যাম্বুলেন্স']];
+  $('app').innerHTML = `<section class="gh"><h1>📞 জরুরি সেবা ও যোগাযোগ</h1><p>এক ট্যাপে কল করুন। উপজেলা কৃষি অফিসে গিয়েও পরামর্শ নিতে পারেন।</p></section>${L.map(x => `<div class="card"><div class="sl"><span class="ri">${x[0]}</span><span><b>${x[1]}</b><br><span class="mut">${x[4]}</span></span><button class="say sm" data-a="say" aria-label="শুনুন">🔊</button></div><a class="btn" style="margin-top:10px" href="tel:${x[3]}">${x[2]} নম্বরে কল করুন</a></div>`).join('')}<div class="card"><h3>🏢 উপজেলা কৃষি অফিস <button class="say sm" data-a="say" aria-label="শুনুন">🔊</button></h3><p>উপজেলা কৃষি কর্মকর্তা ও উপ-সহকারী কৃষি কর্মকর্তা (ব্লক সুপারভাইজার) পরামর্শ ও প্রশিক্ষণ দেন। বীজ-সারের সরকারি সহায়তা ও কৃষি কার্ডের তথ্যও সেখানে পাওয়া যায়।</p></div><p class="mut">নম্বর বদলাতে পারে। কাজ না করলে উপজেলা কৃষি অফিসে জানুন।</p>`;
+}
+
+/* ---------- ভয়েসে শোনা (সব পাতায়) ---------- */
+let SPK = false;
+try { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices(); } catch { }
+function speak(txt) {
+  if (!('speechSynthesis' in window)) return toast('এই ফোনে ভয়েস সমর্থিত নয়');
+  const ss = speechSynthesis, was = SPK, same = speak.last === txt, id = ++speak.id;
+  ss.cancel(); SPK = false; $('tts').textContent = '🔊';
+  if (was && same) return;
+  speak.last = txt;
+  const clean = String(txt || '').replace(/[\p{Extended_Pictographic}\uFE0F\u200d]/gu, ' ').replace(/[→•|]/g, ', ').replace(/\s+/g, ' ').trim(); if (!clean) return;
+  const parts = clean.match(/[^।.!?]+[।.!?]?/g) || [clean], chunks = []; let cur = '';
+  parts.forEach(p => { if ((cur + p).length > 170) { if (cur) chunks.push(cur); cur = p; } else cur += p; }); if (cur) chunks.push(cur);
+  const v = ss.getVoices().find(x => /^bn/i.test(x.lang));
+  if (!v && !speak.warned) { speak.warned = 1; toast('বাংলা ভয়েস না পেলে ফোনের Settings → Text-to-speech-এ বাংলা যোগ করুন'); }
+  SPK = true; $('tts').textContent = '⏹';
+  const done = () => { if (id === speak.id) { SPK = false; $('tts').textContent = '🔊'; } };
+  chunks.forEach((c, i) => { const u = new SpeechSynthesisUtterance(c); u.lang = 'bn-BD'; if (v) u.voice = v; u.rate = .95; if (i === chunks.length - 1) { u.onend = done; u.onerror = done; } ss.speak(u); });
+}
+speak.id = 0;
+A.say = (v, b) => speak((b.closest('.it,.card,.pcard,.rc,.hero,.gh') || $('app')).innerText);
+A.sayPage = () => speak($('app').innerText);
+A.sayWx = () => speak(WSAY);
+
+/* ---------- প্রথম সেটআপ পাতা: yoursite/#setup ---------- */
+const RULES = { fs: `rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function si() { return request.auth != null; }
+    function adm() { return si() && exists(/databases/$(db)/documents/admins/$(request.auth.uid)); }
+    function mine(u) { return si() && request.auth.uid == u; }
+    function me() { return get(/databases/$(db)/documents/users/$(request.auth.uid)).data; }
+    // ১৮+ বা অশ্লীল শব্দ থাকলে পোস্ট সেভই হবে না
+    function clean(t) { return !t.lower().matches('(?s).*(sex|porn|xxx|nude|naked|escort|erotic|18[+]|সেক্স|পর্ন|ন্যুড|নগ্ন|যৌন).*'); }
+    function near(p) {
+      return si() && me().division == p.division &&
+        (p.scope == 'division' || (me().district == p.district &&
+        (p.scope == 'district' || me().upazila == p.upazila)));
+    }
+    function onlyStatus() {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt']);
+    }
+
+    // অ্যাডমিন তালিকা: শুধু Firebase Console থেকে বসানো যাবে
+    match /admins/{a} { allow read: if mine(a); }
+
+    match /users/{u} {
+      allow read: if mine(u) || adm();
+      allow create: if mine(u) && request.resource.data.banned == false
+        && request.resource.data.type in ['retail', 'wholesale', 'both'];
+      allow update: if adm() || (mine(u) &&
+        !request.resource.data.diff(resource.data).affectedKeys().hasAny(['banned']));
+    }
+    match /users/{u}/{sub}/{id} { allow read, write: if mine(u) && sub in ['crops', 'favs', 'ledger']; }
+
+    match /products/{p} {
+      allow read: if adm() || (si() && resource.data.sellerId == request.auth.uid) ||
+        (resource.data.status == 'active' && (resource.data.scope == 'country' || near(resource.data)));
+      allow create: if si() && !me().banned
+        && request.resource.data.sellerId == request.auth.uid
+        && request.resource.data.status == 'active'
+        && clean(request.resource.data.title) && clean(request.resource.data.description)
+        && request.resource.data.category in ['ধান ও শস্য', 'সবজি', 'ফল', 'মাছ', 'গবাদিপশু ও দুধ', 'বীজ ও চারা', 'সার ও কীটনাশক', 'কৃষি যন্ত্রপাতি']
+        && request.resource.data.images.size() >= 1 && request.resource.data.images.size() <= 3
+        && request.resource.data.images[0] is string
+        && request.resource.data.scope in ['upazila', 'district', 'division', 'country']
+        && request.resource.data.saleType in ['retail', 'wholesale', 'both']
+        && request.resource.data.division == me().division
+        && request.resource.data.district == me().district
+        && request.resource.data.upazila == me().upazila;
+      // মালিক শুধু দাম ও পরিমাণ বদলাতে পারবে
+      allow update: if adm() || (mine(resource.data.sellerId)
+        && request.resource.data.diff(resource.data).affectedKeys()
+           .hasOnly(['price', 'qty', 'wholesalePrice', 'minWholesaleQty', 'updatedAt']));
+      allow delete: if adm() || mine(resource.data.sellerId);
+    }
+
+    match /orders/{o} {
+      allow read: if adm() || mine(resource.data.buyerId) || mine(resource.data.sellerId);
+      allow create: if si() && request.resource.data.buyerId == request.auth.uid
+        && request.resource.data.sellerId != request.auth.uid
+        && request.resource.data.status == 'requested'
+        && request.resource.data.mode in ['retail', 'wholesale'];
+      allow update: if adm() || (onlyStatus() && (
+        (mine(resource.data.sellerId) && request.resource.data.status in ['confirmed', 'shipped', 'delivered', 'cancelled']) ||
+        (mine(resource.data.buyerId) && resource.data.status == 'requested' && request.resource.data.status == 'cancelled')));
+    }
+
+    match /chats/{c} {
+      allow read: if adm() || (si() && request.auth.uid in resource.data.members);
+      allow create: if si() && request.auth.uid in request.resource.data.members
+        && request.resource.data.members.size() == 2;
+      allow update: if si() && request.auth.uid in resource.data.members;
+      match /messages/{m} {
+        allow read: if si() && request.auth.uid in get(/databases/$(db)/documents/chats/$(c)).data.members;
+        allow create: if si() && request.resource.data.from == request.auth.uid
+          && request.resource.data.text.size() <= 1000
+          && request.auth.uid in get(/databases/$(db)/documents/chats/$(c)).data.members;
+      }
+    }
+
+    match /questions/{q} {
+      allow read: if si();
+      allow create: if si() && request.resource.data.uid == request.auth.uid && request.resource.data.answer == '';
+      allow update, delete: if adm();
+    }
+    match /announcements/{a} { allow read: if si(); allow write: if adm(); }
+    match /prices/{p} { allow read: if si(); allow write: if adm(); }
+
+    // নীতিমালা: রিপোর্ট ও লগ
+    match /reports/{r} {
+      allow create: if si() && request.resource.data.uid == request.auth.uid
+        && r == request.resource.data.pid + '_' + request.auth.uid;
+      allow read, delete: if adm();
+    }
+    match /violations/{v} {
+      allow create: if si() && (request.resource.data.uid == request.auth.uid || adm());
+      allow read, delete: if adm();
+    }
+  }
+}
+` };
+function setup() {
+  $('app').innerHTML = `<h2>⚙️ প্রথম সেটআপ</h2><div class="card"><h3>Firestore নিয়ম</h3><p class="mut">নিচের বোতামে কপি করুন। তারপর Firebase → Firestore Database → Rules ট্যাবে সব মুছে এটা বসিয়ে Publish দিন। Storage লাগবে না।</p><button data-a="cp" data-v="fs">নিয়ম কপি করুন</button></div>`;
+}
+A.cp = async v => { try { await navigator.clipboard.writeText(RULES[v]); toast('কপি হয়েছে ✅'); } catch { toast('কপি করা যায়নি'); } };
+
+A.rep = async id => { if (!confirm('এই পোস্টটি অনুপযুক্ত (১৮+ বা কৃষি-বহির্ভূত) বলে রিপোর্ট করবেন?')) return; try { await setDoc(doc(db, 'reports', id + '_' + UID), { pid: id, uid: UID, at: serverTimestamp() }); toast('রিপোর্ট জমা হয়েছে, ধন্যবাদ'); } catch { toast('রিপোর্ট করা যায়নি'); } };
+</script>
+</body>
+</html>
