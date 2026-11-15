@@ -73,190 +73,16 @@ label{display:block;font-weight:600;font-size:14px;margin-top:14px}
 details.rc{background:var(--card);border:1px solid var(--bd);border-radius:20px;margin-bottom:12px;box-shadow:var(--sh);overflow:hidden}details.rc summary{display:flex;gap:12px;align-items:center;padding:14px 16px;cursor:pointer;list-style:none}details.rc summary::-webkit-details-marker{display:none}
 .ri{width:48px;height:48px;border-radius:16px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:26px;flex:none}.rb{padding:0 18px 16px}.rb h4{margin:14px 0 4px;color:var(--pri)}.rb p{margin:0}.rb ol{margin:0;padding-left:20px}.rb li{margin-bottom:4px}
 a.btn{display:block;text-align:center;text-decoration:none;font-weight:600;padding:11px 18px;border-radius:14px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--prit)}a.btn.alt{background:transparent;color:var(--pri);border:1.5px solid var(--pri)}
+.say{background:var(--soft);color:var(--pri);border:1px solid var(--bd);padding:2px 10px;border-radius:99px;font-size:14px;margin-left:6px;cursor:pointer}
+#tts{position:fixed;left:14px;bottom:calc(104px + env(safe-area-inset-bottom,0px));width:50px;height:50px;border-radius:50%;z-index:6;padding:0;font-size:22px;box-shadow:var(--sh);background:linear-gradient(135deg,var(--acc),#f3c13a);color:#1d1400;border:0}
 </style>
 </head>
 <body>
-  <!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>মাঠের হাট - লোডিং স্ক্রিন</title>
-    <!-- বাংলা সুন্দর ফন্টের জন্য Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Hind Siliguri', sans-serif;
-        }
-
-        /* লোডিং স্ক্রিন কন্টেইনার */
-        #splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            /* সবুজ প্রকৃতি ও ফসলের মাঠের আবহ তৈরি করতে গ্রেডিয়েন্ট ব্যাকগ্রাউন্ড */
-            background: linear-gradient(180deg, #f4f9f4 0%, #c8e6c9 45%, #2e7d32 80%, #1b5e20 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* অ্যাপের নাম: মাঠের হাট */
-        .app-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #1b5e20;
-            margin-bottom: 35px;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        /* মাঝখানের লোগো ও ঘূর্ণায়মান স্পিনার */
-        .logo-wrapper {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 35px;
-        }
-
-        /* সাদা ঘূর্ণায়মান রিং */
-        .spinner-ring {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 4px solid rgba(255, 255, 255, 0.25);
-            border-top: 4px solid #ffffff;
-            border-right: 4px solid #ffffff;
-            box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
-            animation: spin 1.5s linear infinite;
-        }
-
-        /* ভেতরের গ্লোয়িং সবুজ বৃত্ত */
-        .logo-circle {
-            width: 112px;
-            height: 112px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #e8f5e9 0%, #a5d6a7 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 25px rgba(102, 187, 106, 0.9), inset 0 0 10px rgba(27, 94, 32, 0.2);
-            animation: pulse 2s infinite ease-in-out;
-        }
-
-        /* ধানের শীষের ভেক্টর আইকন */
-        .paddy-icon {
-            width: 65px;
-            height: 65px;
-            fill: #1b5e20;
-        }
-
-        /* নিচের স্লোগান */
-        .tagline {
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: #ffffff;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-            letter-spacing: 0.5px;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        /* লোড শেষ হলে হাইড করার ক্লাস */
-        .hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        /* অ্যানিমেশন সমূহ */
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- লোডিং / স্প্ল্যাশ স্ক্রিন -->
-    <div id="splash-screen">
-        <div class="app-title">মাঠের হাট</div>
-        
-        <div class="logo-wrapper">
-            <div class="spinner-ring"></div>
-            <div class="logo-circle">
-                <!-- ধানের শীষের লোগো (SVG) -->
-                <svg class="paddy-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M32 58C32 58 31 40 31 24C31 14 37 6 37 6C37 6 33 15 33 24C33 40 34 58 34 58H32Z"/>
-                    <path d="M31 46C24 44 19 38 19 38C19 38 25 39 31 43V46Z"/>
-                    <path d="M31 38C23 35 18 28 18 28C18 28 25 30 31 35V38Z"/>
-                    <path d="M31 30C24 26 20 19 20 19C20 19 26 22 31 27V30Z"/>
-                    <path d="M32 22C26 18 24 11 24 11C24 11 29 14 32 19V22Z"/>
-                    <path d="M33 43C40 41 45 35 45 35C45 35 39 36 33 40V43Z"/>
-                    <path d="M33 35C41 32 46 25 46 25C46 25 39 27 33 32V35Z"/>
-                    <path d="M33 27C40 23 44 16 44 16C44 16 38 19 33 24V27Z"/>
-                    <path d="M33 19C39 15 41 8 41 8C41 8 36 11 33 16V19Z"/>
-                    <!-- নিচের পাতা -->
-                    <path d="M31 54C20 52 13 43 13 43C13 43 22 46 31 51V54Z"/>
-                    <path d="M34 52C45 50 51 41 51 41C51 41 43 44 34 49V52Z"/>
-                </svg>
-            </div>
-        </div>
-
-        <div class="tagline">প্রয়োজনীয় কৃষি তথ্য এক জায়গায়</div>
-    </div>
-
-    <!-- আপনার মূল ওয়েবসাইটের কন্টেন্ট এখান থেকে শুরু হবে -->
-    <div id="main-content">
-        <!-- আপনার বর্তমান ওয়েবসাইটের কোড এখানে থাকবে -->
-    </div>
-
-    <script>
-        // পেজ লোড হওয়ার ২.৫ সেকেন্ড (2500ms) পর লোডিং স্ক্রিনটি অদৃশ্য হয়ে যাবে
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                const splash = document.getElementById('splash-screen');
-                splash.classList.add('hidden');
-            }, 2500);
-        });
-    </script>
-
-</body>
-</html>
-
 <header><div class="brand"><span class="logo">🌾</span>মাঠের হাট</div>
 <div class="hb"><button id="bell" data-a="bell" aria-label="নোটিফিকেশন">🔔<i id="bdg" hidden></i></button><a id="pf" href="#me" aria-label="প্রোফাইল"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a></div></header>
 <main id="app"></main>
 <nav id="nav"><a href="#home"><span>🏠</span>হোম</a><a href="#market"><span>🛒</span>বাজার</a><a href="#post" class="fab" aria-label="পণ্য পোস্ট করুন"><i>＋</i></a><a href="#chat"><span>💬</span>বার্তা</a><a href="#guide"><span>🌿</span>গাইড</a></nav>
-<div id="pop" role="alert"></div><div class="md" id="md"></div><div id="toast"></div>
+<button id="tts" data-a="sayPage" aria-label="এই পাতা পড়ে শোনাও">🔊</button><div id="pop" role="alert"></div><div class="md" id="md"></div><div id="toast"></div>
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
@@ -291,13 +117,34 @@ const UP = {
 const upz = d => UP[d] || [d + ' সদর', 'অন্যান্য উপজেলা'];
 const CATS = ['ধান ও শস্য','সবজি','ফল','মাছ','গবাদিপশু ও দুধ','বীজ ও চারা','সার ও কীটনাশক','কৃষি যন্ত্রপাতি'];
 // বপন/রোপণের দিন থেকে গোনা কাজের সময়সূচি
+const FN = { u: 'ইউরিয়া', t: 'টিএসপি', m: 'এমওপি (পটাশ)', g: 'জিপসাম', z: 'জিংক সালফেট', o: 'জৈব সার (গোবর/কম্পোস্ট)', b: 'বোরাক্স' };
+const UN = { 'শতক': 1, 'বিঘা': 33, 'একর': 100 };
+// f = মোট সার (কেজি, প্রতি ১ বিঘা = ৩৩ শতক), d = সার প্রয়োগের দিন (বপন/রোপণ থেকে গোনা) ও মোটের কত ভাগ, t = অন্যান্য কাজ
 const CROPS = {
-'রোপা আমন ধান':[[10,'ইউরিয়া ১ম কিস্তি দিন'],[27,'ইউরিয়া ২য় কিস্তি ও আগাছা পরিষ্কার'],[42,'ইউরিয়া শেষ কিস্তি দিন'],[105,'জমির পানি শুকিয়ে দিন'],[120,'ধান কাটুন']],
-'বোরো ধান':[[13,'ইউরিয়া ১ম কিস্তি দিন'],[32,'ইউরিয়া ২য় কিস্তি দিন'],[52,'ইউরিয়া শেষ কিস্তি দিন'],[100,'জমির পানি শুকিয়ে দিন'],[115,'ধান কাটুন']],
-'গম':[[19,'১ম সেচ ও বাকি ইউরিয়া'],[48,'২য় সেচ দিন'],[68,'৩য় সেচ দিন'],[115,'গম কাটুন']],
-'আলু':[[28,'ইউরিয়া দিয়ে গোড়ায় মাটি তুলুন, ১ম সেচ'],[48,'২য় সেচ দিন'],[68,'৩য় সেচ দিন'],[73,'সেচ বন্ধ করুন'],[85,'আলু তুলুন']],
-'টমেটো':[[15,'ইউরিয়া ১ম কিস্তি'],[22,'খুঁটি দিয়ে বেঁধে দিন'],[30,'২য় কিস্তি সার'],[50,'৩য় কিস্তি সার'],[65,'ফল তোলা শুরু']],
-'সরিষা':[[22,'বাকি ইউরিয়া ও ১ম সেচ'],[52,'২য় সেচ দিন'],[92,'সরিষা কাটুন']]};
+'রোপা আমন ধান': { f: { u: 20, t: 13, m: 9, g: 8, z: 1.3 }, d: [[0, 'জমি তৈরির শেষ চাষে', { t: 1, m: 1, g: 1, z: 1 }], [10, '১ম কিস্তি', { u: 1 / 3 }], [27, '২য় কিস্তি', { u: 1 / 3 }], [42, 'শেষ কিস্তি (শীষ আসার আগে)', { u: 1 / 3 }]], t: [[27, 'আগাছা পরিষ্কার করুন'], [105, 'জমির পানি শুকিয়ে দিন'], [120, 'ধান কাটুন']] },
+'বোরো ধান': { f: { u: 33, t: 13, m: 13, g: 9 }, d: [[0, 'জমি তৈরির শেষ চাষে', { t: 1, m: 1, g: 1 }], [13, '১ম কিস্তি', { u: 1 / 3 }], [32, '২য় কিস্তি', { u: 1 / 3 }], [52, 'শেষ কিস্তি (থোড় আসার আগে)', { u: 1 / 3 }]], t: [[100, 'জমির পানি শুকিয়ে দিন'], [115, 'ধান কাটুন']] },
+'গম': { f: { u: 28, t: 19, m: 8 }, d: [[0, 'শেষ চাষে', { t: 1, m: 1, u: .5 }], [19, '১ম সেচের সময় বাকি', { u: .5 }]], t: [[19, '১ম সেচ দিন'], [48, '২য় সেচ দিন'], [68, '৩য় সেচ দিন'], [115, 'গম কাটুন']] },
+'ভুট্টা': { f: { u: 70, t: 33, m: 27, g: 27, z: 1.3 }, d: [[0, 'শেষ চাষে', { t: 1, m: 1, g: 1, z: 1, u: 1 / 3 }], [25, '২য় কিস্তি', { u: 1 / 3 }], [50, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[25, '১ম সেচ দিন'], [50, '২য় সেচ দিন'], [70, '৩য় সেচ দিন (মোচা আসার সময়)'], [135, 'মোচা পাকলে তুলুন']] },
+'আলু': { f: { u: 30, t: 20, m: 30, o: 1000 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: 1, u: .5 }], [28, 'গোড়ায় মাটি তোলার সময়', { u: .5 }]], t: [[28, '১ম সেচ দিন'], [48, '২য় সেচ দিন'], [68, '৩য় সেচ দিন'], [73, 'সেচ বন্ধ করুন'], [85, 'আলু তুলুন']] },
+'টমেটো': { f: { u: 35, t: 22, m: 27, o: 1000 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [50, '৩য় কিস্তি', { u: 1 / 3 }]], t: [[22, 'খুঁটি দিয়ে বেঁধে দিন'], [65, 'ফল তোলা শুরু']] },
+'বেগুন': { f: { u: 35, t: 20, m: 25, o: 1000 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: .5 }], [20, '১ম কিস্তি', { u: .25 }], [40, '২য় কিস্তি', { u: .25, m: .5 }], [60, '৩য় কিস্তি', { u: .25 }], [80, 'শেষ কিস্তি', { u: .25 }]], t: [[65, 'ফল তোলা শুরু']] },
+'ফুলকপি': { f: { u: 35, t: 25, m: 25, o: 1000, b: 1 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, b: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [45, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[15, 'সেচ ও আগাছা দমন করুন'], [65, 'কপি তুলুন (জাতভেদে ৬০-৮০ দিন)']] },
+'বাঁধাকপি': { f: { u: 40, t: 25, m: 25, o: 1000 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [45, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[15, 'সেচ ও আগাছা দমন করুন'], [75, 'কপি শক্ত হলে তুলুন']] },
+'পেঁয়াজ': { f: { u: 20, t: 20, m: 20, o: 800 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: .5 }], [20, '১ম কিস্তি', { u: .5, m: .5 }], [40, 'শেষ কিস্তি', { u: .5 }]], t: [[85, 'তোলার ১৫ দিন আগে সেচ বন্ধ করুন'], [100, 'গাছের মাথা নুয়ে পড়লে তুলুন']] },
+'সরিষা': { f: { u: 25, t: 20, m: 10, g: 15 }, d: [[0, 'শেষ চাষে', { t: 1, m: 1, g: 1, u: .5 }], [22, 'বাকি অংশ (১ম সেচের সময়)', { u: .5 }]], t: [[22, '১ম সেচ দিন'], [52, '২য় সেচ দিন'], [92, 'সরিষা কাটুন']] },
+'মরিচ': { f: { u: 30, t: 20, m: 20, o: 1000 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: .5 }], [20, '১ম কিস্তি', { u: 1 / 3 }], [40, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [60, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[70, 'কাঁচা মরিচ তোলা শুরু']] },
+'লাউ': { f: { u: 17, t: 13, m: 13, o: 1000 }, d: [[0, 'মাদা তৈরির সময়', { o: 1, t: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [50, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[20, 'মাচা বা বাউনি দিন'], [60, 'লাউ তোলা শুরু']] },
+'ঢেঁড়স': { f: { u: 28, t: 15, m: 15 }, d: [[0, 'জমি তৈরির সময়', { t: 1, m: .5 }], [20, '১ম কিস্তি', { u: 1 / 3 }], [40, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [60, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[50, 'ঢেঁড়স তোলা শুরু (২ দিন পর পর)']] },
+'শসা': { f: { u: 20, t: 15, m: 15, o: 1000 }, d: [[0, 'মাদা তৈরির সময়', { o: 1, t: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [45, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[20, 'মাচা দিন'], [45, 'শসা তোলা শুরু']] },
+'মসুর': { f: { u: 5, t: 13, m: 7 }, d: [[0, 'শেষ চাষে (একবারে)', { u: 1, t: 1, m: 1 }]], t: [[105, '৮০% ফল পাকলে কাটুন']] },
+'মুগডাল': { f: { u: 5, t: 13, m: 7 }, d: [[0, 'শেষ চাষে (একবারে)', { u: 1, t: 1, m: 1 }]], t: [[65, '৮০% ফল পাকলে তুলুন']] }};
+const kgs = k => k >= 1 ? bn(+(Math.round(k * 10) / 10)) + ' কেজি' : bn(Math.round(k * 100) * 10) + ' গ্রাম';
+const areaTxt = a => a % 33 === 0 ? bn(a / 33) + ' বিঘা' : bn(+a.toFixed(1)) + ' শতক';
+function plan(name, areaSh) {
+  const c = CROPS[name]; if (!c) return []; const bg = areaSh / 33;
+  return c.d.map(([day, label, fx]) => ({ day, label, fert: Object.entries(fx).map(([k, fr]) => [FN[k], c.f[k] * fr * bg]) })).concat(c.t.map(([day, x]) => ({ day, label: x, fert: [] }))).sort((a, b) => a.day - b.day);
+}
+const evText = e => e.label + (e.fert.length ? ' → ' + e.fert.map(([n, k]) => n + ' ' + kgs(k)).join(', ') : '');
 
 
 const fb = initializeApp(firebaseConfig), auth = getAuth(fb), db = getFirestore(fb);
@@ -345,13 +192,14 @@ onAuthStateChanged(auth, async u => {
 /* ---------- রাউটার ---------- */
 function route() {
   off.forEach(x => x()); off = [];
+  if (SPK) { speechSynthesis.cancel(); SPK = false; $('tts').textContent = '🔊'; }
   setAv();
   const r = (location.hash || '#home').slice(1);
   document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + r));
   if (r === 'setup') return setup();
   if (!UID || !ME) return authView();
   startNotif();
-  ({ home, market, post, chat, help, me, favs, book, guide }[r] || home)();
+  ({ home, market, post, chat, help, me, favs, book, guide, fert, svc }[r] || home)();
 }
 
 /* ---------- লগইন / নিবন্ধন ---------- */
@@ -381,10 +229,11 @@ A.reg = async () => {
 async function home() {
   const h = new Date().getHours(), gr = h < 12 ? 'শুভ সকাল' : h < 17 ? 'শুভ দুপুর' : h < 19 ? 'শুভ বিকেল' : 'শুভ সন্ধ্যা';
   $('app').innerHTML = `<section class="hero"><div class="m">${gr} 👋</div><h1>${esc(ME.name)}</h1><div class="m">📍 ${esc(ME.upazila)}, ${esc(ME.district)}</div></section>
-<div class="tiles">${[['#market', '🛒', 'কিনুন'], ['#post', '📸', 'বেচুন'], ['#book', '📒', 'কৃষি খাতা'], ['#help', '🌱', 'প্রশ্ন করুন'], ['#favs', '❤️', 'পছন্দ'], ['#me', '👤', 'আমার প্রোফাইল']].map(t => `<a class="tile" href="${t[0]}"><span>${t[1]}</span>${t[2]}</a>`).join('')}</div>
+<div class="tiles">${[['#market', '🛒', 'কিনুন'], ['#post', '📸', 'বেচুন'], ['#book', '📒', 'কৃষি খাতা'], ['#fert', '🧪', 'সারের হিসাব'], ['#guide', '🌿', 'কৃষি গাইড'], ['#help', '🌱', 'প্রশ্ন করুন'], ['#favs', '❤️', 'পছন্দ'], ['#svc', '📞', 'জরুরি সেবা'], ['#me', '👤', 'প্রোফাইল']].map(t => `<a class="tile" href="${t[0]}"><span>${t[1]}</span>${t[2]}</a>`).join('')}</div>
+<div class="card"><h3>💡 আজকের কৃষি পরামর্শ <button class="say sm" data-a="say" aria-label="শুনুন">🔊</button></h3><div>${MONTHS[new Date().getMonth()][1]}</div></div>
 <div id="wx"><div class="sk" style="height:300px"></div></div>
-<div class="card"><h3>📊 আজকের বাজার দর</h3><div id="pr" class="mut">লোড হচ্ছে…</div></div>
-<div class="card"><h3>🌾 আমার ফসল</h3><div id="mc"></div><div class="row"><select id="cs">${opts(Object.keys(CROPS))}</select><input type="date" id="cd"></div><div class="row"><button data-a="addcrop">ফসল যোগ করুন</button></div><p class="mut" style="margin-bottom:0">বপন বা রোপণের তারিখ দিন, পরের সার-সেচের কাজ কবে তা অ্যাপ বলে দেবে।</p></div>`;
+<div class="card"><h3>📊 আজকের বাজার দর <button class="say sm" data-a="say" aria-label="শুনুন">🔊</button></h3><div id="pr" class="mut">লোড হচ্ছে…</div></div>
+<div class="card"><h3>🌾 আমার ফসল</h3><div id="mc"></div><label>ফসল</label><select id="cs">${opts(Object.keys(CROPS))}</select><div class="row"><div><label>বপন বা রোপণের তারিখ</label><input type="date" id="cd"></div></div><div class="row"><div><label>জমির পরিমাণ</label><input id="ca" type="number" min="0" step="any" value="1"></div><div><label>একক</label><select id="cu"><option>বিঘা</option><option>শতক</option><option>একর</option></select></div></div><div class="row"><button data-a="addcrop">ফসল যোগ করুন</button></div><p class="mut" style="margin-bottom:0">তারিখ ও জমির পরিমাণ দিলে অ্যাপ বলে দেবে কবে কোন সার কতটুকু দিতে হবে।</p></div>`;
   $('cd').value = today();
   const tk = setInterval(tick, 1000), rf = setInterval(() => wxLoad(), 600000);
   off.push(() => { clearInterval(tk); clearInterval(rf); });
@@ -395,7 +244,7 @@ async function home() {
 const DC = {"ঢাকা": [23.81, 90.41], "গাজীপুর": [24.0, 90.42], "নারায়ণগঞ্জ": [23.62, 90.5], "টাঙ্গাইল": [24.25, 89.92], "মানিকগঞ্জ": [23.86, 90.0], "মুন্সিগঞ্জ": [23.55, 90.53], "নরসিংদী": [23.92, 90.72], "কিশোরগঞ্জ": [24.43, 90.78], "ফরিদপুর": [23.61, 89.84], "গোপালগঞ্জ": [23.01, 89.83], "মাদারীপুর": [23.17, 90.2], "রাজবাড়ী": [23.76, 89.64], "শরীয়তপুর": [23.22, 90.35], "ময়মনসিংহ": [24.75, 90.41], "জামালপুর": [24.92, 89.94], "নেত্রকোনা": [24.87, 90.73], "শেরপুর": [25.02, 90.02], "চট্টগ্রাম": [22.36, 91.78], "কক্সবাজার": [21.43, 91.98], "কুমিল্লা": [23.46, 91.18], "ফেনী": [23.02, 91.4], "ব্রাহ্মণবাড়িয়া": [23.96, 91.11], "রাঙ্গামাটি": [22.65, 92.17], "নোয়াখালী": [22.87, 91.1], "চাঁদপুর": [23.23, 90.67], "লক্ষ্মীপুর": [22.94, 90.84], "খাগড়াছড়ি": [23.12, 91.98], "বান্দরবান": [22.19, 92.22], "রাজশাহী": [24.37, 88.6], "বগুড়া": [24.85, 89.37], "জয়পুরহাট": [25.1, 89.02], "নওগাঁ": [24.8, 88.93], "নাটোর": [24.41, 89.0], "চাঁপাইনবাবগঞ্জ": [24.6, 88.28], "পাবনা": [24.0, 89.23], "সিরাজগঞ্জ": [24.45, 89.7], "রংপুর": [25.75, 89.25], "দিনাজপুর": [25.63, 88.64], "গাইবান্ধা": [25.33, 89.53], "কুড়িগ্রাম": [25.81, 89.65], "লালমনিরহাট": [25.99, 89.45], "নীলফামারী": [25.93, 88.86], "পঞ্চগড়": [26.34, 88.55], "ঠাকুরগাঁও": [26.03, 88.46], "খুলনা": [22.82, 89.55], "বাগেরহাট": [22.65, 89.79], "চুয়াডাঙ্গা": [23.64, 88.85], "যশোর": [23.17, 89.21], "ঝিনাইদহ": [23.54, 89.17], "কুষ্টিয়া": [23.9, 89.12], "মাগুরা": [23.49, 89.42], "মেহেরপুর": [23.76, 88.63], "নড়াইল": [23.17, 89.5], "সাতক্ষীরা": [22.72, 89.07], "বরিশাল": [22.7, 90.37], "বরগুনা": [22.15, 90.13], "ভোলা": [22.69, 90.65], "ঝালকাঠি": [22.64, 90.2], "পটুয়াখালী": [22.36, 90.33], "পিরোজপুর": [22.58, 89.97], "সিলেট": [24.9, 91.87], "হবিগঞ্জ": [24.38, 91.42], "মৌলভীবাজার": [24.48, 91.77], "সুনামগঞ্জ": [25.07, 91.4]};
 const WC = (c, day = 1) => c === 0 ? (day ? ['☀️', 'পরিষ্কার আকাশ', 'clear'] : ['🌙', 'পরিষ্কার রাত', 'night']) : c <= 3 ? ['⛅', 'আংশিক মেঘলা', 'cloud'] : c <= 48 ? ['🌫️', 'কুয়াশা', 'fog'] : c <= 57 ? ['🌦️', 'গুঁড়ি বৃষ্টি', 'rain'] : c <= 67 ? ['🌧️', 'বৃষ্টি', 'rain'] : c <= 82 ? ['🌧️', 'ভারী বৃষ্টি', 'rain'] : ['⛈️', 'বজ্রসহ বৃষ্টি', 'storm'];
 const SKY = { clear: '#1e88e5,#64b5f6', night: '#0d1b3e,#26397a', cloud: '#546e7a,#90a4ae', fog: '#78909c,#b0bec5', rain: '#37474f,#5c7a89', storm: '#2b2b45,#55557a' };
-let WX = null, WPOS = null;
+let WX = null, WPOS = null, WSAY = '';
 const tm = (t, o) => new Date(t).toLocaleTimeString('bn-BD', o);
 function tick() {
   const d = new Date(), c = $('wclk'), e = $('wdt');
@@ -421,8 +270,9 @@ function wxDraw() {
   if (c.wind_speed_10m >= 30) AD.push('বাতাস জোরালো। আজ স্প্রে করবেন না, ওষুধ উড়ে নষ্ট হবে।');
   if (d.temperature_2m_min[0] <= 12) AD.push('ঠান্ডা বেশি। বীজতলা ও চারা পলিথিন বা খড় দিয়ে ঢেকে রাখুন।');
   if (!AD.length) AD.push('আবহাওয়া স্বাভাবিক, মাঠের কাজের উপযোগী।');
+  WSAY = `${WPOS.label}। এখন ${Math.round(c.temperature_2m)} ডিগ্রি সেলসিয়াস, ${w[1]}। আর্দ্রতা ${c.relative_humidity_2m} শতাংশ, বাতাস ঘণ্টায় ${Math.round(c.wind_speed_10m)} কিলোমিটার। বৃষ্টির সম্ভাবনা ${d.precipitation_probability_max[0] || 0} শতাংশ। ${AD.join('। ')}`;
   const hrs = Array.from({ length: 12 }, (_, k) => i0 + k).filter(i => h.time[i]).map(i => { const x = WC(h.weather_code[i], new Date(h.time[i]).getHours() >= 6 && new Date(h.time[i]).getHours() < 18 ? 1 : 0); return `<div class="hrw">${tm(h.time[i], { hour: 'numeric', hour12: true })}<br><span style="font-size:22px">${x[0]}</span><b>${bn(Math.round(h.temperature_2m[i]))}°</b>☔${bn(h.precipitation_probability[i] || 0)}%</div>`; }).join('');
-  box.innerHTML = `<section class="wx" data-e="${w[0]}" style="background:linear-gradient(145deg,${SKY[w[2]]})"><div class="top"><div><div class="loc">📍 ${esc(WPOS.label)}</div><div class="dt" id="wdt"></div><div class="clk" id="wclk"></div></div><div class="tb"><button data-a="gps" aria-label="আমার অবস্থান">📍</button><button data-a="wxr" aria-label="নতুন করে আনুন">🔄</button></div></div>
+  box.innerHTML = `<section class="wx" data-e="${w[0]}" style="background:linear-gradient(145deg,${SKY[w[2]]})"><div class="top"><div><div class="loc">📍 ${esc(WPOS.label)}</div><div class="dt" id="wdt"></div><div class="clk" id="wclk"></div></div><div class="tb"><button data-a="sayWx" aria-label="শুনুন">🔊</button><button data-a="gps" aria-label="আমার অবস্থান">📍</button><button data-a="wxr" aria-label="নতুন করে আনুন">🔄</button></div></div>
 <div class="big">${bn(Math.round(c.temperature_2m))}°</div><div class="cond">${w[0]} ${w[1]}</div><div class="dt">অনুভূত ${bn(Math.round(c.apparent_temperature))}° • সর্বোচ্চ ${bn(Math.round(d.temperature_2m_max[0]))}° / সর্বনিম্ন ${bn(Math.round(d.temperature_2m_min[0]))}°</div>
 <div class="g3"><div class="gi">💧 আর্দ্রতা<b>${bn(c.relative_humidity_2m)}%</b></div><div class="gi">💨 বাতাস<b>${bn(Math.round(c.wind_speed_10m))} কিমি/ঘ</b></div><div class="gi">🌧️ বৃষ্টি<b>${bn(c.precipitation)} মিমি</b></div><div class="gi">🌅 সূর্যোদয়<b>${tm(d.sunrise[0], { hour: 'numeric', minute: '2-digit' })}</b></div><div class="gi">🌇 সূর্যাস্ত<b>${tm(d.sunset[0], { hour: 'numeric', minute: '2-digit' })}</b></div><div class="gi">☔ বৃষ্টির সম্ভাবনা<b>${bn(d.precipitation_probability_max[0] || 0)}%</b></div></div>
 <div class="hrs">${hrs}</div><div class="adv">🌱 ${AD.join('<br>🌱 ')}</div><div class="upd">সর্বশেষ হালনাগাদ: ${tm(WX.at, { hour: 'numeric', minute: '2-digit' })} • প্রতি ১০ মিনিটে নিজে নতুন হয়</div></section>
@@ -434,11 +284,15 @@ A.gps = () => navigator.geolocation ? navigator.geolocation.getCurrentPosition(p
 async function crops() {
   const s = await getDocs(col('users', UID, 'crops'));
   $('mc').innerHTML = s.docs.length ? s.docs.map(d => {
-    const c = d.data(), n = Math.floor((Date.now() - new Date(c.date)) / 864e5), nx = (CROPS[c.crop] || []).find(t => t[0] >= n);
-    return `<div class="it"><b>${esc(c.crop)}</b> <span class="mut">• ${bn(n)} দিন হয়েছে</span><div>${nx ? (nx[0] === n ? '🔔 আজই: ' : 'পরবর্তী: ') + nx[1] + (nx[0] > n ? ` (${bn(nx[0] - n)} দিন পর)` : '') : '✅ সব কাজ শেষ'}</div><button class="sm del" data-a="dc" data-v="${d.id}">মুছুন</button></div>`;
+    const c = d.data(), n = Math.floor((Date.now() - new Date(c.date)) / 864e5), ar = c.area || 33, ev = plan(c.crop, ar), nx = ev.find(e => e.day >= n);
+    const dt = e => new Date(new Date(c.date).getTime() + e.day * 864e5).toLocaleDateString('bn-BD', { day: 'numeric', month: 'long' });
+    return `<div class="it"><b>${esc(c.crop)}</b> <span class="mut">• ${bn(n)} দিন • জমি ${areaTxt(ar)}</span><button class="say sm" data-a="say" aria-label="শুনুন">🔊</button>
+<div style="margin-top:4px">${nx ? (nx.day === n ? '🔔 আজই: ' : 'পরবর্তী (' + dt(nx) + '): ') + esc(evText(nx)) : '✅ সব কাজ শেষ'}</div>
+<details><summary class="mut" style="cursor:pointer;padding:4px 0">পুরো সময়সূচি ও সারের পরিমাণ</summary>${ev.map(e => `<div class="mut" style="padding:3px 0">${e.day < n ? '✅' : '⏳'} ${dt(e)} (${bn(e.day)} দিন): ${esc(evText(e))}</div>`).join('')}</details>
+<button class="sm del" data-a="dc" data-v="${d.id}">মুছুন</button></div>`;
   }).join('') : '<p class="mut">কোনো ফসল যোগ করা হয়নি।</p>';
 }
-A.addcrop = async () => { await addDoc(col('users', UID, 'crops'), { crop: $('cs').value, date: $('cd').value }); crops(); };
+A.addcrop = async () => { const a = (+$('ca').value || 1) * UN[$('cu').value]; await addDoc(col('users', UID, 'crops'), { crop: $('cs').value, date: $('cd').value, area: a }); crops(); };
 A.dc = async id => { await deleteDoc(doc(db, 'users', UID, 'crops', id)); crops(); };
 
 /* ---------- বাজার: কাছের পোস্ট আগে, তারপর সারা দেশের ---------- */
@@ -451,7 +305,7 @@ async function feed() {
   return [...m.values()].map(p => ({ ...p, r: nearOf(p) })).sort((a, b) => b.r - a.r || (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
 }
 const card = p => `<article class="pcard">${p.images?.[0] ? `<div class="ph"><img src="${esc(p.images[0])}" alt="${esc(p.title)}" loading="lazy"><button class="heart" data-a="fav" data-v="${p.id}" aria-label="পছন্দ">${FAV.has(p.id) ? '❤️' : '🤍'}</button></div>` : ''}<div class="pb">
-<span class="tag ${p.r > 2 ? 'n' : ''}">${NEAR[p.r]}</span> ${p.saleType !== 'retail' ? '<span class="tag w">পাইকারি</span>' : ''}<h3>${esc(p.title)}</h3>
+<span class="tag ${p.r > 2 ? 'n' : ''}">${NEAR[p.r]}</span> ${p.saleType !== 'retail' ? '<span class="tag w">পাইকারি</span>' : ''}<button class="say sm" data-a="say" aria-label="শুনুন">🔊</button><h3>${esc(p.title)}</h3>
 <div class="price">৳${bn(p.price)}<small>/${esc(p.unit)}</small></div>${p.saleType !== 'retail' ? `<div class="mut">পাইকারি ৳${bn(p.wholesalePrice)}/${esc(p.unit)} (ন্যূনতম ${bn(p.minWholesaleQty)})</div>` : ''}
 <div class="mut">${esc(p.category)} • মজুত ${bn(p.qty)} ${esc(p.unit)}</div><div class="sl">${p.sellerPhoto ? `<img class="av" src="${esc(p.sellerPhoto)}" alt="" loading="lazy">` : '<span class="av">👤</span>'}<span><b>${esc(p.sellerName)}</b><br>📍 ${p.sellerVillage ? esc(p.sellerVillage) + ', ' : ''}${esc(p.upazila)}, ${esc(p.district)}</span></div>
 ${p.sellerId !== UID ? `<div class="row"><button data-a="order" data-v="${p.id}">অর্ডার করুন</button><button class="alt" data-a="msg" data-v="${p.id}">💬</button><button class="alt" data-a="share" data-v="${p.id}">↗</button><button class="alt" data-a="rep" data-v="${p.id}" title="রিপোর্ট">🚩</button></div>` : '<div class="mut">এটি আপনার পোস্ট</div>'}</div></article>`;
@@ -581,7 +435,7 @@ function help() {
 <div class="card"><h3>🧮 লাভ-ক্ষতির হিসাব</h3><div class="row"><input id="c1" type="number" placeholder="বীজ ও চারা খরচ ৳"><input id="c2" type="number" placeholder="সার ও ওষুধ ৳"><input id="c3" type="number" placeholder="শ্রম ও সেচ ৳"></div><div class="row"><input id="c4" type="number" placeholder="অন্যান্য ৳"><input id="c5" type="number" placeholder="মোট ফলন (মণ)"><input id="c6" type="number" placeholder="মণ প্রতি দাম ৳"></div><div class="row"><button data-a="calc">হিসাব করুন</button></div><div id="cr"></div></div>`;
   off.push(onSnapshot(query(col('questions'), f('uid', UID)), s => {
     const L = s.docs.map(d => d.data()).sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
-    $('qa').innerHTML = L.map(q => `<div class="it"><b>${esc(q.text)}</b><div>${q.answer ? esc(q.answer) + `<div class="mut">কৃষি বিশেষজ্ঞ</div>` : '<span class="mut">উত্তরের অপেক্ষায়…</span>'}</div></div>`).join('');
+    $('qa').innerHTML = L.map(q => `<div class="it"><button class="say sm" data-a="say" aria-label="শুনুন" style="float:right">🔊</button><b>${esc(q.text)}</b><div>${q.answer ? esc(q.answer) + `<div class="mut">কৃষি বিশেষজ্ঞ</div>` : '<span class="mut">উত্তরের অপেক্ষায়…</span>'}</div></div>`).join('');
   }));
 }
 A.ask = async () => { const t = $('qt').value.trim(); if (!t) return; await addDoc(col('questions'), { uid: UID, text: t.slice(0, 1000), answer: '', answeredBy: '', createdAt: serverTimestamp() }); $('qt').value = ''; };
@@ -626,11 +480,21 @@ pest: [
 { i: '🧼', t: 'সাবান-পানি স্প্রে', w: 'জাব পোকা ও মাকড় নিয়ন্ত্রণের সহজ উপায়', m: 'তরল সাবান বা ব্লিচবিহীন সাবান, পানি', s: ['১ লিটার পানিতে ১ চা-চামচ তরল সাবান মেশান', 'পাতার নিচ-ওপর দুই দিকে ভিজিয়ে স্প্রে করুন'], u: '৫-৭ দিন পর পর ২-৩ বার', n: 'আগে ২-৩টি পাতায় পরীক্ষা করুন। পাতা পুড়ে গেলে সাবান কমিয়ে দিন।' },
 { i: '🟨', t: 'হলুদ আঠালো ফাঁদ', w: 'সাদা মাছি, জাব পোকা ও ফড়িং ধরে', m: 'হলুদ রঙের প্লাস্টিক, টিন বা কাগজ, আঠা (গ্রিজ বা মোটর অয়েল), কাঠি', s: ['হলুদ পাতের দুই পাশে আঠা মাখান', 'কাঠিতে লাগিয়ে ফসলের মাথার সামান্য ওপরে সারিতে পুঁতুন', 'পোকা জমলে পরিষ্কার করে আবার আঠা দিন'], u: 'পোকা দেখা দিলেই লাগান, প্রতি সপ্তাহে দেখুন', n: 'বেশি ঘন করে লাগাবেন না, উপকারী পোকাও আটকে যেতে পারে।' },
 { i: '🐦', t: 'পাখি বসার ডাল (পার্চিং)', w: 'ধান ও সবজির পোকা পাখিতে খেয়ে দেয়, খরচ নেই', m: 'ডালপালা বা বাঁশের খুঁটি', s: ['জমিতে ২-৩ হাত উঁচু ডালপালা বা খুঁটি পুঁতে দিন', 'কয়েক মিটার পর পর রাখুন', 'আক্রান্ত ডগা বা পাতা কেটে মাটিতে পুঁতে ফেলুন'], u: 'চারা রোপণের পর থেকে ফসল ওঠা পর্যন্ত', n: 'বেগুনের ডগা ও ফল ছিদ্রকারী পোকায় আক্রান্ত ডগা সাথে সাথে কেটে ফেলুন।' }]};
-let GT = 'fert';
+GUIDE.live = [
+{ i: '🐄', t: 'গরুর টিকা', w: 'রোগ ঠেকাতে সময়মতো টিকা', l: ['কোথায় পাবেন', 'কী করবেন', 'কখন'], m: 'উপজেলা প্রাণিসম্পদ অফিস বা সরকারি ভেটেরিনারি ডাক্তার', s: ['তড়কা, বাদলা, গলাফুলা ও ক্ষুরারোগের টিকা সরকারি প্রাণিসম্পদ অফিসে পাওয়া যায়', 'গরু সুস্থ থাকা অবস্থায় টিকা দিন', 'টিকার তারিখ লিখে রাখুন'], u: 'কোন টিকা কখন দেবেন তা প্রাণিসম্পদ অফিস জানাবে। সাধারণত বর্ষার আগে দেওয়া হয়', n: 'অসুস্থ বা গর্ভের শেষ সময়ের গরুতে টিকা দেওয়ার আগে ডাক্তারের পরামর্শ নিন।' },
+{ i: '🐐', t: 'কৃমিনাশক ও পশুর যত্ন', w: 'গরু-ছাগলের ওজন ও দুধ বাড়াতে', l: ['প্রয়োজন', 'কী করবেন', 'কখন'], m: 'কৃমিনাশক ওষুধ (প্রাণিসম্পদ অফিস বা ডাক্তারের পরামর্শে), পরিষ্কার পানি, শুকনো ঘর', s: ['বছরে ২ বার কৃমিনাশক খাওয়ান', 'ঘর শুকনো ও পরিষ্কার রাখুন, গোবর-চনা জমতে দেবেন না', 'ভেজা বা জমে থাকা পানির ঘাস খাওয়ানো এড়ান'], u: 'বর্ষার আগে ও শীতের শুরুতে। ওষুধের মাত্রা ডাক্তার বলে দেবেন', n: 'নিজে থেকে ওষুধের মাত্রা ঠিক করবেন না।' },
+{ i: '🐟', t: 'পুকুর প্রস্তুতি', w: 'ভালো ফলনের জন্য পোনা ছাড়ার আগে', l: ['লাগবে', 'ধাপ', 'কখন'], m: 'চুন, জাল, পুকুর শুকানোর সুবিধা', s: ['পুকুর শুকিয়ে বা জাল টেনে অনাকাঙ্ক্ষিত মাছ ও আগাছা সরান', 'প্রতি শতকে প্রায় ১ কেজি চুন ছিটান', '৫-৭ দিন পর পানি ভরুন', 'পানির রঙ হালকা সবুজ হলে সকালে বা বিকেলে পোনা ছাড়ুন'], u: 'পোনা ছাড়ার ৫-৭ দিন আগে প্রস্তুতি শেষ করুন', n: 'পানি খুব গাঢ় সবুজ বা দুর্গন্ধ হলে আংশিক পানি বদলান।' },
+{ i: '🐠', t: 'মাছের যত্ন ও রোগ', w: 'মড়ক ও ক্ষতি কমাতে', l: ['প্রয়োজন', 'কী করবেন', 'কখন'], m: 'জাল, পরিষ্কার পানির উৎস, সুষম খাবার', s: ['ভোরে মাছ ভেসে উঠলে অক্সিজেন কম, সাথে সাথে পানি দিন বা ঢেউ তুলুন', 'খাবার একসাথে বেশি না দিয়ে দিনে ২ বার অল্প করে দিন', 'অসুস্থ মাছ আলাদা করুন, মরা মাছ তুলে মাটিতে পুঁতুন', 'মাসে ১-২ বার জাল টেনে মাছের স্বাস্থ্য দেখুন'], u: 'প্রতিদিন সকালে পুকুর দেখুন', n: 'রোগ বা মড়ক হলে উপজেলা মৎস্য অফিসে যোগাযোগ করুন।' }];
+const SEASONS = [
+{ n: 'রবি / শীতকাল', m: 'অক্টোবর – ফেব্রুয়ারি', mo: [9, 10, 11, 0, 1], i: '❄️', c: { 'ধান ও শস্য': 'বোরো ধান (বীজতলা নভেম্বর-ডিসেম্বর), গম, ভুট্টা', 'ডাল ও তেল': 'মসুর, ছোলা, খেসারি, মটর, সরিষা, তিসি', 'সবজি': 'আলু, টমেটো, বেগুন, ফুলকপি, বাঁধাকপি, শিম, মুলা, গাজর, পালংশাক, লালশাক, ধনিয়া', 'মসলা': 'পেঁয়াজ, রসুন, মরিচ' } },
+{ n: 'খরিফ-১ / গ্রীষ্মকাল', m: 'মার্চ – জুন', mo: [2, 3, 4, 5], i: '☀️', c: { 'ধান ও শস্য': 'আউশ ধান (মার্চ-মে), ভুট্টা', 'ডাল ও তেল': 'মুগডাল, তিল, চিনাবাদাম', 'সবজি': 'ঢেঁড়স, করলা, ঝিঙা, চিচিঙ্গা, পটল, কচু, ডাঁটা, পুঁইশাক, লাউ, শসা', 'আঁশ': 'পাট (মার্চ-এপ্রিল)', 'ফল': 'আম, কাঁঠাল, লিচু, তরমুজ' } },
+{ n: 'খরিফ-২ / বর্ষাকাল', m: 'জুলাই – সেপ্টেম্বর', mo: [6, 7, 8], i: '🌧️', c: { 'ধান ও শস্য': 'রোপা আমন ধান (জুলাই-আগস্ট)', 'সবজি': 'কলমি, ডাঁটা, পুঁইশাক, কচু, বরবটি, লাউ, কুমড়া, ঝিঙা', 'বীজতলা': 'শীতের সবজির বীজতলা আগস্ট-সেপ্টেম্বরে শুরু করুন', 'ফল': 'পেয়ারা, কলা, কাঁঠাল' } }];
+let GT = 'season';
 function guide() {
-  const mo = new Date().getMonth(), T = [['fert', '🌱 জৈব সার'], ['pest', '🐛 জৈব বালাইনাশক'], ['cal', '📅 মৌসুমি পরামর্শ']];
-  const body = GT === 'cal' ? MONTHS.map((m, i) => `<div class="card" style="${i === mo ? 'border:2px solid var(--acc)' : ''}"><h3>${m[0]} ${i === mo ? '<span class="tag n">এই মাস</span>' : ''}</h3><div>${m[1]}</div></div>`).join('')
-    : GUIDE[GT].map(r => `<details class="rc"><summary><span class="ri">${r.i}</span><span><b>${r.t}</b><br><small class="mut">${r.w}</small></span></summary><div class="rb"><h4>উপকরণ</h4><p>${r.m}</p><h4>তৈরির ধাপ</h4><ol>${r.s.map(x => `<li>${x}</li>`).join('')}</ol><h4>ব্যবহার</h4><p>${r.u}</p><div class="adv">⚠️ ${r.n}</div></div></details>`).join('');
+  const mo = new Date().getMonth(), T = [['season', '🌾 মৌসুমি ফসল'], ['fert', '🌱 জৈব সার'], ['pest', '🐛 জৈব বালাইনাশক'], ['live', '🐄 পশু ও মাছ'], ['cal', '📅 মাসিক পরামর্শ']], SB = '<button class="say sm" data-a="say" aria-label="শুনুন">🔊</button>';
+  const body = GT === 'cal' ? MONTHS.map((m, i) => `<div class="card" style="${i === mo ? 'border:2px solid var(--acc)' : ''}">${SB}<h3>${m[0]} ${i === mo ? '<span class="tag n">এই মাস</span>' : ''}</h3><div>${m[1]}</div></div>`).join('')
+    : GT === 'season' ? SEASONS.map(x => `<div class="card" style="${x.mo.includes(mo) ? 'border:2px solid var(--acc)' : ''}">${SB}<h3>${x.i} ${x.n} ${x.mo.includes(mo) ? '<span class="tag n">এখন চলছে</span>' : ''}</h3><div class="mut">${x.m}</div>${Object.entries(x.c).map(([k, v]) => `<p style="margin:8px 0 0"><b>${k}:</b> ${v}</p>`).join('')}</div>`).join('') + '<p class="mut">কোন ফসলে কবে কত সার দেবেন জানতে <a href="#fert">সারের হিসাব</a> দেখুন।</p>'
+    : GUIDE[GT].map(r => { const l = r.l || ['উপকরণ', 'তৈরির ধাপ', 'ব্যবহার']; return `<details class="rc"><summary><span class="ri">${r.i}</span><span><b>${r.t}</b><br><small class="mut">${r.w}</small></span></summary><div class="rb">${SB}<h4>${l[0]}</h4><p>${r.m}</p><h4>${l[1]}</h4><ol>${r.s.map(x => `<li>${x}</li>`).join('')}</ol><h4>${l[2]}</h4><p>${r.u}</p><div class="adv">⚠️ ${r.n}</div></div></details>`; }).join('');
   $('app').innerHTML = `<section class="gh"><div class="m">${MONTHS[mo][0]} মাসের পরামর্শ</div><h1>🌿 কৃষি গাইড</h1><p>${MONTHS[mo][1]}</p></section><div class="chips">${T.map(t => `<button class="chip ${t[0] === GT ? 'on' : ''}" data-a="gt" data-v="${t[0]}">${t[1]}</button>`).join('')}</div>${body}<div class="card"><h3>📞 আরও সাহায্য দরকার?</h3><p class="mut">জৈব ব্যবস্থায় সমস্যা না কমলে উপজেলা কৃষি অফিসে যোগাযোগ করুন। নতুন কোনো মিশ্রণ আগে অল্প জায়গায় পরীক্ষা করে দেখুন।</p><div class="row"><a class="btn" href="tel:16123">কৃষি কল সেন্টার ১৬১২৩</a><a class="btn alt" href="#help">বিশেষজ্ঞকে প্রশ্ন করুন</a></div></div>`;
 }
 A.gt = v => { GT = v; guide(); };
@@ -672,6 +536,48 @@ function startNotif() {
   nu.push(onSnapshot(query(col('chats'), where('members', 'array-contains', UID)), s => { if (f3) { f3 = false; return; } s.docChanges().forEach(c => { const d = c.doc.data(); if (c.type !== 'removed' && d.lastFrom && d.lastFrom !== UID && !(location.hash === '#chat' && CUR === c.doc.id)) notify('💬 নতুন বার্তা', `${d.names?.[d.lastFrom] || ''}: ${d.last}`, '#chat'); }); }, er));
   nu.push(onSnapshot(query(col('announcements'), orderBy('at', 'desc'), limit(1)), s => { const d = s.docs[0]; if (!d) return; let seen = ''; try { seen = localStorage.getItem('ann'); } catch { } if (seen !== d.id) { try { localStorage.setItem('ann', d.id); } catch { } notify('📢 ' + d.data().title, d.data().text || '', '#home'); } }, er));
 }
+
+
+/* ---------- সারের হিসাব ---------- */
+function fert() {
+  $('app').innerHTML = `<section class="gh"><h1>🧪 সারের হিসাব</h1><p>ফসল ও জমির পরিমাণ দিন, কবে কোন সার কতটুকু লাগবে অ্যাপ হিসাব করে দেবে।</p></section><div class="card"><label>ফসল</label><select id="fc">${opts(Object.keys(CROPS))}</select><div class="row"><div><label>জমির পরিমাণ</label><input id="fa" type="number" min="0" step="any" value="1"></div><div><label>একক</label><select id="fu"><option>বিঘা</option><option>শতক</option><option>একর</option></select></div></div><div class="row"><button data-a="fcalc">হিসাব করুন</button></div></div><div id="fr"></div>`;
+}
+A.fcalc = () => {
+  const nm = $('fc').value, a = (+$('fa').value || 0) * UN[$('fu').value]; if (!a) return toast('জমির পরিমাণ দিন');
+  const c = CROPS[nm], bg = a / 33, ev = plan(nm, a), SB = '<button class="say sm" data-a="say" aria-label="শুনুন" style="float:right">🔊</button>';
+  $('fr').innerHTML = `<div class="card">${SB}<h3>${esc(nm)}: ${areaTxt(a)} জমির মোট সার</h3>${Object.entries(c.f).map(([k, v]) => `<div class="pr"><span>${FN[k]}</span><b>${kgs(v * bg)}</b></div>`).join('')}</div>
+<div class="card">${SB}<h3>কবে কী করবেন</h3><p class="mut">দিন গোনা হবে বপন বা রোপণের দিন থেকে (০ দিন = জমি তৈরির সময়)</p>${ev.map(e => `<div class="it"><b>${e.day === 0 ? 'শুরুতে (০ দিন)' : bn(e.day) + ' দিনের মাথায়'}</b><div>${esc(evText(e))}</div></div>`).join('')}</div>
+<p class="mut">এটি আনুমানিক সাধারণ নির্দেশিকা। মাটি, জাত ও এলাকাভেদে বদলায়। মাটি পরীক্ষা বা উপজেলা কৃষি অফিসের পরামর্শ নিন। জৈব সার দিলে রাসায়নিক সার কিছুটা কমানো যায়।</p>`;
+};
+
+/* ---------- জরুরি সেবা ---------- */
+function svc() {
+  const L = [['📞', 'কৃষি কল সেন্টার', '১৬১২৩', '16123', 'ফসল, সার, পোকা-রোগ নিয়ে কৃষি বিশেষজ্ঞের পরামর্শ'], ['🐄', 'প্রাণিসম্পদ হেল্পলাইন', '১৬৩৫৮', '16358', 'গবাদিপশু ও হাঁস-মুরগির রোগ ও টিকা'], ['🏛️', 'সরকারি তথ্য ও সেবা', '৩৩৩', '333', 'সরকারি সেবা ও তথ্য'], ['🚨', 'জরুরি সেবা', '৯৯৯', '999', 'পুলিশ, ফায়ার সার্ভিস, অ্যাম্বুলেন্স']];
+  $('app').innerHTML = `<section class="gh"><h1>📞 জরুরি সেবা ও যোগাযোগ</h1><p>এক ট্যাপে কল করুন। উপজেলা কৃষি অফিসে গিয়েও পরামর্শ নিতে পারেন।</p></section>${L.map(x => `<div class="card"><div class="sl"><span class="ri">${x[0]}</span><span><b>${x[1]}</b><br><span class="mut">${x[4]}</span></span><button class="say sm" data-a="say" aria-label="শুনুন">🔊</button></div><a class="btn" style="margin-top:10px" href="tel:${x[3]}">${x[2]} নম্বরে কল করুন</a></div>`).join('')}<div class="card"><h3>🏢 উপজেলা কৃষি অফিস <button class="say sm" data-a="say" aria-label="শুনুন">🔊</button></h3><p>উপজেলা কৃষি কর্মকর্তা ও উপ-সহকারী কৃষি কর্মকর্তা (ব্লক সুপারভাইজার) পরামর্শ ও প্রশিক্ষণ দেন। বীজ-সারের সরকারি সহায়তা ও কৃষি কার্ডের তথ্যও সেখানে পাওয়া যায়।</p></div><p class="mut">নম্বর বদলাতে পারে। কাজ না করলে উপজেলা কৃষি অফিসে জানুন।</p>`;
+}
+
+/* ---------- ভয়েসে শোনা (সব পাতায়) ---------- */
+let SPK = false;
+try { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices(); } catch { }
+function speak(txt) {
+  if (!('speechSynthesis' in window)) return toast('এই ফোনে ভয়েস সমর্থিত নয়');
+  const ss = speechSynthesis, was = SPK, same = speak.last === txt, id = ++speak.id;
+  ss.cancel(); SPK = false; $('tts').textContent = '🔊';
+  if (was && same) return;
+  speak.last = txt;
+  const clean = String(txt || '').replace(/[\p{Extended_Pictographic}\uFE0F\u200d]/gu, ' ').replace(/[→•|]/g, ', ').replace(/\s+/g, ' ').trim(); if (!clean) return;
+  const parts = clean.match(/[^।.!?]+[।.!?]?/g) || [clean], chunks = []; let cur = '';
+  parts.forEach(p => { if ((cur + p).length > 170) { if (cur) chunks.push(cur); cur = p; } else cur += p; }); if (cur) chunks.push(cur);
+  const v = ss.getVoices().find(x => /^bn/i.test(x.lang));
+  if (!v && !speak.warned) { speak.warned = 1; toast('বাংলা ভয়েস না পেলে ফোনের Settings → Text-to-speech-এ বাংলা যোগ করুন'); }
+  SPK = true; $('tts').textContent = '⏹';
+  const done = () => { if (id === speak.id) { SPK = false; $('tts').textContent = '🔊'; } };
+  chunks.forEach((c, i) => { const u = new SpeechSynthesisUtterance(c); u.lang = 'bn-BD'; if (v) u.voice = v; u.rate = .95; if (i === chunks.length - 1) { u.onend = done; u.onerror = done; } ss.speak(u); });
+}
+speak.id = 0;
+A.say = (v, b) => speak((b.closest('.it,.card,.pcard,.rc,.hero,.gh') || $('app')).innerText);
+A.sayPage = () => speak($('app').innerText);
+A.sayWx = () => speak(WSAY);
 
 /* ---------- প্রথম সেটআপ পাতা: yoursite/#setup ---------- */
 const RULES = { fs: `rules_version = '2';
