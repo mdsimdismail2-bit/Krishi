@@ -74,15 +74,22 @@ details.rc{background:var(--card);border:1px solid var(--bd);border-radius:20px;
 .ri{width:48px;height:48px;border-radius:16px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:26px;flex:none}.rb{padding:0 18px 16px}.rb h4{margin:14px 0 4px;color:var(--pri)}.rb p{margin:0}.rb ol{margin:0;padding-left:20px}.rb li{margin-bottom:4px}
 a.btn{display:block;text-align:center;text-decoration:none;font-weight:600;padding:11px 18px;border-radius:14px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--prit)}a.btn.alt{background:transparent;color:var(--pri);border:1.5px solid var(--pri)}
 .say{background:var(--soft);color:var(--pri);border:1px solid var(--bd);padding:2px 10px;border-radius:99px;font-size:14px;margin-left:6px;cursor:pointer}
-#tts{position:fixed;left:14px;bottom:calc(104px + env(safe-area-inset-bottom,0px));width:50px;height:50px;border-radius:50%;z-index:6;padding:0;font-size:22px;box-shadow:var(--sh);background:linear-gradient(135deg,var(--acc),#f3c13a);color:#1d1400;border:0}
+#nav a span svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;display:block;margin:0 auto 2px}
+#nav .fab i svg{width:30px;height:30px;stroke:#1d1400;fill:none;stroke-width:2.6;stroke-linecap:round}
+#bell{color:var(--pri);display:flex;align-items:center;justify-content:center}#bell svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pav i svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:7px}
+.tile{padding:16px 6px 14px;border-radius:22px}
+.tile .ti{display:flex;width:56px;height:56px;border-radius:20px;margin:0 auto 9px;align-items:center;justify-content:center;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 10px 20px rgba(0,0,0,.16);font-style:normal}
+.tile .ti svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.bar{height:8px;border-radius:6px;background:var(--soft);overflow:hidden;margin:3px 0 8px}.bar>i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--pri),var(--pri2))}
 </style>
 </head>
 <body>
 <header><div class="brand"><span class="logo">🌾</span>মাঠের হাট</div>
-<div class="hb"><button id="bell" data-a="bell" aria-label="নোটিফিকেশন">🔔<i id="bdg" hidden></i></button><a id="pf" href="#me" aria-label="প্রোফাইল"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a></div></header>
+<div class="hb"><button id="bell" data-a="bell" aria-label="নোটিফিকেশন"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><i id="bdg" hidden></i></button><a id="pf" href="#me" aria-label="প্রোফাইল"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a></div></header>
 <main id="app"></main>
-<nav id="nav"><a href="#home"><span>🏠</span>হোম</a><a href="#market"><span>🛒</span>বাজার</a><a href="#post" class="fab" aria-label="পণ্য পোস্ট করুন"><i>＋</i></a><a href="#chat"><span>💬</span>বার্তা</a><a href="#guide"><span>🌿</span>গাইড</a></nav>
-<button id="tts" data-a="sayPage" aria-label="এই পাতা পড়ে শোনাও">🔊</button><div id="pop" role="alert"></div><div class="md" id="md"></div><div id="toast"></div>
+<nav id="nav"><a href="#home"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>হোম</a><a href="#market"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>বাজার</a><a href="#post" class="fab" aria-label="পণ্য পোস্ট করুন"><i><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></i></a><a href="#chat"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>বার্তা</a><a href="#guide"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></span>গাইড</a></nav>
+<div id="pop" role="alert"></div><div class="md" id="md"></div><div id="toast"></div>
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
@@ -138,6 +145,16 @@ const CROPS = {
 'শসা': { f: { u: 20, t: 15, m: 15, o: 1000 }, d: [[0, 'মাদা তৈরির সময়', { o: 1, t: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [45, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[20, 'মাচা দিন'], [45, 'শসা তোলা শুরু']] },
 'মসুর': { f: { u: 5, t: 13, m: 7 }, d: [[0, 'শেষ চাষে (একবারে)', { u: 1, t: 1, m: 1 }]], t: [[105, '৮০% ফল পাকলে কাটুন']] },
 'মুগডাল': { f: { u: 5, t: 13, m: 7 }, d: [[0, 'শেষ চাষে (একবারে)', { u: 1, t: 1, m: 1 }]], t: [[65, '৮০% ফল পাকলে তুলুন']] }};
+const IC = {"home": "<path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/><polyline points=\"9 22 9 12 15 12 15 22\"/>", "bag": "<path d=\"M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z\"/><path d=\"M3 6h18\"/><path d=\"M16 10a4 4 0 0 1-8 0\"/>", "tag": "<path d=\"M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z\"/><line x1=\"7\" y1=\"7\" x2=\"7.01\" y2=\"7\"/>", "chart": "<line x1=\"12\" y1=\"20\" x2=\"12\" y2=\"10\"/><line x1=\"18\" y1=\"20\" x2=\"18\" y2=\"4\"/><line x1=\"6\" y1=\"20\" x2=\"6\" y2=\"16\"/>", "book": "<path d=\"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z\"/><path d=\"M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z\"/>", "flask": "<path d=\"M9 3h6\"/><path d=\"M10 3v6L4.5 19a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L14 9V3\"/><path d=\"M7.5 15h9\"/>", "leaf": "<path d=\"M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z\"/><path d=\"M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12\"/>", "help": "<path d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z\"/><path d=\"M9.7 9.6a2.4 2.4 0 1 1 3.4 2.2c-.6.3-1.1.8-1.1 1.5\"/><line x1=\"12\" y1=\"16.4\" x2=\"12.01\" y2=\"16.4\"/>", "heart": "<path d=\"M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\"/>", "phone": "<path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"/>", "user": "<path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/>", "msg": "<path d=\"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\"/>", "bell": "<path d=\"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9\"/><path d=\"M13.73 21a2 2 0 0 1-3.46 0\"/>", "plus": "<line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"/><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/>", "camera": "<path d=\"M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z\"/><circle cx=\"12\" cy=\"13\" r=\"4\"/>"};
+const ic = n => '<svg viewBox="0 0 24 24" aria-hidden="true">' + IC[n] + '</svg>';
+Object.assign(CROPS, {
+'শিম': { f: { u: 13, t: 20, m: 16, o: 1000 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: .5 }], [20, '১ম কিস্তি', { u: .5 }], [40, '২য় কিস্তি', { u: .5, m: .5 }]], t: [[20, 'মাচা বা বাউনি দিন'], [80, 'শিম তোলা শুরু']] },
+'মিষ্টিকুমড়া': { f: { u: 20, t: 20, m: 13, o: 1000 }, d: [[0, 'মাদা তৈরির সময়', { o: 1, t: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [50, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[20, 'লতা ছড়িয়ে দিন, গোড়ার আগাছা পরিষ্কার করুন'], [90, 'খোসা শক্ত হলে কুমড়া তুলুন']] },
+'ঝিঙা': { f: { u: 20, t: 13, m: 13, o: 1000 }, d: [[0, 'মাদা তৈরির সময়', { o: 1, t: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [45, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[20, 'মাচা দিন'], [50, 'ঝিঙা তোলা শুরু']] },
+'চিচিঙ্গা': { f: { u: 20, t: 13, m: 13, o: 1000 }, d: [[0, 'মাদা তৈরির সময়', { o: 1, t: 1, m: .5 }], [15, '১ম কিস্তি', { u: 1 / 3 }], [30, '২য় কিস্তি', { u: 1 / 3, m: .5 }], [45, 'শেষ কিস্তি', { u: 1 / 3 }]], t: [[20, 'মাচা দিন'], [55, 'চিচিঙ্গা তোলা শুরু']] },
+'পেঁপে': { note: 'প্রতি গাছে বছরে প্রায় গোবর ১০ কেজি, ইউরিয়া ২০০ গ্রাম, টিএসপি ২০০ গ্রাম, এমওপি ২৫০ গ্রাম ধরা হয়েছে। ২×২ মিটার দূরত্বে প্রতি বিঘায় প্রায় ৩৩০টি গাছ ধরা হয়েছে; গাছ কম-বেশি হলে সেই অনুপাতে কমান-বাড়ান। ফলের বাগানের মাত্রা বয়স ও জাতভেদে বদলায়।', f: { u: .2 * 330, t: .2 * 330, m: .25 * 330, o: 10 * 330 }, d: [[0, 'গর্ত তৈরি ও চারা রোপণের সময়', { o: 1, t: 1 }], [60, '১ম কিস্তি', { u: 1 / 3, m: 1 / 3 }], [120, '২য় কিস্তি', { u: 1 / 3, m: 1 / 3 }], [180, '৩য় কিস্তি', { u: 1 / 3, m: 1 / 3 }]], t: [[30, 'গোড়ায় মাটি তুলে দিন, পানি জমতে দেবেন না'], [270, 'ফল পাকতে শুরু করলে তুলুন']] },
+'কলা': { note: 'প্রতি গাছে প্রায় গোবর ১০ কেজি, ইউরিয়া ২৫০ গ্রাম, টিএসপি ১৫০ গ্রাম, এমওপি ৩০০ গ্রাম ধরা হয়েছে। ২.৫×২.৫ মিটার দূরত্বে প্রতি বিঘায় প্রায় ২১০টি গাছ ধরা হয়েছে; গাছ কম-বেশি হলে সেই অনুপাতে কমান-বাড়ান। মাত্রা জাতভেদে বদলায়।', f: { u: .25 * 210, t: .15 * 210, m: .3 * 210, o: 10 * 210 }, d: [[0, 'গর্ত তৈরির সময়', { o: 1, t: 1 }], [45, '১ম কিস্তি', { u: .25, m: .25 }], [90, '২য় কিস্তি', { u: .25, m: .25 }], [135, '৩য় কিস্তি', { u: .25, m: .25 }], [180, 'শেষ কিস্তি', { u: .25, m: .25 }]], t: [[60, 'পাশের তেউড় ছেঁটে ১-২টি রাখুন'], [345, 'কাঁদি পরিপক্ক হলে কাটুন (জাতভেদে ১১-১৪ মাস)']] },
+'লেবু': { note: 'প্রতি গাছে বছরে প্রায় গোবর ১২ কেজি, ইউরিয়া ২০০ গ্রাম, টিএসপি ২০০ গ্রাম, এমওপি ১৫০ গ্রাম ধরা হয়েছে। ৪×৪ মিটার দূরত্বে প্রতি বিঘায় প্রায় ৮০টি গাছ ধরা হয়েছে। চারা ২-৩ বছর বয়সে ফল দিতে শুরু করে, বড় গাছে মাত্রা বাড়াতে হয়।', f: { u: .2 * 80, t: .2 * 80, m: .15 * 80, o: 12 * 80 }, d: [[0, 'গর্ত তৈরির সময়', { o: 1, t: 1 }], [60, '১ম কিস্তি', { u: .5, m: .5 }], [150, '২য় কিস্তি', { u: .5, m: .5 }]], t: [[30, 'শুকনো মৌসুমে সেচ দিন'], [90, 'গোড়ায় আগাছা পরিষ্কার ও মালচিং করুন'], [730, 'এই সময়ে ফল ধরা শুরু হয়']] }});
 const kgs = k => k >= 1 ? bn(+(Math.round(k * 10) / 10)) + ' কেজি' : bn(Math.round(k * 100) * 10) + ' গ্রাম';
 const areaTxt = a => a % 33 === 0 ? bn(a / 33) + ' বিঘা' : bn(+a.toFixed(1)) + ' শতক';
 function plan(name, areaSh) {
@@ -192,14 +209,15 @@ onAuthStateChanged(auth, async u => {
 /* ---------- রাউটার ---------- */
 function route() {
   off.forEach(x => x()); off = [];
-  if (SPK) { speechSynthesis.cancel(); SPK = false; $('tts').textContent = '🔊'; }
+  if (SPK) { speechSynthesis.cancel(); SPK = false;  }
   setAv();
   const r = (location.hash || '#home').slice(1);
+  if (r !== 'farm') PROJ = null;
   document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + r));
   if (r === 'setup') return setup();
   if (!UID || !ME) return authView();
   startNotif();
-  ({ home, market, post, chat, help, me, favs, book, guide, fert, svc }[r] || home)();
+  ({ home, market, post, chat, help, me, favs, book, guide, fert, svc, farm }[r] || home)();
 }
 
 /* ---------- লগইন / নিবন্ধন ---------- */
@@ -229,7 +247,7 @@ A.reg = async () => {
 async function home() {
   const h = new Date().getHours(), gr = h < 12 ? 'শুভ সকাল' : h < 17 ? 'শুভ দুপুর' : h < 19 ? 'শুভ বিকেল' : 'শুভ সন্ধ্যা';
   $('app').innerHTML = `<section class="hero"><div class="m">${gr} 👋</div><h1>${esc(ME.name)}</h1><div class="m">📍 ${esc(ME.upazila)}, ${esc(ME.district)}</div></section>
-<div class="tiles">${[['#market', '🛒', 'কিনুন'], ['#post', '📸', 'বেচুন'], ['#book', '📒', 'কৃষি খাতা'], ['#fert', '🧪', 'সারের হিসাব'], ['#guide', '🌿', 'কৃষি গাইড'], ['#help', '🌱', 'প্রশ্ন করুন'], ['#favs', '❤️', 'পছন্দ'], ['#svc', '📞', 'জরুরি সেবা'], ['#me', '👤', 'প্রোফাইল']].map(t => `<a class="tile" href="${t[0]}"><span>${t[1]}</span>${t[2]}</a>`).join('')}</div>
+<div class="tiles">${[['#market', 'bag', 'কিনুন', '#0f4c2a,#2f9158'], ['#post', 'tag', 'বেচুন', '#c98a00,#f3c13a'], ['#farm', 'chart', 'ফসলের হিসাব', '#3949ab,#7986cb'], ['#book', 'book', 'কৃষি খাতা', '#00796b,#4db6ac'], ['#fert', 'flask', 'সারের হিসাব', '#7b1fa2,#ba68c8'], ['#guide', 'leaf', 'কৃষি গাইড', '#558b2f,#9ccc65'], ['#help', 'help', 'প্রশ্ন করুন', '#0277bd,#4fc3f7'], ['#svc', 'phone', 'জরুরি সেবা', '#d84315,#ff8a65'], ['#me', 'user', 'প্রোফাইল', '#455a64,#90a4ae']].map(t => `<a class="tile" href="${t[0]}"><i class="ti" style="background:linear-gradient(135deg,${t[3]})">${ic(t[1])}</i>${t[2]}</a>`).join('')}</div>
 <div class="card"><h3>💡 আজকের কৃষি পরামর্শ <button class="say sm" data-a="say" aria-label="শুনুন">🔊</button></h3><div>${MONTHS[new Date().getMonth()][1]}</div></div>
 <div id="wx"><div class="sk" style="height:300px"></div></div>
 <div class="card"><h3>📊 আজকের বাজার দর <button class="say sm" data-a="say" aria-label="শুনুন">🔊</button></h3><div id="pr" class="mut">লোড হচ্ছে…</div></div>
@@ -288,7 +306,7 @@ async function crops() {
     const dt = e => new Date(new Date(c.date).getTime() + e.day * 864e5).toLocaleDateString('bn-BD', { day: 'numeric', month: 'long' });
     return `<div class="it"><b>${esc(c.crop)}</b> <span class="mut">• ${bn(n)} দিন • জমি ${areaTxt(ar)}</span><button class="say sm" data-a="say" aria-label="শুনুন">🔊</button>
 <div style="margin-top:4px">${nx ? (nx.day === n ? '🔔 আজই: ' : 'পরবর্তী (' + dt(nx) + '): ') + esc(evText(nx)) : '✅ সব কাজ শেষ'}</div>
-<details><summary class="mut" style="cursor:pointer;padding:4px 0">পুরো সময়সূচি ও সারের পরিমাণ</summary>${ev.map(e => `<div class="mut" style="padding:3px 0">${e.day < n ? '✅' : '⏳'} ${dt(e)} (${bn(e.day)} দিন): ${esc(evText(e))}</div>`).join('')}</details>
+<details><summary class="mut" style="cursor:pointer;padding:4px 0">পুরো সময়সূচি ও সারের পরিমাণ</summary>${ev.map(e => `<div class="mut" style="padding:3px 0">${e.day < n ? '✅' : '⏳'} ${dt(e)} (${bn(e.day)} দিন): ${esc(evText(e))}</div>`).join('')}${CROPS[c.crop] && CROPS[c.crop].note ? `<div class="mut" style="padding:6px 0">${CROPS[c.crop].note}</div>` : ''}</details>
 <button class="sm del" data-a="dc" data-v="${d.id}">মুছুন</button></div>`;
   }).join('') : '<p class="mut">কোনো ফসল যোগ করা হয়নি।</p>';
 }
@@ -313,7 +331,7 @@ let FLT = 'all';
 async function loadFav() { try { FAV = new Set((await getDocs(col('users', UID, 'favs'))).docs.map(d => d.id)); } catch { } }
 async function market() {
   const CH = [['all', 'সব'], ['near', '📍 কাছের'], ['ws', 'পাইকারি'], ['cheap', 'দাম কম']].concat(CATS.map(c => [c, c]));
-  $('app').innerHTML = `<input id="q" placeholder="🔍 ধান, সবজি, ট্রাক্টর…"><div class="chips" id="ch">${CH.map(c => `<button class="chip ${c[0] === FLT ? 'on' : ''}" data-a="flt" data-v="${esc(c[0])}">${esc(c[1])}</button>`).join('')}</div><div id="ml" class="grid"><div class="sk"></div><div class="sk"></div></div>`;
+  $('app').innerHTML = `<input id="q" placeholder="🔍 ধান, সবজি, ট্রাক্টর…"><div class="chips" id="ch"><a class="chip" href="#favs">❤️ পছন্দ</a>${CH.map(c => `<button class="chip ${c[0] === FLT ? 'on' : ''}" data-a="flt" data-v="${esc(c[0])}">${esc(c[1])}</button>`).join('')}</div><div id="ml" class="grid"><div class="sk"></div><div class="sk"></div></div>`;
   try { await loadFav(); ALL = await feed(); ALL.forEach(p => P[p.id] = p); } catch (e) { console.error(e); return $('ml').innerHTML = '<p class="mut">পোস্ট আনা যায়নি। ইন্টারনেট দেখুন।</p>'; }
   A.draw = () => {
     const q = $('q').value.trim(); let L = ALL.filter(p => (!q || (p.title + (p.description || '')).includes(q)) && (FLT === 'all' || FLT === 'cheap' || (FLT === 'near' ? p.r >= 3 : FLT === 'ws' ? p.saleType !== 'retail' : p.category === FLT)));
@@ -443,7 +461,7 @@ A.calc = () => { const v = i => +$(i).value || 0, cost = v('c1') + v('c2') + v('
 
 /* ---------- প্রোফাইল (উপরে ডানে আইকন) ---------- */
 async function me() {
-  $('app').innerHTML = `<div class="card" style="text-align:center"><label class="pav" for="pph">${ME.photo ? `<img src="${esc(ME.photo)}" alt="">` : '<span>👤</span>'}<i>📷</i></label><input id="pph" type="file" accept="image/*" hidden><h3 style="margin-top:10px">${esc(ME.name)}</h3><div class="mut">${ME.village ? '🏡 ' + esc(ME.village) + ' • ' : ''}${esc(ME.upazila)}, ${esc(ME.district)}, ${esc(ME.division)}</div><div class="mut">${esc(ME.phone)}</div></div>
+  $('app').innerHTML = `<div class="card" style="text-align:center"><label class="pav" for="pph">${ME.photo ? `<img src="${esc(ME.photo)}" alt="">` : '<span>👤</span>'}<i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></i></label><input id="pph" type="file" accept="image/*" hidden><h3 style="margin-top:10px">${esc(ME.name)}</h3><div class="mut">${ME.village ? '🏡 ' + esc(ME.village) + ' • ' : ''}${esc(ME.upazila)}, ${esc(ME.district)}, ${esc(ME.division)}</div><div class="mut">${esc(ME.phone)}</div></div>
 <div class="card"><label>আমার গ্রামের নাম</label><input id="pv" value="${esc(ME.village || '')}" placeholder="যেমন: কালিয়াগঞ্জ"><label>আমি করতে চাই</label><select id="ut"><option value="both">খুচরা ও পাইকারি</option><option value="retail">শুধু খুচরা</option><option value="wholesale">শুধু পাইকারি</option></select><div class="row"><button data-a="ut">সংরক্ষণ</button><button class="alt" data-a="perm">🔔 ফোন নোটিফিকেশন চালু</button></div><div class="row"><button class="alt" data-a="out">লগ আউট</button></div></div>
 <div class="card"><h3>আমার পোস্ট</h3><div id="mp"></div></div><div class="card"><h3>আমার ক্রয় (অর্ডার)</h3><div id="ob"></div></div><div class="card"><h3>আমার কাছে আসা অর্ডার</h3><div id="os"></div></div>`;
   $('ut').value = ME.type; $('pph').onchange = e => avatar(e.target.files[0]);
@@ -486,8 +504,8 @@ GUIDE.live = [
 { i: '🐟', t: 'পুকুর প্রস্তুতি', w: 'ভালো ফলনের জন্য পোনা ছাড়ার আগে', l: ['লাগবে', 'ধাপ', 'কখন'], m: 'চুন, জাল, পুকুর শুকানোর সুবিধা', s: ['পুকুর শুকিয়ে বা জাল টেনে অনাকাঙ্ক্ষিত মাছ ও আগাছা সরান', 'প্রতি শতকে প্রায় ১ কেজি চুন ছিটান', '৫-৭ দিন পর পানি ভরুন', 'পানির রঙ হালকা সবুজ হলে সকালে বা বিকেলে পোনা ছাড়ুন'], u: 'পোনা ছাড়ার ৫-৭ দিন আগে প্রস্তুতি শেষ করুন', n: 'পানি খুব গাঢ় সবুজ বা দুর্গন্ধ হলে আংশিক পানি বদলান।' },
 { i: '🐠', t: 'মাছের যত্ন ও রোগ', w: 'মড়ক ও ক্ষতি কমাতে', l: ['প্রয়োজন', 'কী করবেন', 'কখন'], m: 'জাল, পরিষ্কার পানির উৎস, সুষম খাবার', s: ['ভোরে মাছ ভেসে উঠলে অক্সিজেন কম, সাথে সাথে পানি দিন বা ঢেউ তুলুন', 'খাবার একসাথে বেশি না দিয়ে দিনে ২ বার অল্প করে দিন', 'অসুস্থ মাছ আলাদা করুন, মরা মাছ তুলে মাটিতে পুঁতুন', 'মাসে ১-২ বার জাল টেনে মাছের স্বাস্থ্য দেখুন'], u: 'প্রতিদিন সকালে পুকুর দেখুন', n: 'রোগ বা মড়ক হলে উপজেলা মৎস্য অফিসে যোগাযোগ করুন।' }];
 const SEASONS = [
-{ n: 'রবি / শীতকাল', m: 'অক্টোবর – ফেব্রুয়ারি', mo: [9, 10, 11, 0, 1], i: '❄️', c: { 'ধান ও শস্য': 'বোরো ধান (বীজতলা নভেম্বর-ডিসেম্বর), গম, ভুট্টা', 'ডাল ও তেল': 'মসুর, ছোলা, খেসারি, মটর, সরিষা, তিসি', 'সবজি': 'আলু, টমেটো, বেগুন, ফুলকপি, বাঁধাকপি, শিম, মুলা, গাজর, পালংশাক, লালশাক, ধনিয়া', 'মসলা': 'পেঁয়াজ, রসুন, মরিচ' } },
-{ n: 'খরিফ-১ / গ্রীষ্মকাল', m: 'মার্চ – জুন', mo: [2, 3, 4, 5], i: '☀️', c: { 'ধান ও শস্য': 'আউশ ধান (মার্চ-মে), ভুট্টা', 'ডাল ও তেল': 'মুগডাল, তিল, চিনাবাদাম', 'সবজি': 'ঢেঁড়স, করলা, ঝিঙা, চিচিঙ্গা, পটল, কচু, ডাঁটা, পুঁইশাক, লাউ, শসা', 'আঁশ': 'পাট (মার্চ-এপ্রিল)', 'ফল': 'আম, কাঁঠাল, লিচু, তরমুজ' } },
+{ n: 'রবি / শীতকাল', m: 'অক্টোবর – ফেব্রুয়ারি', mo: [9, 10, 11, 0, 1], i: '❄️', c: { 'ধান ও শস্য': 'বোরো ধান (বীজতলা নভেম্বর-ডিসেম্বর), গম, ভুট্টা', 'ডাল ও তেল': 'মসুর, ছোলা, খেসারি, মটর, সরিষা, তিসি', 'সবজি': 'আলু, টমেটো, বেগুন, ফুলকপি, বাঁধাকপি, শিম, মিষ্টিকুমড়া, মুলা, গাজর, পালংশাক, লালশাক, ধনিয়া', 'মসলা': 'পেঁয়াজ, রসুন, মরিচ' } },
+{ n: 'খরিফ-১ / গ্রীষ্মকাল', m: 'মার্চ – জুন', mo: [2, 3, 4, 5], i: '☀️', c: { 'ধান ও শস্য': 'আউশ ধান (মার্চ-মে), ভুট্টা', 'ডাল ও তেল': 'মুগডাল, তিল, চিনাবাদাম', 'সবজি': 'ঢেঁড়স, করলা, ঝিঙা, চিচিঙ্গা, পটল, কচু, ডাঁটা, পুঁইশাক, লাউ, শসা', 'আঁশ': 'পাট (মার্চ-এপ্রিল)', 'ফল': 'আম, কাঁঠাল, লিচু, তরমুজ, পেঁপে, কলা, লেবু (চারা রোপণ সাধারণত ফেব্রুয়ারি-এপ্রিল ও জুলাই-অক্টোবর)' } },
 { n: 'খরিফ-২ / বর্ষাকাল', m: 'জুলাই – সেপ্টেম্বর', mo: [6, 7, 8], i: '🌧️', c: { 'ধান ও শস্য': 'রোপা আমন ধান (জুলাই-আগস্ট)', 'সবজি': 'কলমি, ডাঁটা, পুঁইশাক, কচু, বরবটি, লাউ, কুমড়া, ঝিঙা', 'বীজতলা': 'শীতের সবজির বীজতলা আগস্ট-সেপ্টেম্বরে শুরু করুন', 'ফল': 'পেয়ারা, কলা, কাঁঠাল' } }];
 let GT = 'season';
 function guide() {
@@ -545,7 +563,7 @@ function fert() {
 A.fcalc = () => {
   const nm = $('fc').value, a = (+$('fa').value || 0) * UN[$('fu').value]; if (!a) return toast('জমির পরিমাণ দিন');
   const c = CROPS[nm], bg = a / 33, ev = plan(nm, a), SB = '<button class="say sm" data-a="say" aria-label="শুনুন" style="float:right">🔊</button>';
-  $('fr').innerHTML = `<div class="card">${SB}<h3>${esc(nm)}: ${areaTxt(a)} জমির মোট সার</h3>${Object.entries(c.f).map(([k, v]) => `<div class="pr"><span>${FN[k]}</span><b>${kgs(v * bg)}</b></div>`).join('')}</div>
+  $('fr').innerHTML = `<div class="card">${SB}<h3>${esc(nm)}: ${areaTxt(a)} জমির মোট সার</h3>${Object.entries(c.f).map(([k, v]) => `<div class="pr"><span>${FN[k]}</span><b>${kgs(v * bg)}</b></div>`).join('')}${c.note ? `<p class="mut" style="margin:8px 0 0">${c.note}</p>` : ''}</div>
 <div class="card">${SB}<h3>কবে কী করবেন</h3><p class="mut">দিন গোনা হবে বপন বা রোপণের দিন থেকে (০ দিন = জমি তৈরির সময়)</p>${ev.map(e => `<div class="it"><b>${e.day === 0 ? 'শুরুতে (০ দিন)' : bn(e.day) + ' দিনের মাথায়'}</b><div>${esc(evText(e))}</div></div>`).join('')}</div>
 <p class="mut">এটি আনুমানিক সাধারণ নির্দেশিকা। মাটি, জাত ও এলাকাভেদে বদলায়। মাটি পরীক্ষা বা উপজেলা কৃষি অফিসের পরামর্শ নিন। জৈব সার দিলে রাসায়নিক সার কিছুটা কমানো যায়।</p>`;
 };
@@ -562,7 +580,7 @@ try { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => speec
 function speak(txt) {
   if (!('speechSynthesis' in window)) return toast('এই ফোনে ভয়েস সমর্থিত নয়');
   const ss = speechSynthesis, was = SPK, same = speak.last === txt, id = ++speak.id;
-  ss.cancel(); SPK = false; $('tts').textContent = '🔊';
+  ss.cancel(); SPK = false; 
   if (was && same) return;
   speak.last = txt;
   const clean = String(txt || '').replace(/[\p{Extended_Pictographic}\uFE0F\u200d]/gu, ' ').replace(/[→•|]/g, ', ').replace(/\s+/g, ' ').trim(); if (!clean) return;
@@ -570,21 +588,77 @@ function speak(txt) {
   parts.forEach(p => { if ((cur + p).length > 170) { if (cur) chunks.push(cur); cur = p; } else cur += p; }); if (cur) chunks.push(cur);
   const v = ss.getVoices().find(x => /^bn/i.test(x.lang));
   if (!v && !speak.warned) { speak.warned = 1; toast('বাংলা ভয়েস না পেলে ফোনের Settings → Text-to-speech-এ বাংলা যোগ করুন'); }
-  SPK = true; $('tts').textContent = '⏹';
-  const done = () => { if (id === speak.id) { SPK = false; $('tts').textContent = '🔊'; } };
+  SPK = true; 
+  const done = () => { if (id === speak.id) { SPK = false;  } };
   chunks.forEach((c, i) => { const u = new SpeechSynthesisUtterance(c); u.lang = 'bn-BD'; if (v) u.voice = v; u.rate = .95; if (i === chunks.length - 1) { u.onend = done; u.onerror = done; } ss.speak(u); });
 }
 speak.id = 0;
 A.say = (v, b) => speak((b.closest('.it,.card,.pcard,.rc,.hero,.gh') || $('app')).innerText);
-A.sayPage = () => speak($('app').innerText);
 A.sayWx = () => speak(WSAY);
+
+
+/* ---------- ফসল ভিত্তিক হিসাব: খরচ-আয় লিখে রাখুন, শেষে পুরো লাভ-ক্ষতি ---------- */
+const OUTC = ['বীজ/চারা', 'জমি তৈরি/চাষ', 'সার', 'কীটনাশক/ওষুধ', 'সেচ', 'শ্রমিক', 'ফসল তোলা/মাড়াই', 'পরিবহন', 'অন্যান্য খরচ'], INCC = ['ফসল বিক্রি', 'উপজাত বিক্রি (খড়, লতা ইত্যাদি)', 'অন্যান্য আয়'];
+let PROJ = null;
+const pcol = id => col('users', UID, 'projects', id, 'entries');
+const sumBy = (E, t) => E.filter(e => e.type === t).reduce((a, e) => a + e.amount, 0);
+const projEntries = async id => (await getDocs(pcol(id))).docs.map(d => ({ id: d.id, ...d.data() }));
+const clr = v => v >= 0 ? 'var(--pri)' : 'var(--red)';
+async function farm() {
+  if (PROJ) return projView();
+  $('app').innerHTML = `<section class="gh"><div class="m">নাম রেখে খরচ-আয় লিখুন</div><h1>📊 ফসলের হিসাব</h1><p>প্রতিটি ফসলের জন্য আলাদা খাতা খুলুন। যেদিন যা খরচ হবে সেই খাতায় লিখে রাখুন, ফসল শেষে পুরো লাভ-ক্ষতি দেখুন।</p></section>
+<div class="card"><h3>নতুন ফসলের খাতা</h3><label>খাতার নাম</label><input id="pn" placeholder="যেমন: আমন ২০২৬ – উত্তর মাঠ"><label>কী ফসল</label><select id="pc2">${opts(Object.keys(CROPS).concat('অন্যান্য'))}</select><div class="row"><div><label>জমি</label><input id="pa" type="number" min="0" step="any" value="1"></div><div><label>একক</label><select id="pu2"><option>বিঘা</option><option>শতক</option><option>একর</option></select></div></div><label>শুরুর তারিখ</label><input id="ps2" type="date"><div class="row"><button data-a="pnew">খাতা খুলুন</button></div></div><div id="pl"><div class="sk" style="height:110px"></div></div>`;
+  $('ps2').value = today();
+  const L = await Promise.all((await getDocs(col('users', UID, 'projects'))).docs.map(async d => ({ id: d.id, ...d.data(), E: await projEntries(d.id) })));
+  const card = p => { const o = sumBy(p.E, 'out'), i = sumBy(p.E, 'in'), pf = i - o; return `<div class="card" data-a="popen" data-v="${p.id}" style="cursor:pointer"><div class="row" style="justify-content:space-between;align-items:center;margin:0"><div style="flex:3"><b>${esc(p.name)}</b><div class="mut">${esc(p.crop)} • ${areaTxt(p.area)} • ${p.status === 'done' ? '🏁 শেষ' : '⏳ চলছে'}</div></div><div style="flex:2;text-align:right"><div class="mut">খরচ ৳${bn(o)} • আয় ৳${bn(i)}</div><b style="color:${clr(pf)}">${pf >= 0 ? 'লাভ' : 'ক্ষতি'} ৳${bn(Math.abs(pf))}</b></div></div></div>`; };
+  const open = L.filter(p => p.status !== 'done'), done = L.filter(p => p.status === 'done');
+  const rank = done.map(p => ({ n: p.name, v: (sumBy(p.E, 'in') - sumBy(p.E, 'out')) / (p.area / 33) })).sort((a, b) => b.v - a.v);
+  $('pl').innerHTML = (open.length ? `<h3 style="margin:14px 2px 8px">⏳ চলমান ফসল</h3>${open.map(card).join('')}` : '') + (done.length ? `<h3 style="margin:14px 2px 8px">🏁 শেষ হওয়া ফসল</h3>${done.map(card).join('')}<div class="card"><h3>কোন ফসলে বিঘা প্রতি কত লাভ</h3>${rank.map(x => `<div class="pr"><span>${esc(x.n)}</span><b style="color:${clr(x.v)}">${x.v >= 0 ? '' : '−'}৳${bn(Math.round(Math.abs(x.v)))}</b></div>`).join('')}</div>` : '') || '<p class="mut" style="margin:14px 2px">এখনো কোনো খাতা খোলা হয়নি।</p>';
+}
+A.pnew = async () => {
+  const name = $('pn').value.trim(); if (!name) return toast('খাতার একটি নাম দিন');
+  const r = await addDoc(col('users', UID, 'projects'), { name: name.slice(0, 80), crop: $('pc2').value, area: (+$('pa').value || 1) * UN[$('pu2').value], start: $('ps2').value || today(), status: 'open', createdAt: serverTimestamp() });
+  PROJ = r.id; farm();
+};
+A.popen = id => { PROJ = id; farm(); };
+A.pback = () => { PROJ = null; farm(); };
+async function projView() {
+  const sn = await getDoc(doc(db, 'users', UID, 'projects', PROJ)); if (!sn.exists()) { PROJ = null; return farm(); }
+  const p = { id: PROJ, ...sn.data() }, E = (await projEntries(PROJ)).sort((a, b) => (b.date || '').localeCompare(a.date || '') || (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+  const out = sumBy(E, 'out'), inc = sumBy(E, 'in'), pf = inc - out, done = p.status === 'done', bg = p.area / 33, cats = {};
+  E.filter(e => e.type === 'out').forEach(e => cats[e.cat] = (cats[e.cat] || 0) + e.amount);
+  const days = Math.max(1, Math.floor(((p.endedAt ? new Date(p.endedAt) : new Date()) - new Date(p.start)) / 864e5)), SB = '<button class="say sm" data-a="say" aria-label="শুনুন" style="float:right">🔊</button>';
+  const brk = Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([k, v]) => { const pc = Math.round(v * 100 / out); return `<div class="pr" style="border:0;padding-bottom:0"><span>${esc(k)}</span><b>৳${bn(v)} (${bn(pc)}%)</b></div><div class="bar"><i style="width:${pc}%"></i></div>`; }).join('');
+  const rep2 = done ? `<div class="card">${SB}<h3>🏁 ফসলের পুরো হিসাব</h3>
+<div class="pr"><span>সময়কাল</span><b>${bn(days)} দিন</b></div><div class="pr"><span>মোট ফলন</span><b>${p.yield ? bn(p.yield) + ' ' + esc(p.yieldUnit) : 'দেওয়া হয়নি'}</b></div><div class="pr"><span>মোট খরচ</span><b>৳${bn(out)}</b></div><div class="pr"><span>মোট আয়</span><b>৳${bn(inc)}</b></div>
+<div class="pr"><span>${pf >= 0 ? 'নিট লাভ' : 'নিট ক্ষতি'}</span><b style="color:${clr(pf)}">৳${bn(Math.abs(pf))}</b></div><div class="pr"><span>বিঘা প্রতি ${pf >= 0 ? 'লাভ' : 'ক্ষতি'}</span><b style="color:${clr(pf)}">৳${bn(Math.round(Math.abs(pf) / bg))}</b></div>${p.yield ? `<div class="pr"><span>প্রতি ${esc(p.yieldUnit)} ফলনে খরচ</span><b>৳${bn(Math.round(out / p.yield))}</b></div>` : ''}${out ? `<h4 style="margin:14px 0 6px">কোন খাতে কত খরচ</h4>${brk}` : ''}
+<div class="row"><button data-a="pshare">শেয়ার করুন</button><button class="alt" data-a="preopen">আবার চালু করুন</button></div></div>`
+    : `<div class="card"><h3>আজকের খরচ বা আয় লিখুন</h3><div class="row"><select id="et"><option value="out">খরচ ➖</option><option value="in">আয় ➕</option></select><select id="ec">${opts(OUTC)}</select></div><div class="row"><input id="ea" type="number" min="0" step="any" placeholder="টাকা ৳"><input id="ed" type="date"></div><div class="row"><input id="en" placeholder="বিবরণ (ঐচ্ছিক, যেমন: ২ বস্তা ইউরিয়া)"></div><div class="row"><button data-a="eadd">খাতায় লিখুন</button></div></div>${out ? `<div class="card"><h3>কোন খাতে কত খরচ</h3>${brk}</div>` : ''}`;
+  $('app').innerHTML = `<button class="alt sm" data-a="pback">← সব খাতা</button><section class="gh" style="margin-top:10px"><div class="m">${esc(p.crop)} • ${areaTxt(p.area)} • ${bn(days)} দিন${done ? ' • 🏁 শেষ' : ''}</div><h1 style="font-size:23px">${esc(p.name)}</h1><div class="sum" style="margin-top:12px;color:var(--tx)"><div>খরচ<b>৳${bn(out)}</b></div><div>আয়<b>৳${bn(inc)}</b></div><div>${pf >= 0 ? 'লাভ' : 'ক্ষতি'}<b style="color:${clr(pf)}">৳${bn(Math.abs(pf))}</b></div></div></section>${rep2}
+<div class="card"><h3>সব হিসাব (${bn(E.length)}টি)</h3>${E.map(e => `<div class="it"><b style="color:${e.type === 'in' ? 'var(--pri)' : 'var(--red)'}">${e.type === 'in' ? '➕' : '➖'} ৳${bn(e.amount)}</b> ${esc(e.cat)}${e.note ? ' • ' + esc(e.note) : ''} <span class="mut">• ${bn(e.date || '')}</span>${done ? '' : ` <button class="sm del" data-a="edel" data-v="${e.id}">মুছুন</button>`}</div>`).join('') || '<p class="mut">এখনো কিছু লেখা হয়নি।</p>'}</div>
+${done ? '' : '<div class="card"><h3>ফসল কাটা বা বিক্রি শেষ?</h3><p class="mut">মোট ফলন লিখলে পুরো লাভ-ক্ষতির হিসাব পাবেন।</p><button data-a="pfin" style="width:100%">🏁 ফসল শেষ করুন</button></div>'}
+<button class="del sm" data-a="pdelp" style="margin:6px 0 20px">এই খাতা মুছুন</button>`;
+  if (!done) { $('ed').value = today(); $('et').onchange = () => $('ec').innerHTML = opts($('et').value === 'out' ? OUTC : INCC); }
+}
+A.eadd = async () => { const a = +$('ea').value; if (!a || a < 0) return toast('টাকার পরিমাণ দিন'); await addDoc(pcol(PROJ), { type: $('et').value, cat: $('ec').value, note: $('en').value.trim().slice(0, 100), amount: a, date: $('ed').value || today(), createdAt: serverTimestamp() }); projView(); };
+A.edel = async id => { await deleteDoc(doc(pcol(PROJ), id)); projView(); };
+A.pfin = () => modal(`<h3>🏁 ফসল শেষ</h3><label>মোট ফলন</label><div class="row"><input id="fy" type="number" min="0" step="any" placeholder="যেমন: ২৫"><select id="fyu"><option>মণ</option><option>কেজি</option><option>টন</option></select></div><p class="mut">না জানলে ফাঁকা রাখুন।</p><div class="row"><button data-a="pfin2">হিসাব সম্পূর্ণ করুন</button><button class="alt" data-a="mc">বাতিল</button></div>`);
+A.pfin2 = async () => { await updateDoc(doc(db, 'users', UID, 'projects', PROJ), { status: 'done', yield: +$('fy').value || 0, yieldUnit: $('fyu').value, endedAt: today() }); modal(''); projView(); };
+A.preopen = async () => { await updateDoc(doc(db, 'users', UID, 'projects', PROJ), { status: 'open', endedAt: '' }); projView(); };
+A.pdelp = async () => { if (!confirm('এই খাতা ও এর সব হিসাব মুছে ফেলবেন?')) return; for (const e of await projEntries(PROJ)) await deleteDoc(doc(pcol(PROJ), e.id)); await deleteDoc(doc(db, 'users', UID, 'projects', PROJ)); PROJ = null; farm(); };
+A.pshare = async () => {
+  const sn = await getDoc(doc(db, 'users', UID, 'projects', PROJ)), p = sn.data(), E = await projEntries(PROJ), o = sumBy(E, 'out'), i = sumBy(E, 'in'), pf = i - o;
+  const t = `${p.name} (${p.crop}, ${areaTxt(p.area)})\nখরচ ৳${o}, আয় ৳${i}, ${pf >= 0 ? 'লাভ' : 'ক্ষতি'} ৳${Math.abs(pf)}${p.yield ? `\nফলন ${p.yield} ${p.yieldUnit}, প্রতি ${p.yieldUnit} খরচ ৳${Math.round(o / p.yield)}` : ''}\n— মাঠের হাট`;
+  if (navigator.share) { try { await navigator.share({ text: t }); } catch { } } else { try { await navigator.clipboard.writeText(t); toast('কপি হয়েছে'); } catch { } }
+};
 
 /* ---------- প্রথম সেটআপ পাতা: yoursite/#setup ---------- */
 const RULES = { fs: `rules_version = '2';
 service cloud.firestore {
   match /databases/{db}/documents {
     function si() { return request.auth != null; }
-    function adm() { return si() && exists(/databases/$(db)/documents/admins/$(request.auth.uid)); }
+    // অ্যাডমিন: নিচের Gmail (যাচাই করা) অথবা admins কালেকশনের UID
+    function adm() { return si() && ((request.auth.token.email_verified == true && request.auth.token.email in ['__ADMIN_EMAIL__']) || exists(/databases/$(db)/documents/admins/$(request.auth.uid))); }
     function mine(u) { return si() && request.auth.uid == u; }
     function me() { return get(/databases/$(db)/documents/users/$(request.auth.uid)).data; }
     // ১৮+ বা অশ্লীল শব্দ থাকলে পোস্ট সেভই হবে না
@@ -608,7 +682,8 @@ service cloud.firestore {
       allow update: if adm() || (mine(u) &&
         !request.resource.data.diff(resource.data).affectedKeys().hasAny(['banned']));
     }
-    match /users/{u}/{sub}/{id} { allow read, write: if mine(u) && sub in ['crops', 'favs', 'ledger']; }
+    match /users/{u}/{sub}/{id} { allow read, write: if mine(u) && sub in ['crops', 'favs', 'ledger', 'projects']; }
+    match /users/{u}/projects/{p}/entries/{e} { allow read, write: if mine(u); }
 
     match /products/{p} {
       allow read: if adm() || (si() && resource.data.sellerId == request.auth.uid) ||
@@ -678,9 +753,15 @@ service cloud.firestore {
 }
 ` };
 function setup() {
-  $('app').innerHTML = `<h2>⚙️ প্রথম সেটআপ</h2><div class="card"><h3>Firestore নিয়ম</h3><p class="mut">নিচের বোতামে কপি করুন। তারপর Firebase → Firestore Database → Rules ট্যাবে সব মুছে এটা বসিয়ে Publish দিন। Storage লাগবে না।</p><button data-a="cp" data-v="fs">নিয়ম কপি করুন</button></div>`;
+  let sv = ''; try { sv = localStorage.getItem('adm') || ''; } catch { }
+  $('app').innerHTML = `<h2>⚙️ প্রথম সেটআপ</h2><div class="card"><h3>ধাপ ১: আপনার Gmail</h3><p class="mut">এই Gmail দিয়েই অ্যাডমিন প্যানেলে সরাসরি ঢুকতে পারবেন। একাধিক হলে কমা দিয়ে লিখুন।</p><input id="ge" type="email" placeholder="example@gmail.com" value="${esc(sv)}"></div><div class="card"><h3>ধাপ ২: নিয়ম কপি করুন</h3><p class="mut">কপি করে Firebase → Firestore Database → Rules ট্যাবে সব মুছে বসান এবং Publish দিন। Storage লাগবে না।</p><button data-a="cp" data-v="fs">নিয়ম কপি করুন</button></div>`;
 }
-A.cp = async v => { try { await navigator.clipboard.writeText(RULES[v]); toast('কপি হয়েছে ✅'); } catch { toast('কপি করা যায়নি'); } };
+A.cp = async () => {
+  const em = $('ge').value.toLowerCase().split(/[\s,]+/).filter(x => /^[^@\s'"\\]+@[^@\s'"\\]+\.[^@\s'"\\]+$/.test(x));
+  if (!em.length) return toast('আগে আপনার Gmail লিখুন');
+  try { localStorage.setItem('adm', em.join(', ')); } catch { }
+  try { await navigator.clipboard.writeText(RULES.fs.replace("'__ADMIN_EMAIL__'", em.map(x => `'${x}'`).join(', '))); toast('কপি হয়েছে ✅ এবার Firebase-এ বসান'); } catch { toast('কপি করা যায়নি'); }
+};
 
 A.rep = async id => { if (!confirm('এই পোস্টটি অনুপযুক্ত (১৮+ বা কৃষি-বহির্ভূত) বলে রিপোর্ট করবেন?')) return; try { await setDoc(doc(db, 'reports', id + '_' + UID), { pid: id, uid: UID, at: serverTimestamp() }); toast('রিপোর্ট জমা হয়েছে, ধন্যবাদ'); } catch { toast('রিপোর্ট করা যায়নি'); } };
 </script>
