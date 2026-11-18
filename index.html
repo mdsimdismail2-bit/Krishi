@@ -82,6 +82,14 @@ a.btn{display:block;text-align:center;text-decoration:none;font-weight:600;paddi
 .tile .ti{display:flex;width:56px;height:56px;border-radius:20px;margin:0 auto 9px;align-items:center;justify-content:center;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 10px 20px rgba(0,0,0,.16);font-style:normal}
 .tile .ti svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .bar{height:8px;border-radius:6px;background:var(--soft);overflow:hidden;margin:3px 0 8px}.bar>i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--pri),var(--pri2))}
+.bigbtn{width:100%;height:54px;font-size:20px;border-radius:12px;margin-top:6px}
+.mk{background:linear-gradient(135deg,#d99a00,#f3c13a);color:#1d1400;padding:12px 22px;border-radius:12px;font-size:16px;border:0;font-weight:700}
+.dv{border:0;border-top:1px solid var(--bd);margin:6px 0 16px}
+a[data-a]{color:var(--pri);font-weight:600;text-decoration:none;cursor:pointer}
+body.anon #nav,body.anon .hb{display:none}
+.fbout{width:100%;height:50px;border-radius:12px;background:var(--soft);color:var(--tx);border:1px solid var(--bd);font-size:17px;display:flex;gap:10px;align-items:center;justify-content:center;margin:6px 0 28px}
+.fbout svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rc ul{margin:0;padding-left:20px}.rc ul li{margin-bottom:4px}
 </style>
 </head>
 <body>
@@ -92,7 +100,7 @@ a.btn{display:block;text-align:center;text-decoration:none;font-weight:600;paddi
 <div id="pop" role="alert"></div><div class="md" id="md"></div><div id="toast"></div>
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail, updatePassword, reauthenticateWithCredential, EmailAuthProvider, verifyBeforeUpdateEmail } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
 import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, collection, query, where, getDocs, onSnapshot, orderBy, limit, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 
 // Firebase প্রজেক্ট: krishi-4b93c
@@ -146,6 +154,7 @@ const CROPS = {
 'মসুর': { f: { u: 5, t: 13, m: 7 }, d: [[0, 'শেষ চাষে (একবারে)', { u: 1, t: 1, m: 1 }]], t: [[105, '৮০% ফল পাকলে কাটুন']] },
 'মুগডাল': { f: { u: 5, t: 13, m: 7 }, d: [[0, 'শেষ চাষে (একবারে)', { u: 1, t: 1, m: 1 }]], t: [[65, '৮০% ফল পাকলে তুলুন']] }};
 const IC = {"home": "<path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/><polyline points=\"9 22 9 12 15 12 15 22\"/>", "bag": "<path d=\"M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z\"/><path d=\"M3 6h18\"/><path d=\"M16 10a4 4 0 0 1-8 0\"/>", "tag": "<path d=\"M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z\"/><line x1=\"7\" y1=\"7\" x2=\"7.01\" y2=\"7\"/>", "chart": "<line x1=\"12\" y1=\"20\" x2=\"12\" y2=\"10\"/><line x1=\"18\" y1=\"20\" x2=\"18\" y2=\"4\"/><line x1=\"6\" y1=\"20\" x2=\"6\" y2=\"16\"/>", "book": "<path d=\"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z\"/><path d=\"M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z\"/>", "flask": "<path d=\"M9 3h6\"/><path d=\"M10 3v6L4.5 19a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L14 9V3\"/><path d=\"M7.5 15h9\"/>", "leaf": "<path d=\"M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z\"/><path d=\"M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12\"/>", "help": "<path d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z\"/><path d=\"M9.7 9.6a2.4 2.4 0 1 1 3.4 2.2c-.6.3-1.1.8-1.1 1.5\"/><line x1=\"12\" y1=\"16.4\" x2=\"12.01\" y2=\"16.4\"/>", "heart": "<path d=\"M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\"/>", "phone": "<path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"/>", "user": "<path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/>", "msg": "<path d=\"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\"/>", "bell": "<path d=\"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9\"/><path d=\"M13.73 21a2 2 0 0 1-3.46 0\"/>", "plus": "<line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"/><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/>", "camera": "<path d=\"M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z\"/><circle cx=\"12\" cy=\"13\" r=\"4\"/>"};
+Object.assign(IC, { logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>', scan: '<path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/>' });
 const ic = n => '<svg viewBox="0 0 24 24" aria-hidden="true">' + IC[n] + '</svg>';
 Object.assign(CROPS, {
 'শিম': { f: { u: 13, t: 20, m: 16, o: 1000 }, d: [[0, 'জমি তৈরির সময়', { o: 1, t: 1, m: .5 }], [20, '১ম কিস্তি', { u: .5 }], [40, '২য় কিস্তি', { u: .5, m: .5 }]], t: [[20, 'মাচা বা বাউনি দিন'], [80, 'শিম তোলা শুরু']] },
@@ -192,7 +201,7 @@ const toast = m => { const t = $('toast'); t.textContent = m; t.style.display = 
 const modal = h => { $('md').innerHTML = h ? `<div class="card">${h}</div>` : ''; $('md').className = h ? 'md on' : 'md'; };
 const col = (...p) => collection(db, ...p), f = (k, v) => where(k, '==', v);
 
-document.addEventListener('click', e => { const b = e.target.closest('[data-a]'); if (b && A[b.dataset.a]) A[b.dataset.a](b.dataset.v, b); });
+document.addEventListener('click', e => { const b = e.target.closest('[data-a]'); if (b && A[b.dataset.a]) { if (b.tagName === 'A') e.preventDefault(); A[b.dataset.a](b.dataset.v, b); } });
 let keep = false;
 window.addEventListener('hashchange', () => { if (keep) keep = false; else CUR = null; route(); });
 onAuthStateChanged(auth, async u => {
@@ -215,39 +224,70 @@ function route() {
   if (r !== 'farm') PROJ = null;
   document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + r));
   if (r === 'setup') return setup();
+  document.body.classList.toggle('anon', !UID || !ME);
   if (!UID || !ME) return authView();
   startNotif();
-  ({ home, market, post, chat, help, me, favs, book, guide, fert, svc, farm }[r] || home)();
+  ({ home, market, post, chat, help, me, favs, book, guide, fert, svc, farm, doctor }[r] || home)();
 }
 
-/* ---------- লগইন / নিবন্ধন ---------- */
+/* ---------- লগইন / নিবন্ধন (ফেসবুকের মতো) ---------- */
+try { auth.languageCode = 'bn'; } catch { }
+let CFG = null;
+async function loadCfg() { if (CFG) return CFG; try { const sn = await getDoc(doc(db, 'config', 'app')); CFG = sn.exists() ? sn.data() : {}; } catch { CFG = {}; } return CFG; }
+// অ্যাডমিনের Gmail-এর প্লাস-ঠিকানা: রিসেটের লিংক অ্যাডমিনের ইনবক্সে যায়
+const aliasOf = (ph, c) => { const [l, d] = String((c && c.adminMail) || '').toLowerCase().split('@'); return l && d === 'gmail.com' ? l + '+' + ph + '@gmail.com' : ''; };
+const candidates = async v => { v = v.trim().toLowerCase(); if (v.includes('@')) return [v]; const a = aliasOf(v, await loadCfg()); return a ? [a, v + '@mathar.app'] : [v + '@mathar.app']; };
+const idEmail = v => { v = (v || '').trim().toLowerCase(); return v.includes('@') ? v : v + '@mathar.app'; };
+const okMail = e => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e);
 function authView() {
-  $('app').innerHTML = REG
-    ? `<div class="card"><h3>নতুন অ্যাকাউন্ট</h3><label>পুরো নাম</label><input id="rn"><label>মোবাইল নম্বর</label><input id="rp" inputmode="numeric" placeholder="01XXXXXXXXX"><label>পাসওয়ার্ড (৬+ অক্ষর)</label><input id="rw" type="password"><label>গ্রামের নাম</label><input id="rv" placeholder="যেমন: কালিয়াগঞ্জ">
+  const hero = `<div style="text-align:center;margin:${REG ? 0 : 14}px 0 16px"><div style="width:${REG ? 64 : 104}px;margin:auto">${LOGO}</div><h1 style="margin:10px 0 2px;font-size:${REG ? 24 : 32}px;color:var(--pri)">মাঠের হাট</h1><div class="mut" style="font-size:15px">${REG ? 'এটি বিনামূল্যে এবং সবসময় বিনামূল্যে থাকবে' : 'কৃষকের নিজের বাজার, সারা বাংলাদেশে'}</div></div>`;
+  $('app').innerHTML = hero + (REG
+    ? `<div class="card" style="padding:18px"><input id="rn" placeholder="আপনার পুরো নাম"><input id="rp" inputmode="numeric" placeholder="মোবাইল নম্বর (01XXXXXXXXX)"><input id="re" type="email" placeholder="ইমেইল (ঐচ্ছিক)"><p class="mut" style="margin:4px 2px 0">ইমেইল দিলে পাসওয়ার্ড ভুলে গেলে সেই ইমেইলে নতুন করার লিংক পাবেন। তবে তখন ইমেইল দিয়েই লগইন করতে হবে।</p><input id="rw" type="password" placeholder="নতুন পাসওয়ার্ড (৬+ অক্ষর)"><input id="rv" placeholder="গ্রামের নাম">
 <label>বিভাগ</label><select id="lv">${opts(Object.keys(G))}</select><label>জেলা</label><select id="ld"></select><label>উপজেলা</label><select id="lu"></select>
 <label>আপনি কী করবেন?</label><select id="rt"><option value="both">খুচরা ও পাইকারি দুটোই</option><option value="retail">শুধু খুচরা</option><option value="wholesale">শুধু পাইকারি</option></select>
-<div class="row"><button data-a="reg">অ্যাকাউন্ট খুলুন</button><button class="alt" data-a="tog">লগইন</button></div></div>`
-    : `<div class="card"><h3>লগইন</h3><label>মোবাইল নম্বর</label><input id="lp" inputmode="numeric"><label>পাসওয়ার্ড</label><input id="lw" type="password"><div class="row"><button data-a="login">লগইন</button><button class="alt" data-a="tog">নতুন অ্যাকাউন্ট</button></div></div>`;
-  $('app').insertAdjacentHTML('afterbegin', `<div style="text-align:center;margin:8px 0 14px"><div style="width:92px;margin:auto">${LOGO}</div><h2 style="margin:8px 0 0">মাঠের হাট</h2><div class="mut">কৃষকের নিজের বাজার</div></div>`);
+<button data-a="reg" class="mk" style="width:100%;height:50px;font-size:18px;margin-top:16px">অ্যাকাউন্ট খুলুন</button><div style="text-align:center;margin-top:14px"><a href="#" data-a="tog">আগেই অ্যাকাউন্ট আছে?</a></div></div>`
+    : `<div class="card" style="padding:18px"><input id="lp" placeholder="মোবাইল নম্বর বা ইমেইল" autocomplete="username" style="height:52px;font-size:17px"><input id="lw" type="password" placeholder="পাসওয়ার্ড" autocomplete="current-password" style="height:52px;font-size:17px"><button data-a="login" class="bigbtn">লগ ইন</button><div style="text-align:center;margin:14px 0 12px"><a href="#" data-a="forgot">পাসওয়ার্ড ভুলে গেছেন?</a></div><hr class="dv"><div style="text-align:center"><button data-a="tog" class="mk">নতুন অ্যাকাউন্ট খুলুন</button></div></div>`);
   if (REG) { $('lv').onchange = () => { $('ld').innerHTML = opts(G[$('lv').value]); $('ld').onchange(); }; $('ld').onchange = () => $('lu').innerHTML = opts(upz($('ld').value)); $('lv').onchange(); }
+  else $('lw').onkeydown = e => { if (e.key === 'Enter') A.login(); };
 }
-A.tog = () => { REG = !REG; authView(); };
-A.login = async () => { try { await signInWithEmailAndPassword(auth, $('lp').value.trim() + '@mathar.app', $('lw').value); } catch { toast('নম্বর বা পাসওয়ার্ড ভুল'); } };
+A.tog = () => { REG = !REG; authView(); window.scrollTo(0, 0); };
+A.login = async () => {
+  const v = $('lp').value.trim(), w = $('lw').value; if (!v || !w) return toast('নম্বর বা ইমেইল ও পাসওয়ার্ড দিন');
+  let err = null;
+  for (const em of await candidates(v)) { try { await signInWithEmailAndPassword(auth, em, w); return; } catch (e) { err = e; } }
+  toast(err && err.code === 'auth/too-many-requests' ? 'অনেকবার ভুল হয়েছে, একটু পরে চেষ্টা করুন' : 'নম্বর/ইমেইল বা পাসওয়ার্ড ভুল। ইমেইল দিয়ে নিবন্ধন করে থাকলে ইমেইল দিয়ে লগইন করুন');
+};
+A.forgot = () => modal(`<h3>পাসওয়ার্ড ভুলে গেছেন?</h3><p class="mut">আপনার নম্বর ও হোয়াটসঅ্যাপ নম্বর দিন। অ্যাডমিন যাচাই করে নতুন পাসওয়ার্ড আপনার হোয়াটসঅ্যাপে পাঠিয়ে দেবেন। পরে প্রোফাইল থেকে নিজের পছন্দের পাসওয়ার্ড দিয়ে বদলে নিতে পারবেন।</p><label>নিবন্ধনের মোবাইল নম্বর</label><input id="fp" inputmode="numeric" placeholder="01XXXXXXXXX"><label>হোয়াটসঅ্যাপ নম্বর (এখানে পাসওয়ার্ড যাবে)</label><input id="fw" inputmode="numeric" placeholder="একই হলে ফাঁকা রাখুন"><div class="row"><button data-a="forgot3">আবেদন পাঠান</button><button class="alt" data-a="mc">বন্ধ করুন</button></div><details style="margin-top:14px"><summary class="mut" style="cursor:pointer">ইমেইল দিয়ে নিবন্ধন করেছেন?</summary><input id="fe" type="email" placeholder="আপনার ইমেইল" style="margin-top:8px"><div class="row"><button class="alt" data-a="forgot2">ইমেইলে লিংক পাঠান</button></div></details>`);
+A.forgot3 = async () => {
+  const p = $('fp').value.trim(), w = $('fw').value.trim() || p, ok = x => /^01[3-9]\d{8}$/.test(x);
+  if (!ok(p) || !ok(w)) return toast('সঠিক মোবাইল ও হোয়াটসঅ্যাপ নম্বর দিন');
+  try { await setDoc(doc(db, 'resetRequests', p), { phone: p, whatsapp: w, status: 'new', at: serverTimestamp() }); }
+  catch { return modal(`<h3>আবেদন আগেই জমা আছে</h3><p>আপনার আগের আবেদন অ্যাডমিনের কাছে অপেক্ষায় আছে। হোয়াটসঅ্যাপে নতুন পাসওয়ার্ড আসার জন্য একটু অপেক্ষা করুন।</p><button data-a="mc" style="width:100%">ঠিক আছে</button>`); }
+  const c = await loadCfg(), wa = String(c.adminWa || '').replace(/\D/g, '');
+  modal(`<h3>✅ আবেদন জমা হয়েছে</h3><p>অ্যাডমিন যাচাই করে নতুন পাসওয়ার্ড আপনার হোয়াটসঅ্যাপ (${bn(w)}) নম্বরে পাঠাবেন। পাসওয়ার্ড পেলে লগইন করুন, তারপর প্রোফাইল → নিরাপত্তা থেকে বদলে নিন।</p>${/^01[3-9]\\d{8}$/.test(wa) ? `<a class="btn" href="https://wa.me/880${wa.slice(1)}?text=${encodeURIComponent('আমি পাসওয়ার্ড রিসেটের আবেদন করেছি। নিবন্ধিত নম্বর: ' + p)}" target="_blank" rel="noopener">অ্যাডমিনকে হোয়াটসঅ্যাপে জানান</a>` : ''}<button class="alt" data-a="mc" style="width:100%;margin-top:10px">বন্ধ করুন</button>`);
+};
+A.forgot2 = async () => {
+  const e = $('fe').value.trim().toLowerCase(); if (!okMail(e)) return toast('সঠিক ইমেইল লিখুন');
+  try { await sendPasswordResetEmail(auth, e); modal(''); toast('লিংক পাঠানো হয়েছে। ইনবক্স ও স্প্যাম ফোল্ডার দেখুন'); } catch { toast('পাঠানো যায়নি, একটু পরে আবার চেষ্টা করুন'); }
+};
 A.reg = async () => {
-  const n = $('rn').value.trim(), p = $('rp').value.trim(), w = $('rw').value;
+  const n = $('rn').value.trim(), p = $('rp').value.trim(), em = $('re').value.trim().toLowerCase(), w = $('rw').value, c = await loadCfg();
   if (!n || !/^01[3-9]\d{8}$/.test(p) || w.length < 6) return toast('সঠিক নাম, মোবাইল নম্বর ও ৬+ অক্ষরের পাসওয়ার্ড দিন');
+  if (em && !okMail(em)) return toast('ইমেইলটি ঠিক নেই');
+  if (em && c.adminMail && em.startsWith(String(c.adminMail).split('@')[0].toLowerCase() + '+')) return toast('এই ইমেইল ব্যবহার করা যাবে না');
+  const ae = em || aliasOf(p, c) || p + '@mathar.app';
   try {
-    const c = await createUserWithEmailAndPassword(auth, p + '@mathar.app', w);
-    const d = { name: n, phone: p, village: $('rv').value.trim().slice(0, 60), division: $('lv').value, district: $('ld').value, upazila: $('lu').value, type: $('rt').value, banned: false, createdAt: serverTimestamp() };
-    await setDoc(doc(db, 'users', c.user.uid), d); UID = c.user.uid; ME = { id: UID, ...d }; route();
-  } catch (e) { toast(e.code === 'auth/email-already-in-use' ? 'এই নম্বরে অ্যাকাউন্ট আছে' : 'নিবন্ধন ব্যর্থ হয়েছে'); }
+    const cr = await createUserWithEmailAndPassword(auth, ae, w);
+    const d = { name: n, phone: p, ae, village: $('rv').value.trim().slice(0, 60), division: $('lv').value, district: $('ld').value, upazila: $('lu').value, type: $('rt').value, banned: false, createdAt: serverTimestamp() };
+    await setDoc(doc(db, 'users', cr.user.uid), d); UID = cr.user.uid; ME = { id: UID, ...d }; route();
+  } catch (e) { toast(e.code === 'auth/email-already-in-use' ? 'এই নম্বর বা ইমেইলে আগেই অ্যাকাউন্ট আছে' : 'নিবন্ধন ব্যর্থ হয়েছে'); }
 };
 
 /* ---------- হোম ---------- */
 async function home() {
   const h = new Date().getHours(), gr = h < 12 ? 'শুভ সকাল' : h < 17 ? 'শুভ দুপুর' : h < 19 ? 'শুভ বিকেল' : 'শুভ সন্ধ্যা';
   $('app').innerHTML = `<section class="hero"><div class="m">${gr} 👋</div><h1>${esc(ME.name)}</h1><div class="m">📍 ${esc(ME.upazila)}, ${esc(ME.district)}</div></section>
-<div class="tiles">${[['#market', 'bag', 'কিনুন', '#0f4c2a,#2f9158'], ['#post', 'tag', 'বেচুন', '#c98a00,#f3c13a'], ['#farm', 'chart', 'ফসলের হিসাব', '#3949ab,#7986cb'], ['#book', 'book', 'কৃষি খাতা', '#00796b,#4db6ac'], ['#fert', 'flask', 'সারের হিসাব', '#7b1fa2,#ba68c8'], ['#guide', 'leaf', 'কৃষি গাইড', '#558b2f,#9ccc65'], ['#help', 'help', 'প্রশ্ন করুন', '#0277bd,#4fc3f7'], ['#svc', 'phone', 'জরুরি সেবা', '#d84315,#ff8a65'], ['#me', 'user', 'প্রোফাইল', '#455a64,#90a4ae']].map(t => `<a class="tile" href="${t[0]}"><i class="ti" style="background:linear-gradient(135deg,${t[3]})">${ic(t[1])}</i>${t[2]}</a>`).join('')}</div>
+<div class="tiles">${[['#market', 'bag', 'কিনুন', '#0f4c2a,#2f9158'], ['#post', 'tag', 'বেচুন', '#c98a00,#f3c13a'], ['#farm', 'chart', 'ফসলের হিসাব', '#3949ab,#7986cb'], ['#book', 'book', 'কৃষি খাতা', '#00796b,#4db6ac'], ['#fert', 'flask', 'সারের হিসাব', '#7b1fa2,#ba68c8'], ['#guide', 'leaf', 'কৃষি গাইড', '#558b2f,#9ccc65'], ['#doctor', 'scan', 'রোগ শনাক্ত', '#b71c1c,#ef5350'], ['#svc', 'phone', 'জরুরি সেবা', '#d84315,#ff8a65'], ['#me', 'user', 'প্রোফাইল', '#455a64,#90a4ae']].map(t => `<a class="tile" href="${t[0]}"><i class="ti" style="background:linear-gradient(135deg,${t[3]})">${ic(t[1])}</i>${t[2]}</a>`).join('')}</div>
 <div class="card"><h3>💡 আজকের কৃষি পরামর্শ <button class="say sm" data-a="say" aria-label="শুনুন">🔊</button></h3><div>${MONTHS[new Date().getMonth()][1]}</div></div>
 <div id="wx"><div class="sk" style="height:300px"></div></div>
 <div class="card"><h3>📊 আজকের বাজার দর <button class="say sm" data-a="say" aria-label="শুনুন">🔊</button></h3><div id="pr" class="mut">লোড হচ্ছে…</div></div>
@@ -462,8 +502,9 @@ A.calc = () => { const v = i => +$(i).value || 0, cost = v('c1') + v('c2') + v('
 /* ---------- প্রোফাইল (উপরে ডানে আইকন) ---------- */
 async function me() {
   $('app').innerHTML = `<div class="card" style="text-align:center"><label class="pav" for="pph">${ME.photo ? `<img src="${esc(ME.photo)}" alt="">` : '<span>👤</span>'}<i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></i></label><input id="pph" type="file" accept="image/*" hidden><h3 style="margin-top:10px">${esc(ME.name)}</h3><div class="mut">${ME.village ? '🏡 ' + esc(ME.village) + ' • ' : ''}${esc(ME.upazila)}, ${esc(ME.district)}, ${esc(ME.division)}</div><div class="mut">${esc(ME.phone)}</div></div>
-<div class="card"><label>আমার গ্রামের নাম</label><input id="pv" value="${esc(ME.village || '')}" placeholder="যেমন: কালিয়াগঞ্জ"><label>আমি করতে চাই</label><select id="ut"><option value="both">খুচরা ও পাইকারি</option><option value="retail">শুধু খুচরা</option><option value="wholesale">শুধু পাইকারি</option></select><div class="row"><button data-a="ut">সংরক্ষণ</button><button class="alt" data-a="perm">🔔 ফোন নোটিফিকেশন চালু</button></div><div class="row"><button class="alt" data-a="out">লগ আউট</button></div></div>
-<div class="card"><h3>আমার পোস্ট</h3><div id="mp"></div></div><div class="card"><h3>আমার ক্রয় (অর্ডার)</h3><div id="ob"></div></div><div class="card"><h3>আমার কাছে আসা অর্ডার</h3><div id="os"></div></div>`;
+<div class="card"><label>আমার গ্রামের নাম</label><input id="pv" value="${esc(ME.village || '')}" placeholder="যেমন: কালিয়াগঞ্জ"><label>আমি করতে চাই</label><select id="ut"><option value="both">খুচরা ও পাইকারি</option><option value="retail">শুধু খুচরা</option><option value="wholesale">শুধু পাইকারি</option></select><div class="row"><button data-a="ut">সংরক্ষণ</button><button class="alt" data-a="perm">🔔 ফোন নোটিফিকেশন চালু</button></div></div>
+${secCard()}
+<div class="card"><h3>আমার পোস্ট</h3><div id="mp"></div></div><div class="card"><h3>আমার ক্রয় (অর্ডার)</h3><div id="ob"></div></div><div class="card"><h3>আমার কাছে আসা অর্ডার</h3><div id="os"></div></div><button class="fbout" data-a="outc">${ic('logout')} লগ আউট</button>`;
   $('ut').value = ME.type; $('pph').onchange = e => avatar(e.target.files[0]);
   const ord = (id, q, seller) => off.push(onSnapshot(q, s => {
     const L = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
@@ -477,7 +518,8 @@ ${seller && o.status === 'requested' ? `<button class="sm" data-a="os" data-v="$
   }));
 }
 A.ut = async (v, b) => { if (b.tagName === 'BUTTON' && !v) { const vl = $('pv').value.trim().slice(0, 60); await updateDoc(doc(db, 'users', UID), { type: $('ut').value, village: vl }); ME.type = $('ut').value; ME.village = vl; toast('সংরক্ষিত ✅'); me(); } };
-A.out = () => signOut(auth);
+A.outc = () => modal(`<h3>লগ আউট</h3><p>আপনি কি এই অ্যাকাউন্ট থেকে লগ আউট করতে চান?</p><div class="row"><button data-a="out">লগ আউট</button><button class="alt" data-a="mc">বাতিল</button></div>`);
+A.out = () => { modal(''); signOut(auth); };
 A.os = async v => { const [id, s] = v.split('|'); await updateDoc(doc(db, 'orders', id), { status: s, updatedAt: serverTimestamp() }); };
 A.dp = async id => { if (confirm('পোস্টটি মুছবেন?')) await deleteDoc(doc(db, 'products', id)); };
 
@@ -532,16 +574,18 @@ async function avatar(file) {
 let NT = [], UNREAD = 0, NS = false, nu = [];
 try { NT = JSON.parse(localStorage.getItem('nt') || '[]'); } catch { }
 function badge() { const b = $('bdg'); b.hidden = !UNREAD; b.textContent = bn(UNREAD); }
+const go = l => { if (/^https?:\/\//i.test(l || '')) window.open(l, '_blank', 'noopener'); else if (l) location.hash = l; };
 function notify(t, x, l) {
   NT.unshift({ t, x, l, at: Date.now() }); NT = NT.slice(0, 30); UNREAD++; badge();
   try { localStorage.setItem('nt', JSON.stringify(NT)); } catch { }
   const p = $('pop'); p.innerHTML = `<b>${esc(t)}</b><div>${esc(x)}</div>`; p.dataset.l = l || ''; p.classList.add('on');
   clearTimeout(notify.h); notify.h = setTimeout(() => p.classList.remove('on'), 6500);
   if (navigator.vibrate) navigator.vibrate(180);
-  if ('Notification' in window && Notification.permission === 'granted' && document.hidden) { try { new Notification(t, { body: x }); } catch { } }
+  if ('Notification' in window && Notification.permission === 'granted' && document.hidden) { try { const nn = new Notification(t, { body: x }); nn.onclick = () => { window.focus(); go(l); nn.close(); }; } catch { } }
 }
-$('pop').onclick = e => { const p = e.currentTarget; p.classList.remove('on'); if (p.dataset.l) location.hash = p.dataset.l; };
-A.bell = () => { UNREAD = 0; badge(); modal(`<h3>🔔 নোটিফিকেশন</h3>${NT.length ? NT.map(n => `<div class="it"><b>${esc(n.t)}</b><div>${esc(n.x)}</div><div class="mut">${new Date(n.at).toLocaleString('bn-BD')}</div></div>`).join('') : '<p class="mut">এখনো কিছু নেই</p>'}<div class="row"><button class="alt" data-a="mc">বন্ধ করুন</button><button class="del" data-a="nclr">সব মুছুন</button></div>`); };
+$('pop').onclick = e => { const p = e.currentTarget; p.classList.remove('on'); if (p.dataset.l) go(p.dataset.l); };
+A.bell = () => { UNREAD = 0; badge(); modal(`<h3>🔔 নোটিফিকেশন</h3>${NT.length ? NT.map((n, i) => `<div class="it" data-a="nopen" data-v="${i}" style="cursor:pointer"><b>${esc(n.t)}</b><div>${esc(n.x)}</div><div class="mut">${new Date(n.at).toLocaleString('bn-BD')}</div></div>`).join('') : '<p class="mut">এখনো কিছু নেই</p>'}<div class="row"><button class="alt" data-a="mc">বন্ধ করুন</button><button class="del" data-a="nclr">সব মুছুন</button></div>`); };
+A.nopen = i => { const n = NT[i]; modal(''); if (n && n.l) go(n.l); };
 A.nclr = () => { NT = []; try { localStorage.removeItem('nt'); } catch { } modal(''); };
 A.perm = async () => {
   if (!('Notification' in window)) return toast('এই ব্রাউজারে সমর্থিত নয়');
@@ -552,7 +596,7 @@ function startNotif() {
   nu.push(onSnapshot(query(col('orders'), f('sellerId', UID)), s => { if (f1) { f1 = false; return; } s.docChanges().forEach(c => { if (c.type === 'added') { const o = c.doc.data(); notify('🛒 নতুন অর্ডার', `${o.buyerName}: ${o.title} (${bn(o.qty)} ${o.mode === 'wholesale' ? 'পাইকারি' : ''})`, '#me'); } }); }, er));
   nu.push(onSnapshot(query(col('orders'), f('buyerId', UID)), s => { if (f2) { f2 = false; return; } s.docChanges().forEach(c => { if (c.type === 'modified') { const o = c.doc.data(); notify('📦 অর্ডারের খবর', `${o.title}: ${ST[o.status]}`, '#me'); } }); }, er));
   nu.push(onSnapshot(query(col('chats'), where('members', 'array-contains', UID)), s => { if (f3) { f3 = false; return; } s.docChanges().forEach(c => { const d = c.doc.data(); if (c.type !== 'removed' && d.lastFrom && d.lastFrom !== UID && !(location.hash === '#chat' && CUR === c.doc.id)) notify('💬 নতুন বার্তা', `${d.names?.[d.lastFrom] || ''}: ${d.last}`, '#chat'); }); }, er));
-  nu.push(onSnapshot(query(col('announcements'), orderBy('at', 'desc'), limit(1)), s => { const d = s.docs[0]; if (!d) return; let seen = ''; try { seen = localStorage.getItem('ann'); } catch { } if (seen !== d.id) { try { localStorage.setItem('ann', d.id); } catch { } notify('📢 ' + d.data().title, d.data().text || '', '#home'); } }, er));
+  nu.push(onSnapshot(query(col('announcements'), orderBy('at', 'desc'), limit(1)), s => { const d = s.docs[0]; if (!d) return; let seen = ''; try { seen = localStorage.getItem('ann'); } catch { } if (seen !== d.id) { try { localStorage.setItem('ann', d.id); } catch { } notify('📢 ' + d.data().title, (d.data().text || '') + (d.data().link ? ' 🔗' : ''), d.data().link || '#home'); } }, er));
 }
 
 
@@ -652,13 +696,86 @@ A.pshare = async () => {
   if (navigator.share) { try { await navigator.share({ text: t }); } catch { } } else { try { await navigator.clipboard.writeText(t); toast('কপি হয়েছে'); } catch { } }
 };
 
+
+/* ---------- পাসওয়ার্ড বদল ও উদ্ধারের ইমেইল ---------- */
+function secCard() {
+  const em = (auth.currentUser && auth.currentUser.email) || '', old = em.endsWith('@mathar.app'), al = !old && /\+\d{11}@/.test(em);
+  const info = old ? 'শুধু মোবাইল নম্বর দিয়ে খোলা পুরনো অ্যাকাউন্ট। পাসওয়ার্ড ভুললে অ্যাডমিন রিসেট করতে পারবেন না, তাই নিচে উদ্ধারের ইমেইল যোগ করে রাখুন।' : al ? 'পাসওয়ার্ড ভুলে গেলে লগইন পাতায় "পাসওয়ার্ড ভুলে গেছেন?" চেপে হোয়াটসঅ্যাপ নম্বর দিয়ে আবেদন করুন, অ্যাডমিন নতুন পাসওয়ার্ড পাঠাবেন।' : 'পাসওয়ার্ড ভুললে ' + esc(em) + ' ইমেইলে লিংক পাবেন।';
+  return `<div class="card"><h3>🔐 নিরাপত্তা</h3><p class="mut">${info}</p><label>বর্তমান পাসওয়ার্ড</label><input id="po" type="password"><label>নতুন পাসওয়ার্ড</label><input id="pn2" type="password" placeholder="৬+ অক্ষর"><div class="row"><button data-a="cpw">পাসওয়ার্ড বদলান</button></div>${old ? `<label style="margin-top:18px">পাসওয়ার্ড উদ্ধারের ইমেইল যোগ করুন</label><input id="pe" type="email" placeholder="আপনার ইমেইল"><input id="po2" type="password" placeholder="বর্তমান পাসওয়ার্ড"><div class="row"><button class="alt" data-a="aem">ইমেইল যোগ করুন</button></div>` : ''}</div>`;
+}
+const reauth = pw => reauthenticateWithCredential(auth.currentUser, EmailAuthProvider.credential(auth.currentUser.email, pw));
+const authErr = e => e.code === 'auth/invalid-credential' || e.code === 'auth/wrong-password' ? 'বর্তমান পাসওয়ার্ড ভুল' : e.code === 'auth/too-many-requests' ? 'অনেকবার ভুল হয়েছে, একটু পরে চেষ্টা করুন' : 'হয়নি, আবার চেষ্টা করুন';
+A.cpw = async () => { const n = $('pn2').value; if (n.length < 6) return toast('নতুন পাসওয়ার্ড কমপক্ষে ৬ অক্ষর'); try { await reauth($('po').value); await updatePassword(auth.currentUser, n); $('po').value = $('pn2').value = ''; toast('পাসওয়ার্ড বদলেছে ✅'); } catch (e) { toast(authErr(e)); } };
+A.aem = async () => { const e = $('pe').value.trim().toLowerCase(); if (!okMail(e)) return toast('সঠিক ইমেইল দিন'); try { await reauth($('po2').value); await verifyBeforeUpdateEmail(auth.currentUser, e); toast('ইমেইলে একটি লিংক গেছে। সেটি চাপলে ইমেইল যুক্ত হবে, এরপর ইমেইল দিয়ে লগইন করবেন'); } catch (x) { toast(authErr(x)); } };
+
+
+/* ---------- ফসলের রোগ শনাক্ত ---------- */
+// k = ওষুধ: [নাম, প্রতি লিটার পানিতে পরিমাণ, একক (g বা ml), কখন/কতবার]। মাত্রা সাধারণ নির্দেশিকা, প্যাকেটের লেবেল ও কৃষি অফিসের পরামর্শ আগে।
+const DIS = [
+{ id: 'blast', c: 'ধান', n: 'ধানের ব্লাস্ট রোগ', ai: 'rice blast: eye-shaped grey spots with brown border on leaves, neck rot', s: 'পাতায় চোখের মতো দাগ (মাঝখান ধূসর, কিনারা বাদামি); শীষের গোড়া কালো হয়ে শীষ ভেঙে পড়ে', o: ['জমিতে অতিরিক্ত ইউরিয়া দেবেন না, পটাশ সার ঠিক মাত্রায় দিন', 'পরের মৌসুমে রোগমুক্ত বীজ ও প্রতিরোধী জাত ব্যবহার করুন'], k: [['ট্রাইসাইক্লাজোল (৭৫ ডব্লিউপি)', 0.6, 'g', 'রোগ দেখা দিলে স্প্রে করুন, দরকার হলে ১০-১২ দিন পর আবার']] },
+{ id: 'sheath', c: 'ধান', n: 'ধানের খোলপোড়া রোগ', ai: 'rice sheath blight: oval grey-green lesions on leaf sheath near water level, snake-skin pattern', s: 'গোড়ার দিকে পাতার খোলে ডিম্বাকার ধূসর-সবুজ দাগ, পরে বড় হয়ে সাপের চামড়ার মতো দেখায়', o: ['ঘন করে চারা লাগাবেন না, আগাছা পরিষ্কার রাখুন', 'ইউরিয়া কমিয়ে পটাশ দিন', 'সারি ফাঁক করে বাতাস চলাচলের ব্যবস্থা করুন'], k: [['হেক্সাকোনাজোল (৫ ইসি)', 2, 'ml', '১০-১২ দিন পর পর ২ বার'], ['প্রোপিকোনাজোল (২৫ ইসি)', 1, 'ml', 'বিকল্প হিসেবে, ১০-১২ দিন পর পর ২ বার']] },
+{ id: 'bph', c: 'ধান', n: 'ধানের বাদামি গাছফড়িং', ai: 'rice brown planthopper: small brown insects at plant base, hopperburn patches drying', s: 'গাছের গোড়ায় ছোট বাদামি পোকা; ক্ষেতের কিছু অংশ গোল হয়ে পুড়ে যাওয়ার মতো শুকিয়ে যায়', o: ['জমির পানি ২-৩ দিন শুকিয়ে ফেলুন', 'অতিরিক্ত ইউরিয়া বন্ধ রাখুন', 'কয়েক সারি পর পর ফাঁক রাখুন, যাতে বাতাস ঢোকে'], k: [['ইমিডাক্লোপ্রিড (২০ এসএল)', 0.5, 'ml', 'গাছের গোড়া লক্ষ্য করে সকালে বা বিকেলে স্প্রে করুন']], t: 'ফড়িং বেশি হলে দেরি না করে উপজেলা কৃষি অফিসে জানান।' },
+{ id: 'zinc', c: 'ধান', n: 'ধানে জিংকের অভাব (খয়রা রোগ)', ai: 'rice zinc deficiency khaira: rusty brown spots on young leaves, stunted plants', s: 'রোপণের ১-২ সপ্তাহ পর পাতায় মরিচার মতো বাদামি ছিটা দাগ, গাছ খাটো ও দুর্বল', o: ['রোগ নয়, সারের অভাব। জিংক সার দিলে সেরে যায়'], k: [['জিংক সালফেট (সাথে প্রতি লিটারে ২.৫ গ্রাম চুন)', 5, 'g', '৭ দিন পর পর ২ বার পাতায় স্প্রে']], x: 'অথবা জমিতে বিঘা প্রতি প্রায় ১.৩ কেজি জিংক সালফেট ছিটান।' },
+{ id: 'lateblight', c: 'আলু, টমেটো', n: 'নাবী ধসা রোগ', ai: 'potato or tomato late blight: water-soaked dark grey-black blotches on leaves, white mold underneath', s: 'পাতায় জলে ভেজা ধূসর-কালো দাগ; কুয়াশা-মেঘলায় দ্রুত ছড়ায়, পাতার নিচে সাদা ছত্রাক', o: ['আক্রান্ত পাতা ও গাছ তুলে মাটিতে পুঁতে ফেলুন', 'মেঘলা-কুয়াশার আবহাওয়ায় রোগ আসার আগেই স্প্রে করুন', 'আলু তোলার ১৫ দিন আগে লতা কেটে দিন'], k: [['ম্যানকোজেব (৭৫ ডব্লিউপি): রোগ আসার আগে', 2.5, 'g', '৭ দিন পর পর'], ['মেটালাক্সিল+ম্যানকোজেব (৬৮ ডব্লিউপি): রোগ দেখা দিলে', 2.5, 'g', '৭-১০ দিন পর পর, সর্বোচ্চ ২-৩ বার']] },
+{ id: 'wilt', c: 'টমেটো, বেগুন, মরিচ', n: 'ঢলে পড়া রোগ (ব্যাকটেরিয়াল উইল্ট)', ai: 'bacterial wilt: whole plant suddenly wilts while leaves still green, stem cut shows brown vascular tissue', s: 'গাছ হঠাৎ সবুজ থাকা অবস্থায়ই ঢলে পড়ে; গোড়া কেটে পানিতে ধরলে ঘোলা সুতার মতো রস বের হয়', o: ['আক্রান্ত গাছ শিকড়সহ তুলে পুড়িয়ে বা পুঁতে ফেলুন', 'সেচের পানি এক জমি থেকে অন্য জমিতে যেতে দেবেন না', 'পরের ২-৩ বছর ধান বা অন্য ফসল করুন; কলমের চারা বা প্রতিরোধী জাত ব্যবহার করুন'], k: [], t: 'এই রোগের কার্যকর ওষুধ নেই, প্রতিরোধই একমাত্র উপায়।' },
+{ id: 'powdery', c: 'শসা, টমেটো, শিম, কুমড়া', n: 'সাদা গুঁড়া রোগ (পাউডারি মিলডিউ)', ai: 'powdery mildew: white powdery coating on leaf surface', s: 'পাতা ও কাণ্ডে সাদা গুঁড়ার মতো আস্তরণ', o: ['আক্রান্ত পাতা সরান', 'ঘন করে লাগাবেন না, রোদ-বাতাস চলাচল রাখুন'], k: [['সালফার (৮০ ডব্লিউপি)', 2.5, 'g', '৭-১০ দিন পর পর']], t: 'খুব গরমে (৩২° সেলসিয়াসের বেশি) সালফার স্প্রে করবেন না, পাতা পুড়তে পারে।' },
+{ id: 'downy', c: 'শসা, লাউ, কুমড়া', n: 'ডাউনি মিলডিউ', ai: 'downy mildew of cucurbits: angular yellow patches on upper leaf surface, purple-grey mold underneath', s: 'পাতার ওপরে কোণাকৃতি হলুদ দাগ, নিচে বেগুনি-ধূসর ছত্রাক; পাতা শুকিয়ে যায়', o: ['আক্রান্ত পাতা সরিয়ে ফেলুন', 'মাচায় লতা তুলে দিন, মাটিতে ছড়াতে দেবেন না'], k: [['ম্যানকোজেব (৭৫ ডব্লিউপি)', 2.5, 'g', '৭ দিন পর পর'], ['মেটালাক্সিল+ম্যানকোজেব (৬৮ ডব্লিউপি)', 2.5, 'g', 'রোগ বেশি হলে, সর্বোচ্চ ২ বার']] },
+{ id: 'borer', c: 'বেগুন', n: 'বেগুনের ডগা ও ফল ছিদ্রকারী পোকা', ai: 'brinjal shoot and fruit borer: wilted drooping shoot tips, holes in fruit with frass', s: 'ডগা ঢলে পড়ে শুকিয়ে যায়; ফলে ছিদ্র ও ভেতরে পোকা ও মল', o: ['আক্রান্ত ডগা ও ফল কেটে মাটিতে পুঁতে ফেলুন', 'ফেরোমন ফাঁদ লাগান (কৃষি অফিস বা দোকান থেকে)', 'ফল নিয়মিত তুলুন, পচা ফল জমিতে ফেলে রাখবেন না'], k: [['সাইপারমেথ্রিন (১০ ইসি)', 1, 'ml', '৭-১০ দিন পর পর; স্প্রের পর অন্তত ৭ দিন ফল তুলবেন না']] },
+{ id: 'aphid', c: 'সরিষা, সবজি', n: 'জাব পোকা', ai: 'aphids: dense colonies of tiny green or black insects on shoot tips and underside of leaves, curled leaves, sticky honeydew', s: 'কচি ডগা ও পাতার নিচে ছোট সবুজ বা কালো পোকার ঝাঁক; পাতা কুঁকড়ে যায়, আঠালো রস', o: ['সাবান-পানি স্প্রে (১ লিটারে ১ চা-চামচ তরল সাবান)', 'নিমপাতার নির্যাস স্প্রে', 'হলুদ আঠালো ফাঁদ লাগান'], k: [['ইমিডাক্লোপ্রিড (২০ এসএল)', 0.5, 'ml', 'দরকার হলে ১ বার'], ['ম্যালাথিয়ন (৫৭ ইসি)', 2, 'ml', 'স্প্রের পর ৭ দিন ফল-সবজি তুলবেন না']] },
+{ id: 'whitefly', c: 'মরিচ, টমেটো, ঢেঁড়স', n: 'সাদা মাছি ও পাতা কোঁকড়ানো ভাইরাস', ai: 'whitefly and leaf curl virus: leaves curled upward, yellow veins, stunted plant, tiny white flies under leaves', s: 'পাতা কুঁকড়ে ওপরে বা নিচে মোড়ানো, শিরা হলুদ, গাছ খর্ব; পাতার নিচে ছোট সাদা মাছি', o: ['আক্রান্ত গাছ তুলে ফেলুন (ভাইরাসের চিকিৎসা নেই)', 'হলুদ আঠালো ফাঁদ লাগান', 'বীজতলা নেট দিয়ে ঘিরে চারা তৈরি করুন'], k: [['থায়ামেথোক্সাম (২৫ ডব্লিউজি)', 0.2, 'g', 'মাছি দমনে; ১০ দিন পর আবার। এতে ভাইরাস সারে না, ছড়ানো কমে']] },
+{ id: 'alternaria', c: 'সরিষা, পেঁয়াজ', n: 'পাতার কালো দাগ (আলটারনারিয়া ও পার্পল ব্লচ)', ai: 'alternaria leaf spot of mustard or purple blotch of onion: concentric ring brown-black spots on leaves', s: 'পাতায় চাকার মতো বলয়যুক্ত বাদামি-কালো দাগ; পেঁয়াজে বেগুনি-বাদামি দাগ', o: ['রোগমুক্ত বীজ ব্যবহার করুন', 'আক্রান্ত পাতা সরান', 'অতিরিক্ত সেচ ও ঘন চারা এড়ান'], k: [['ম্যানকোজেব (৭৫ ডব্লিউপি)', 2.5, 'g', '১০ দিন পর পর ২-৩ বার']] },
+{ id: 'wheatrust', c: 'গম', n: 'গমের পাতার মরিচা রোগ', ai: 'wheat leaf rust: orange-brown powdery pustules on leaves', s: 'পাতায় মরিচার মতো কমলা-বাদামি গুঁড়া ফোসকা', o: ['প্রতিরোধী জাত লাগান, দেরিতে বপন এড়ান'], k: [['প্রোপিকোনাজোল (২৫ ইসি)', 1, 'ml', 'রোগ দেখা দিলে; দরকারে ১৫ দিন পর আবার']] },
+{ id: 'mango', c: 'আম', n: 'আমের অ্যানথ্রাকনোজ', ai: 'mango anthracnose: black spots on leaves, flowers and fruits, flower drop', s: 'পাতা, মুকুল ও ফলে কালো দাগ; মুকুল ঝরে যায়', o: ['ঝরা পাতা ও মরা ডাল পরিষ্কার করুন', 'ডাল ছাঁটাই করে বাতাস চলাচল বাড়ান'], k: [['কার্বেন্ডাজিম (৫০ ডব্লিউপি)', 1, 'g', 'মুকুল আসার আগে ও পরে ১৫ দিন পর পর'], ['কপার অক্সিক্লোরাইড (৫০ ডব্লিউপি)', 3, 'g', 'বিকল্প হিসেবে']] },
+{ id: 'damping', c: 'সব সবজির বীজতলা', n: 'চারা পচা (ড্যাম্পিং অফ)', ai: 'damping off in seedbed: seedlings rot at soil level, collapse and die', s: 'বীজতলায় চারার গোড়া পচে মাটির কাছে নুয়ে মরে যায়', o: ['বীজতলা উঁচু করে বানান, পানি জমতে দেবেন না', 'ঘন করে বীজ বুনবেন না', 'মরা চারা তুলে ফেলুন'], k: [['কার্বেন্ডাজিম (৫০ ডব্লিউপি): গোড়ায় ঢালার জন্য', 1, 'g', '১ বার']], x: 'বীজ শোধন: প্রতি কেজি বীজে ২ গ্রাম কার্বেন্ডাজিম মিশিয়ে বুনুন।' },
+{ id: 'nitrogen', c: 'সব ফসল', n: 'নাইট্রোজেনের অভাবে পাতা হলুদ', ai: 'nitrogen deficiency: older lower leaves turn uniformly pale yellow, weak growth', s: 'নিচের পুরনো পাতা আগে ফ্যাকাশে হলুদ হয়ে ওপরে ছড়ায়, গাছ দুর্বল', o: ['কম্পোস্ট বা জৈব সার দিন', 'পানি জমে থাকলে নিষ্কাশন করুন'], k: [], x: 'ইউরিয়া: বিঘা প্রতি ৫-৭ কেজি সেচের সাথে বা বৃষ্টির পর ছিটান। অতিরিক্ত দেবেন না।' }];
+const SAFE = '<div class="adv">⚠️ ওষুধের নিয়ম: আগে জৈব ব্যবস্থা নিন। প্যাকেটের লেবেল পড়ুন। গ্লাভস ও মাস্ক পরুন। সকাল বা বিকেলে, বাতাসের অনুকূলে স্প্রে করুন, বৃষ্টির আগে নয়। ফল-সবজি তোলার আগে অন্তত ৭ দিন অপেক্ষা করুন। মাত্রা নিজে বাড়াবেন না। খালি প্যাকেট মাটিতে পুঁতুন, শিশু ও পশু থেকে দূরে রাখুন। নিশ্চিত না হলে উপজেলা কৃষি অফিস বা ১৬১২৩ নম্বরে জানুন।</div>';
+const fmtQ = (v, u) => bn(Math.round(v * 10) / 10) + (u === 'g' ? ' গ্রাম' : ' মিলি');
+function disBody(d) {
+  return `<p><b>লক্ষণ:</b> ${d.s}</p>${d.o.length ? `<h4>প্রথমে যা করবেন</h4><ul>${d.o.map(x => `<li>${x}</li>`).join('')}</ul>` : ''}${d.k.length ? `<h4>ওষুধ ও মাত্রা</h4>${d.k.map(c => `<div class="it"><b>${c[0]}</b><div>প্রতি ১ লিটার পানিতে <b>${fmtQ(c[1], c[2])}</b></div><div>১৬ লিটারের স্প্রে মেশিনে (১ ট্যাংক) <b>${fmtQ(c[1] * 16, c[2])}</b></div><div class="mut">${c[3]}</div></div>`).join('')}` : ''}${d.x ? `<div class="it">${d.x}</div>` : ''}${d.t ? `<p class="mut">${d.t}</p>` : ''}${SAFE}`;
+}
+let AI = null, DIMG = '';
+const DPROMPT = 'You are an expert plant pathologist for Bangladesh crops. Look at the plant photo and choose the single best matching id from the list below. If the plant looks healthy answer "healthy". If nothing matches or the photo is unclear answer "unknown". Reply ONLY JSON: {"id":"...","crop":"<crop name in Bengali>","confidence":<0-100>,"reason":"<1-2 short Bengali sentences describing the visible symptoms>"}\nList:\n';
+const toData = (file, mx = 640, q = .72) => new Promise((res, rej) => { const i = new Image(); i.onload = () => { const k = Math.min(1, mx / Math.max(i.width, i.height)), c = document.createElement('canvas'); c.width = i.width * k; c.height = i.height * k; c.getContext('2d').drawImage(i, 0, 0, c.width, c.height); res(c.toDataURL('image/jpeg', q)); }; i.onerror = rej; i.src = URL.createObjectURL(file); });
+const aiLeft = () => { try { return 6 - (+localStorage.getItem('dx' + today()) || 0); } catch { return 6; } };
+async function aiDiagnose(img, note) {
+  const body = { contents: [{ parts: [{ text: DPROMPT + DIS.map(d => d.id + ': ' + d.ai).join('\n') + (note ? '\nFarmer note: ' + note : '') }, { inlineData: { mimeType: 'image/jpeg', data: img.split(',')[1] } }] }], generationConfig: { responseMimeType: 'application/json', temperature: 0.2 } };
+  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${AI.model || 'gemini-flash-latest'}:generateContent`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': AI.key }, body: JSON.stringify(body) });
+  const j = await r.json(); if (!r.ok) throw new Error((j.error && j.error.message) || String(r.status));
+  const t = (((j.candidates || [])[0] || {}).content || { parts: [] }).parts.map(p => p.text).join('');
+  return JSON.parse(t.replace(/```json|```/g, '').trim());
+}
+async function doctor() {
+  DIMG = '';
+  $('app').innerHTML = `<section class="gh"><div class="m">ছবি দিন, রোগ চিনুন</div><h1>🔬 ফসলের রোগ শনাক্ত</h1><p>আক্রান্ত পাতা বা ফলের স্পষ্ট ছবি দিন। অ্যাপ সম্ভাব্য রোগ বলবে এবং কোন ওষুধ কতটুকু লাগবে জানাবে।</p></section>
+<div class="card"><label>আক্রান্ত অংশের ছবি</label><input id="di" type="file" accept="image/*"><img id="dp" alt="" style="display:none;width:100%;border-radius:14px;margin-top:10px"><label>কী সমস্যা দেখছেন? (ঐচ্ছিক)</label><input id="dn" placeholder="যেমন: ধানের পাতায় দাগ"><div class="row"><button id="db" data-a="dgo">🔍 রোগ শনাক্ত করুন</button></div><div id="dr"></div></div>
+<div class="card"><h3>নিজে খুঁজে নিন</h3><p class="mut">ছবি না দিলেও লক্ষণ মিলিয়ে রোগ বেছে নিন।</p>${DIS.map(d => `<details class="rc"><summary><span class="ri">🌿</span><span><b>${d.n}</b><br><small class="mut">${d.c}</small></span></summary><div class="rb"><button class="say sm" data-a="say" aria-label="শুনুন">🔊</button>${disBody(d)}</div></details>`).join('')}</div>
+<p class="mut">আরও প্রশ্ন থাকলে <a href="#help">বিশেষজ্ঞকে প্রশ্ন করুন</a>।</p>`;
+  $('di').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { DIMG = await toData(f); const p = $('dp'); p.src = DIMG; p.style.display = 'block'; } catch { toast('ছবিটি পড়া যায়নি'); } };
+  try { const sn = await getDoc(doc(db, 'config', 'ai')); AI = sn.exists() ? sn.data() : null; } catch { AI = null; }
+}
+A.dgo = async () => {
+  if (!DIMG) return toast('আগে একটি ছবি দিন');
+  if (!AI || !AI.key) return $('dr').innerHTML = '<div class="adv">স্বয়ংক্রিয় শনাক্তকরণ এখনো চালু হয়নি (অ্যাডমিনকে জানান)। নিচের "নিজে খুঁজে নিন" তালিকা থেকে লক্ষণ মিলিয়ে দেখুন।</div>';
+  const left = aiLeft(); if (left <= 0) return toast('আজকের ৬টি শনাক্তের সীমা শেষ, কাল আবার চেষ্টা করুন');
+  const b = $('db'); b.disabled = true; b.textContent = 'বিশ্লেষণ চলছে…'; $('dr').innerHTML = '';
+  try { const r = await aiDiagnose(DIMG, $('dn').value.trim()); try { localStorage.setItem('dx' + today(), String(7 - left)); } catch { } showDx(r); }
+  catch (e) { const m = String(e.message || ''); $('dr').innerHTML = `<div class="adv">${/API key|API_KEY|403/i.test(m) ? 'AI-এর কী ঠিক নেই, অ্যাডমিনকে জানান' : /quota|429|exhaust/i.test(m) ? 'আজকের ফ্রি সীমা শেষ, একটু পরে আবার চেষ্টা করুন' : /not found|404/i.test(m) ? 'AI মডেল পাওয়া যায়নি, অ্যাডমিন সেটিংসে মডেলের নাম বদলাতে হবে' : 'শনাক্ত করা যায়নি, আবার চেষ্টা করুন'}</div>`; }
+  b.disabled = false; b.textContent = '🔍 রোগ শনাক্ত করুন';
+};
+function showDx(r) {
+  const d = DIS.find(x => x.id === r.id), cf = +r.confidence || 0, SB = '<button class="say sm" data-a="say" aria-label="শুনুন" style="float:right">🔊</button>';
+  if (r.id === 'healthy') return $('dr').innerHTML = `<div class="card" style="margin-top:12px">${SB}<h3>✅ গাছ সুস্থ মনে হচ্ছে</h3><p>${esc(r.reason || '')}</p></div>`;
+  if (!d || cf < 55) return $('dr').innerHTML = `<div class="card" style="margin-top:12px">${SB}<h3>নিশ্চিত হওয়া গেল না</h3><p>${esc(r.reason || 'ছবি থেকে নির্দিষ্ট রোগ চেনা যায়নি।')}</p><p class="mut">আরও স্পষ্ট ছবি (কাছ থেকে, আলোতে, আক্রান্ত অংশের) আবার দিন, অথবা নিচের তালিকা থেকে নিজে বেছে নিন। আক্রান্ত অংশ নিয়ে উপজেলা কৃষি অফিসেও যোগাযোগ করুন।</p></div>`;
+  $('dr').innerHTML = `<div class="card" style="margin-top:12px">${SB}<h3>🔎 সম্ভাব্য রোগ: ${d.n}</h3><span class="tag n">মিল ${bn(Math.round(cf))}%</span> <span class="tag">${d.c}</span><p>${esc(r.reason || '')}</p>${disBody(d)}<p class="mut">এটি AI-এর অনুমান, ভুল হতে পারে। ওষুধ দেওয়ার আগে কৃষি অফিস বা ব্লক সুপারভাইজারের পরামর্শ নিন।</p></div>`;
+}
+
 /* ---------- প্রথম সেটআপ পাতা: yoursite/#setup ---------- */
 const RULES = { fs: `rules_version = '2';
 service cloud.firestore {
   match /databases/{db}/documents {
     function si() { return request.auth != null; }
-    // অ্যাডমিন: নিচের Gmail (যাচাই করা) অথবা admins কালেকশনের UID
-    function adm() { return si() && ((request.auth.token.email_verified == true && request.auth.token.email in ['__ADMIN_EMAIL__']) || exists(/databases/$(db)/documents/admins/$(request.auth.uid))); }
+    // অ্যাডমিন: যাচাই করা Gmail, অথবা অ্যাডমিনের মোবাইল নম্বর (ওয়েবসাইটের লগইন), অথবা admins কালেকশনের UID
+    function adm() { return si() && ((request.auth.token.email_verified == true && request.auth.token.email in ['__ADMIN_EMAIL__']) || request.auth.token.email in ['__ADMIN_PHONE__'] || exists(/databases/$(db)/documents/admins/$(request.auth.uid))); }
     function mine(u) { return si() && request.auth.uid == u; }
     function me() { return get(/databases/$(db)/documents/users/$(request.auth.uid)).data; }
     // ১৮+ বা অশ্লীল শব্দ থাকলে পোস্ট সেভই হবে না
@@ -736,6 +853,24 @@ service cloud.firestore {
       allow create: if si() && request.resource.data.uid == request.auth.uid && request.resource.data.answer == '';
       allow update, delete: if adm();
     }
+    // অ্যাপের সেটিং: 'app' সবাই পড়তে পারবে (রিসেটের ঠিকানা তৈরির জন্য), বাকিগুলো শুধু লগইন করা ইউজার
+    match /config/{c} {
+      allow read: if c == 'app' || si();
+      allow write: if adm();
+    }
+    // পাসওয়ার্ড রিসেটের আবেদন (লগইন ছাড়াই করা যায়, দেখতে ও সামলাতে পারবে শুধু অ্যাডমিন)
+    match /resetRequests/{p} {
+      allow create: if request.resource.data.keys().hasOnly(['phone', 'whatsapp', 'status', 'at'])
+        && request.resource.data.phone == p && p.matches('01[3-9][0-9]{8}')
+        && request.resource.data.whatsapp.matches('01[3-9][0-9]{8}')
+        && request.resource.data.status == 'new' && request.resource.data.at == request.time;
+      allow update: if adm() || (resource.data.status == 'done'
+        && request.resource.data.keys().hasOnly(['phone', 'whatsapp', 'status', 'at'])
+        && request.resource.data.phone == resource.data.phone
+        && request.resource.data.whatsapp.matches('01[3-9][0-9]{8}')
+        && request.resource.data.status == 'new' && request.resource.data.at == request.time);
+      allow read, delete: if adm();
+    }
     match /announcements/{a} { allow read: if si(); allow write: if adm(); }
     match /prices/{p} { allow read: if si(); allow write: if adm(); }
 
@@ -754,13 +889,15 @@ service cloud.firestore {
 ` };
 function setup() {
   let sv = ''; try { sv = localStorage.getItem('adm') || ''; } catch { }
-  $('app').innerHTML = `<h2>⚙️ প্রথম সেটআপ</h2><div class="card"><h3>ধাপ ১: আপনার Gmail</h3><p class="mut">এই Gmail দিয়েই অ্যাডমিন প্যানেলে সরাসরি ঢুকতে পারবেন। একাধিক হলে কমা দিয়ে লিখুন।</p><input id="ge" type="email" placeholder="example@gmail.com" value="${esc(sv)}"></div><div class="card"><h3>ধাপ ২: নিয়ম কপি করুন</h3><p class="mut">কপি করে Firebase → Firestore Database → Rules ট্যাবে সব মুছে বসান এবং Publish দিন। Storage লাগবে না।</p><button data-a="cp" data-v="fs">নিয়ম কপি করুন</button></div>`;
+  $('app').innerHTML = `<h2>⚙️ প্রথম সেটআপ</h2><div class="card"><h3>ধাপ ১: অ্যাডমিনের নম্বর বা Gmail</h3><p class="mut">ওয়েবসাইটে নিবন্ধন করা আপনার <b>মোবাইল নম্বর</b> লিখুন (এই নম্বর ও পাসওয়ার্ড দিয়েই অ্যাডমিন প্যানেলে ঢুকবেন)। চাইলে Gmail-ও লিখতে পারেন। একাধিক হলে কমা দিয়ে লিখুন।</p><input id="ge" placeholder="01XXXXXXXXX অথবা example@gmail.com" value="${esc(sv)}"></div><div class="card"><h3>ধাপ ২: নিয়ম কপি করুন</h3><p class="mut">কপি করে Firebase → Firestore Database → Rules ট্যাবে সব মুছে বসান এবং Publish দিন। Storage লাগবে না।</p><button data-a="cp">নিয়ম কপি করুন</button></div>`;
 }
 A.cp = async () => {
-  const em = $('ge').value.toLowerCase().split(/[\s,]+/).filter(x => /^[^@\s'"\\]+@[^@\s'"\\]+\.[^@\s'"\\]+$/.test(x));
-  if (!em.length) return toast('আগে আপনার Gmail লিখুন');
-  try { localStorage.setItem('adm', em.join(', ')); } catch { }
-  try { await navigator.clipboard.writeText(RULES.fs.replace("'__ADMIN_EMAIL__'", em.map(x => `'${x}'`).join(', '))); toast('কপি হয়েছে ✅ এবার Firebase-এ বসান'); } catch { toast('কপি করা যায়নি'); }
+  const t = $('ge').value.toLowerCase().split(/[\s,]+/).filter(Boolean), safe = x => !/['"\\]/.test(x);
+  const ph = t.filter(x => /^01[3-9]\d{8}$/.test(x)).map(x => x + '@mathar.app'), em = t.filter(x => okMail(x) && safe(x));
+  if (!ph.length && !em.length) return toast('আগে আপনার মোবাইল নম্বর বা Gmail লিখুন');
+  try { localStorage.setItem('adm', t.join(', ')); } catch { }
+  const q = a => (a.length ? a : ['-']).map(x => `'${x}'`).join(', ');
+  try { await navigator.clipboard.writeText(RULES.fs.replace("'__ADMIN_EMAIL__'", q(em)).replace("'__ADMIN_PHONE__'", q(ph))); toast('কপি হয়েছে ✅ এবার Firebase-এ বসান'); } catch { toast('কপি করা যায়নি'); }
 };
 
 A.rep = async id => { if (!confirm('এই পোস্টটি অনুপযুক্ত (১৮+ বা কৃষি-বহির্ভূত) বলে রিপোর্ট করবেন?')) return; try { await setDoc(doc(db, 'reports', id + '_' + UID), { pid: id, uid: UID, at: serverTimestamp() }); toast('রিপোর্ট জমা হয়েছে, ধন্যবাদ'); } catch { toast('রিপোর্ট করা যায়নি'); } };
