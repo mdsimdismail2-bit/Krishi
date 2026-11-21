@@ -36,7 +36,7 @@ ol.st{padding-left:20px;margin:8px 0;color:var(--mut);font-size:14px}.sm2{font-s
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
-import { getFirestore, doc, getDoc, addDoc, deleteDoc, updateDoc, setDoc, collection, query, orderBy, limit, getDocs, getCountFromServer, where, serverTimestamp, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+import { getFirestore, doc, getDoc, addDoc, deleteDoc, updateDoc, setDoc, collection, query, orderBy, limit, getDocs, writeBatch, getCountFromServer, where, serverTimestamp, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 const firebaseConfig = {
   apiKey: "AIzaSyAlAYaKVYs5eEWD69ATTMLnkkJOq98RhfA",
   authDomain: "krishi-4b93c.firebaseapp.com",
@@ -60,14 +60,152 @@ onAuthStateChanged(auth, async u => {
   let ok = true;
   try { await getDocs(query(col('users'), limit(1))); } catch { ok = false; }
   if (!ok) return uidView(u);
-  shell(); watchReset(); sweep().then(n => { if (n) { alert(n + 'টি নীতিমালা-বিরোধী পোস্ট স্বয়ংক্রিয়ভাবে মুছে ফেলা হয়েছে'); V[TAB](); } });
+  enter();
 });
-function loginView(msg) { $('root').innerHTML = `<div class="card" id="login"><div style="text-align:center"><div style="width:84px;margin:auto">${LOGO}</div><h2 style="margin:8px 0 4px">অ্যাডমিন লগইন</h2><p style="color:var(--mut);font-size:14px;margin:0 0 8px">ওয়েবসাইটে নিবন্ধনের সময় যে মোবাইল নম্বর ও পাসওয়ার্ড দিয়েছিলেন সেটাই দিন। ওয়েবসাইটে লগইন থাকলে এখানে নিজে থেকেই ঢুকে যাবেন।</p></div><p style="color:var(--red);margin:6px 0">${msg || ''}</p><div class="row"><input id="u" placeholder="মোবাইল নম্বর বা ইমেইল" autocomplete="username" style="height:50px;font-size:17px"></div><div class="row"><input id="p" type="password" placeholder="পাসওয়ার্ড" autocomplete="current-password" style="height:50px;font-size:17px"></div><button data-a="login" style="width:100%;height:52px;font-size:18px">প্রবেশ করুন</button><div style="text-align:center;color:var(--mut);margin:12px 0">অথবা</div><button class="alt" data-a="glogin" style="width:100%">🔐 Google (Gmail) দিয়ে</button></div>`; const pw = $('p'); if (pw) pw.onkeydown = e => { if (e.key === 'Enter') A.login(); }; }
-function uidView(u) {
-  const id = (u.email || '').replace('@mathar.app', '') || u.uid, ph = /^01\d{9}$/.test(id);
-  $('root').innerHTML = `<div class="card" id="login"><h2 style="margin-top:0">লগইন হয়েছে ✅ কিন্তু অ্যাডমিন হিসেবে যুক্ত নেই</h2><p>আপনি <b>${esc(id)}</b> দিয়ে ঢুকেছেন। এটাকে অ্যাডমিন বানাতে (একবারই করতে হবে):</p><ol style="padding-left:20px"><li>ওয়েবসাইটের ঠিকানার শেষে <b>/#setup</b> যোগ করে খুলুন</li><li>ঘরে লিখুন: <b>${esc(id)}</b></li><li>"নিয়ম কপি করুন" চাপুন</li><li>Firebase → Firestore Database → Rules-এ সব মুছে বসান ও <b>Publish</b> দিন</li><li>এই পাতা রিফ্রেশ করুন, সরাসরি প্যানেল খুলবে</li></ol>${ph || !(u.email) ? '' : '<p style="color:var(--mut);font-size:14px">Gmail ছাড়া অন্য ইমেইলে আগে Gmail দিয়ে ঢুকে যাচাই হতে হয়। মোবাইল নম্বর দিয়ে ঢোকাই সহজ।</p>'}<button class="alt" data-a="out" style="width:100%">লগ আউট</button><details style="margin-top:12px"><summary style="color:var(--mut)">পুরনো পদ্ধতি (UID দিয়ে)</summary><p style="color:var(--mut);font-size:14px">Firestore-এ admins কালেকশনে এই UID ডকুমেন্ট আইডি দিয়ে ok = true বসালেও চলে:</p><input id="uid" readonly value="${u.uid}"><div class="row"><button data-a="cuid">কোড কপি করুন</button></div></details></div>`;
+function enter() { shell(); watchReset(); sweep().then(n => { if (n) { alert(n + 'টি নীতিমালা-বিরোধী পোস্ট স্বয়ংক্রিয়ভাবে মুছে ফেলা হয়েছে'); V[TAB](); } }); }
+function loginView(msg) { $('root').innerHTML = `<div class="card" id="login"><div style="text-align:center"><div style="width:84px;margin:auto">${LOGO}</div><h2 style="margin:8px 0 4px">অ্যাডমিন লগইন</h2><p style="color:var(--mut);font-size:14px;margin:0 0 8px">ওয়েবসাইটে যে মোবাইল নম্বর ও পাসওয়ার্ড দিয়ে অ্যাকাউন্ট খুলেছেন সেটাই দিন। ওয়েবসাইটে লগইন থাকলে এখানে নিজে থেকেই ঢুকে যাবেন।</p></div><p style="color:var(--red);margin:6px 0">${msg || ''}</p><div class="row"><input id="u" placeholder="মোবাইল নম্বর বা ইমেইল" autocomplete="username" style="height:50px;font-size:17px"></div><div class="row"><input id="p" type="password" placeholder="পাসওয়ার্ড" autocomplete="current-password" style="height:50px;font-size:17px"></div><button data-a="login" style="width:100%;height:52px;font-size:18px">প্রবেশ করুন</button></div>`; const pw = $('p'); if (pw) pw.onkeydown = e => { if (e.key === 'Enter') A.login(); }; }
+const RULES = `rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function si() { return request.auth != null; }
+    // অ্যাডমিন: admins কালেকশনে যার UID আছে সে
+    function adm() { return si() && exists(/databases/$(db)/documents/admins/$(request.auth.uid)); }
+    function mine(u) { return si() && request.auth.uid == u; }
+    function me() { return get(/databases/$(db)/documents/users/$(request.auth.uid)).data; }
+    // ১৮+ বা অশ্লীল শব্দ থাকলে পোস্ট সেভই হবে না
+    function clean(t) { return !t.lower().matches('(?s).*(sex|porn|xxx|nude|naked|escort|erotic|18[+]|সেক্স|পর্ন|ন্যুড|নগ্ন|যৌন).*'); }
+    function near(p) {
+      return si() && me().division == p.division &&
+        (p.scope == 'division' || (me().district == p.district &&
+        (p.scope == 'district' || me().upazila == p.upazila)));
+    }
+    function onlyStatus() {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt']);
+    }
+
+    // অ্যাডমিন তালিকা: শুধু Firebase Console থেকে বসানো যাবে
+    // প্রথম মালিক একবারই নিজেকে অ্যাডমিন করতে পারে (config/lock তৈরি হয়ে গেলে আর কেউ পারবে না)
+    match /admins/{a} {
+      allow read: if mine(a);
+      allow create: if adm() || (mine(a) && !exists(/databases/$(db)/documents/config/lock)
+        && existsAfter(/databases/$(db)/documents/config/lock));
+      allow delete: if adm();
+    }
+
+    match /users/{u} {
+      allow read: if mine(u) || adm();
+      allow create: if mine(u) && request.resource.data.banned == false
+        && request.resource.data.type in ['retail', 'wholesale', 'both'];
+      allow update: if adm() || (mine(u) &&
+        !request.resource.data.diff(resource.data).affectedKeys().hasAny(['banned']));
+    }
+    match /users/{u}/{sub}/{id} { allow read, write: if mine(u) && sub in ['crops', 'favs', 'ledger', 'projects']; }
+    match /users/{u}/projects/{p}/entries/{e} { allow read, write: if mine(u); }
+
+    match /products/{p} {
+      allow read: if adm() || (si() && resource.data.sellerId == request.auth.uid) ||
+        (resource.data.status == 'active' && (resource.data.scope == 'country' || near(resource.data)));
+      allow create: if si() && !me().banned
+        && request.resource.data.sellerId == request.auth.uid
+        && request.resource.data.status == 'active'
+        && clean(request.resource.data.title) && clean(request.resource.data.description)
+        && request.resource.data.category in ['ধান ও শস্য', 'সবজি', 'ফল', 'মাছ', 'গবাদিপশু ও দুধ', 'বীজ ও চারা', 'সার ও কীটনাশক', 'কৃষি যন্ত্রপাতি']
+        && request.resource.data.images.size() >= 1 && request.resource.data.images.size() <= 3
+        && request.resource.data.images[0] is string
+        && request.resource.data.scope in ['upazila', 'district', 'division', 'country']
+        && request.resource.data.saleType in ['retail', 'wholesale', 'both']
+        && request.resource.data.division == me().division
+        && request.resource.data.district == me().district
+        && request.resource.data.upazila == me().upazila;
+      // মালিক শুধু দাম ও পরিমাণ বদলাতে পারবে
+      allow update: if adm() || (mine(resource.data.sellerId)
+        && request.resource.data.diff(resource.data).affectedKeys()
+           .hasOnly(['price', 'qty', 'wholesalePrice', 'minWholesaleQty', 'updatedAt']));
+      allow delete: if adm() || mine(resource.data.sellerId);
+    }
+
+    match /orders/{o} {
+      allow read: if adm() || mine(resource.data.buyerId) || mine(resource.data.sellerId);
+      allow create: if si() && request.resource.data.buyerId == request.auth.uid
+        && request.resource.data.sellerId != request.auth.uid
+        && request.resource.data.status == 'requested'
+        && request.resource.data.mode in ['retail', 'wholesale'];
+      allow update: if adm() || (onlyStatus() && (
+        (mine(resource.data.sellerId) && request.resource.data.status in ['confirmed', 'shipped', 'delivered', 'cancelled']) ||
+        (mine(resource.data.buyerId) && resource.data.status == 'requested' && request.resource.data.status == 'cancelled')));
+    }
+
+    match /chats/{c} {
+      allow read: if adm() || (si() && request.auth.uid in resource.data.members);
+      allow create: if si() && request.auth.uid in request.resource.data.members
+        && request.resource.data.members.size() == 2;
+      allow update: if si() && request.auth.uid in resource.data.members;
+      match /messages/{m} {
+        allow read: if si() && request.auth.uid in get(/databases/$(db)/documents/chats/$(c)).data.members;
+        allow create: if si() && request.resource.data.from == request.auth.uid
+          && request.resource.data.text.size() <= 1000
+          && request.auth.uid in get(/databases/$(db)/documents/chats/$(c)).data.members;
+      }
+    }
+
+    match /questions/{q} {
+      allow read: if si();
+      allow create: if si() && request.resource.data.uid == request.auth.uid && request.resource.data.answer == '';
+      allow update, delete: if adm();
+    }
+    // অ্যাপের সেটিং: 'app' সবাই পড়তে পারবে (রিসেটের ঠিকানা তৈরির জন্য), বাকিগুলো শুধু লগইন করা ইউজার
+    match /config/{c} {
+      allow read: if c == 'app' || si();
+      allow write: if adm();
+      allow create: if c == 'lock' && si() && !exists(/databases/$(db)/documents/config/lock)
+        && existsAfter(/databases/$(db)/documents/admins/$(request.auth.uid));
+    }
+    // পাসওয়ার্ড রিসেটের আবেদন (লগইন ছাড়াই করা যায়, দেখতে ও সামলাতে পারবে শুধু অ্যাডমিন)
+    match /resetRequests/{p} {
+      allow create: if request.resource.data.keys().hasOnly(['phone', 'whatsapp', 'status', 'at'])
+        && request.resource.data.phone == p && p.matches('01[3-9][0-9]{8}')
+        && request.resource.data.whatsapp.matches('01[3-9][0-9]{8}')
+        && request.resource.data.status == 'new' && request.resource.data.at == request.time;
+      allow update: if adm() || (resource.data.status == 'done'
+        && request.resource.data.keys().hasOnly(['phone', 'whatsapp', 'status', 'at'])
+        && request.resource.data.phone == resource.data.phone
+        && request.resource.data.whatsapp.matches('01[3-9][0-9]{8}')
+        && request.resource.data.status == 'new' && request.resource.data.at == request.time);
+      allow read, delete: if adm();
+    }
+    match /announcements/{a} { allow read: if si(); allow write: if adm(); }
+    match /prices/{p} { allow read: if si(); allow write: if adm(); }
+
+    // নীতিমালা: রিপোর্ট ও লগ
+    match /reports/{r} {
+      allow create: if si() && request.resource.data.uid == request.auth.uid
+        && r == request.resource.data.pid + '_' + request.auth.uid;
+      allow read, delete: if adm();
+    }
+    match /violations/{v} {
+      allow create: if si() && (request.resource.data.uid == request.auth.uid || adm());
+      allow read, delete: if adm();
+    }
+  }
 }
-A.cuid = async () => { try { await navigator.clipboard.writeText(auth.currentUser.uid); alert('কপি হয়েছে'); } catch { $('uid').select(); } };
+`;
+async function uidView(u) {
+  const who = (u.email || '').replace(/@mathar\.app$/, '');
+  let st = 'norules'; try { st = (await getDoc(doc(db, 'config', 'lock'))).exists() ? 'locked' : 'free'; } catch { }
+  if (st === 'free') {
+    $('root').innerHTML = '<div class="card" id="login" style="text-align:center"><p>প্যানেল চালু হচ্ছে…</p></div>';
+    try { const b = writeBatch(db); b.set(doc(db, 'admins', u.uid), { ok: true, who: String(u.email || '').slice(0, 60), at: serverTimestamp() }); b.set(doc(db, 'config', 'lock'), { uid: u.uid, at: serverTimestamp() }); await b.commit(); return enter(); }
+    catch (e) { st = 'norules'; }
+  }
+  const body = st === 'locked' ? `<p>এই সাইটের অ্যাডমিন আগেই ঠিক করা হয়ে গেছে, কিন্তু আপনি (<b>${esc(who)}</b>) সেই অ্যাকাউন্ট নন। যে নম্বর দিয়ে প্রথমবার এই পাতায় ঢুকেছিলেন সেই নম্বর ও পাসওয়ার্ড দিয়ে ঢুকুন।</p>`
+    : `<p style="color:var(--red)"><b>নতুন নিয়ম এখনো Firebase-এ বসানো হয়নি।</b> একবার বসালেই এই পাতা আর আসবে না, সরাসরি প্যানেলে ঢুকবেন।</p><button data-a="cprules" style="width:100%;height:52px;font-size:18px">১. 📋 নিয়ম কপি করুন</button><ol start="2" style="padding-left:20px"><li>Firebase Console → Firestore Database → <b>Rules</b> ট্যাব</li><li>সব মুছে <b>Paste</b> করুন, তারপর <b>Publish</b> চাপুন</li><li>এই পাতা রিফ্রেশ করুন</li></ol>`;
+  $('root').innerHTML = `<div class="card" id="login"><h2 style="margin-top:0">${st === 'locked' ? 'অ্যাডমিন যাচাই' : 'একবারের কাজ বাকি'}</h2>${body}<button class="alt" data-a="out" style="width:100%;margin-top:10px">লগ আউট</button></div>`;
+}
+A.cprules = async () => { try { await navigator.clipboard.writeText(RULES); alert('কপি হয়েছে ✅ এবার Firebase-এ Paste করে Publish দিন'); } catch { alert('কপি করা যায়নি'); } };
+A.claim = async () => {
+  try { const u = auth.currentUser, b = writeBatch(db); b.set(doc(db, 'admins', u.uid), { ok: true, who: String(u.email || '').slice(0, 60), at: serverTimestamp() }); b.set(doc(db, 'config', 'lock'), { uid: u.uid, at: serverTimestamp() }); await b.commit(); try { sessionStorage.setItem('claimed', '1'); } catch { } location.reload(); }
+  catch (e) { alert('হয়নি (' + (e.code || e.message) + '). নতুন নিয়ম বসানো হয়েছে কি দেখুন, অথবা অন্য কেউ আগেই অ্যাডমিন হয়ে গেছে।'); }
+};
 A.glogin = async () => {
   try { await signInWithPopup(auth, new GoogleAuthProvider()); }
   catch (e) {
@@ -75,7 +213,12 @@ A.glogin = async () => {
     loginView(e.code in m ? m[e.code] : 'Google লগইন হয়নি (' + (e.code || 'অজানা') + ')');
   }
 };
-A.login = async () => { const u = $('u').value.trim(); try { await signInWithEmailAndPassword(auth, u.includes('@') ? u : u + '@mathar.app', $('p').value); } catch { loginView('নম্বর বা পাসওয়ার্ড ভুল'); } };
+A.login = async () => {
+  const u = $('u').value.trim().toLowerCase(), w = $('p').value; if (!u || !w) return loginView('নম্বর ও পাসওয়ার্ড দিন');
+  let em = [u]; if (!u.includes('@')) { em = [u + '@mathar.app']; try { const c = (await getDoc(doc(db, 'config', 'app'))).data() || {}, [l, d] = String(c.adminMail || '').toLowerCase().split('@'); if (l && d === 'gmail.com') em.unshift(l + '+' + u + '@gmail.com'); } catch { } }
+  for (const e of em) { try { await signInWithEmailAndPassword(auth, e, w); return; } catch { } }
+  loginView('নম্বর বা পাসওয়ার্ড ভুল। ওয়েবসাইটে যে নম্বর ও পাসওয়ার্ড দিয়ে অ্যাকাউন্ট খুলেছেন সেটাই দিন');
+};
 const T = [['rst', '🔑 পাসওয়ার্ড রিসেট'], ['posts', '🛒 পোস্ট (এলাকা অনুযায়ী)'], ['dash', '📊 ড্যাশবোর্ড'], ['users', '👥 সদস্য'], ['mod', '🚫 নীতিমালা ও রিপোর্ট'], ['ann', '📢 ঘোষণা (পপআপ)'], ['qs', '🌱 প্রশ্ন'], ['prices', '💰 বাজার দর'], ['cfg', '⚙️ সেটিংস (রিসেট ইমেইল ও AI)']];
 function shell() { $('root').innerHTML = `<div id="rb" data-a="rbgo"></div><div class="wrap"><aside><h2>🌾 মাঠের হাট</h2>${T.map(t => `<a data-a="tab" data-v="${t[0]}" class="${t[0] === TAB ? 'on' : ''}">${t[1]}</a>`).join('')}<a data-a="out">⎋ বের হন</a></aside><main id="m">লোড হচ্ছে…</main></div>`; badge(); V[TAB](); }
 A.tab = v => { TAB = v; shell(); }; A.out = () => signOut(auth);
@@ -147,7 +290,7 @@ A.cfgsave = async () => {
     await setDoc(doc(db, 'config', 'app'), { adminMail: m, adminWa: w }, { merge: true });
     const ai = { model: md }; if (k) ai.key = k; await setDoc(doc(db, 'config', 'ai'), ai, { merge: true });
     alert('সংরক্ষিত ✅'); V.cfg();
-  } catch (e) { alert('সংরক্ষণ হয়নি। Firestore নিয়ম নতুন করে বসানো হয়েছে কি দেখুন (ওয়েবসাইটের /#setup)।'); }
+  } catch (e) { alert('সংরক্ষণ হয়নি। Firestore নিয়ম নতুন করে বসানো হয়েছে কি দেখুন।'); }
 };
 
 /* ---------- স্বয়ংক্রিয় পরিষ্কার: অ্যাডমিন প্যানেল খুললেই চলে ---------- */
